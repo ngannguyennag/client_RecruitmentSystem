@@ -42,9 +42,13 @@ const EnterNewPassword = () => {
         layout="vertical"
         className="form-forgot-password"
       >
-        <h2>Đổi mật khẩu</h2>
+        {/* <h2>ANJWork</h2> */}
+        <div className="imgLogo">
+          <img src="img/J.png"></img>
+        </div>
+        <h2> Tạo lại mật khẩu của bạn</h2>
         <div className="title-email">
-        <div className="title-form">
+        <div className="title-formNew">
         <Form.Item
           label="Nhập mật khẩu mới"
           rules={[
@@ -61,8 +65,6 @@ const EnterNewPassword = () => {
         >
           <Input.Password />
         </Form.Item>
-        </div>
-        </div>
         <Form.Item
           label="Nhập lại mật khẩu"
           name="confirmPassword"
@@ -85,8 +87,10 @@ const EnterNewPassword = () => {
         >
           <Input.Password />
         </Form.Item>
+        </div>
+        </div>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="btn-submit-email" style={{height: '60px'}}>
+          <Button type="primary" htmlType="submit" className="btn-submit-email" style={{height: '40px'}}>
             Submit
           </Button>
         </Form.Item>

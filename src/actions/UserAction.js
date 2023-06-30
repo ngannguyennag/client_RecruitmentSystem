@@ -37,7 +37,7 @@ export const getAllUser = () => async (dispatch, getState) => {
     const {data} = await   axios.get('http://localhost:8080/api/v1/users/all', {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YW5AZ21haWwuY29tIiwicm9sZXMiOiJST0xFX0FETUlOIiwiaWF0IjoxNjg3OTMyMDc4LCJleHAiOjE2ODgwMTg0Nzh9.9QjOn1fPlcP5LCllfNFOwp6-pPilBBOPWP0Ed6GGNho`
+        'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YW5AZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0YW4iLCJyb2xlcyI6IlJPTEVfQURNSU4iLCJpYXQiOjE2ODgxMzMwOTMsImV4cCI6MTY4ODIxOTQ5M30.heOCk-nGqeKvnfPDUi2hg6TMsReZ7Pdk52gf-X656kU`
       },
     })
     dispatch({type: 'GET_ALL_USER', payload: data})

@@ -33,7 +33,7 @@ export default function DashBoard() {
           </div>
           <div className="dashboard-top-content">
             <li className="dashboard-top-content-avatar">
-              <img src="https://res.cloudinary.com/caokhahieu/image/upload/v1626334932/gediogbkwlg85kbbsamq.jpg"></img>
+              {/* <img src="https://res.cloudinary.com/caokhahieu/image/upload/v1626334932/gediogbkwlg85kbbsamq.jpg"></img> */}
               <span>Ngân Nguyễn</span>
               {/* <Button onClick="onSignOut">Sign Out</Button> */}
               <input type='button' value="Đăng xuất" onClick={onSignOut} />
@@ -54,7 +54,7 @@ export default function DashBoard() {
                 </div>
                 <div className="dashboard-middle-statistic-title">
                   <span className="total">1666</span>
-                  <span className="title">Total Sales</span>
+                  <span className="title">Users</span>
                 </div>
               </li>
             </div>
@@ -65,7 +65,7 @@ export default function DashBoard() {
                 </div>
                 <div className="dashboard-middle-statistic-title">
                   <span className="total">25</span>
-                  <span className="title">Daily Visits</span>
+                  <span className="title">Users Group</span>
                 </div>
               </li>
             </div>

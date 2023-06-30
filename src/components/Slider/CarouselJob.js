@@ -4,81 +4,10 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {CarouselItem} from "./CarouselItem";
-// import {CarouselItemJob} from "./CarouselItem";
+// import {CarouselItem} from "./CarouselItem";
+import {CarouselItemJob} from "./CarouselItem";
 import axios from "axios";
 
-const mockData = [
-  { category_icon: "img/img1.png",
-    category_name: "Sales",
-    category_name_vn:"Bán hàng",
-    category_url:"https://www.vietnamworks.com/viec-lam-ban-hang-i33-vn",
-    total:1751
-  },
-  {
-    category_icon: "img/img2.png",
-    category_name: "IT - Software",
-    category_name_vn: "IT - Phần mềm",
-    category_url: "https://www.vietnamworks.com/viec-lam-it-phan-mem-i35-vn",
-    total: 964
-  },
-  {
-    category_icon: "img/img3.png",
-    category_name: "Marketing",
-    category_name_vn: "Marketing",
-    category_url: "https://www.vietnamworks.com/viec-lam-marketing-i27-vn",
-    total: 236
-  },
-  {
-    category_icon: "img/img4.png",
-    category_name: "Administrative/Clerical",
-    category_name_vn: "Thư ký",
-    category_url: "https://www.vietnamworks.com/viec-lam-hanh-chanh-thu-ky-i2-vn",
-    total: 458
-  },
-  {
-    category_icon: "img/img5.png",
-    category_name: "Accounting",
-    category_name_vn: "Kế toán",
-    category_url: "https://www.vietnamworks.com/viec-lam-ke-toan-i1-vn",
-    total: 752
-  },
-  {
-    category_icon: "img/img6.png",
-    category_name: "Customer Service",
-    category_name_vn: "Dịch vụ khách hàng",
-    category_url: "https://www.vietnamworks.com/viec-lam-dich-vu-khach-hang-i11-vn",
-    total: 1300
-  },
-  {
-    category_icon: "img/img7.png",
-    category_name: "Banking",
-    category_name_vn: "Ngân hàng",
-    category_url: "https://www.vietnamworks.com/viec-lam-ngan-hang-i42-vn",
-    total: 189
-  },
-  {
-    category_icon: "img/img8.png",
-    category_name: "Electrical/Electronics",
-    category_name_vn: "Điện/Điện tử",
-    category_url: "https://www.vietnamworks.com/viec-lam-dien-dien-tu-i64-vn",
-    total: 765
-  },
-  {
-    category_icon: "img/img9.png",
-    category_name: "Production/Process",
-    category_name_vn: "Sản xuất",
-    category_url: "https://www.vietnamworks.com/viec-lam-san-xuat-i26-vn",
-    total: 542
-  },
-  {
-    category_icon: "img/img10.png",
-    category_name: "Auditing",
-    category_name_vn: "Kiểm toán",
-    category_url: "https://www.vietnamworks.com/viec-lam-kiem-toan-i58-vn",
-    total: 903
-  },
-];
 
 const mockDataJob = [
   {
@@ -195,7 +124,7 @@ function Carousel(props,title) {
     fetchData();
   }, []);
   function fetchData() {
-    setUserData(mockData);
+    setUserData(mockDataJob);
   //  axios.get('http://localhost:8080/api/v1/users/all', {
   //   headers: {
   //     'Content-Type': 'application/json',
@@ -226,8 +155,8 @@ function Carousel(props,title) {
     // autoplay: true,
     // autoplaySpeed: 2500,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
@@ -244,15 +173,15 @@ function Carousel(props,title) {
     <section id="carousel">
       <div className="carousel">
         <div className="carousel-left">
-          <div className="title">Ngành nghề trọng điểm</div>
+          <div className="title">Việc làm tốt nhất</div>
           <div className="carousel-left-slide">
             <Slider asNavFor={nav.nav2}
                     ref={slider => (slider1 = slider)} 
-                    {...settings} slidesToShow={5}>
+                    {...settings} slidesToShow={4}>
               {data.map((e,i)=> {
                 return (
                   <div key={i} className="carouselItem">
-                    <CarouselItem e={e} ></CarouselItem>
+                    <CarouselItemJob e={e} ></CarouselItemJob>
                     {/* <CarouselItemJob e= {e}></CarouselItemJob> */}
                   </div>
                 )
@@ -270,7 +199,7 @@ function Carousel(props,title) {
           <div className="carousel-left-bottom">
             <Slider asNavFor={nav.nav1}
                     ref={slider => (slider2 = slider)}
-                    slidesToShow={4}
+                    slidesToShow={2}
                     swipeToSlide={true}
                     focusOnSelect={true}
                      >

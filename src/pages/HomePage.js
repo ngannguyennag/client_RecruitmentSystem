@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../components/header/Header';
 import Carousel from '../components/Slider/Carousel';
-
+import CarouselJob from '../components/Slider/CarouselJob';
+import CarouselCompany from '../components/Slider/CarouselCompany';
 // import IPhone from '../components/HotSale/components/Iphone'
 // import Samsung from '../components/HotSale/components/Samsung'
 // import Xiaomi from '../components/HotSale/components/Xiaomi';
@@ -17,6 +18,8 @@ function HomePage(props) {
         <div style={{position: 'relative'}}>
             <Header></Header>
             <Carousel></Carousel>
+            <CarouselJob></CarouselJob>
+            <CarouselCompany></CarouselCompany>
             {/* <Carousel></Carousel> */}
             {/* <Carousel></Carousel> */}
 

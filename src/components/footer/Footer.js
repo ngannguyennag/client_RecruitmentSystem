@@ -99,8 +99,7 @@ function Footer(props) {
                     </div>
                 </div>
                 <div className="footer-bot">
-                    
-                    <p>Copyright © 2023. Công ty cổ phần AMJWork Việt Nam</p>
+                    <p>Copyright © 2023. Công ty cổ phần ANJWork Việt Nam</p>
                     <p>Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</p>
                 </div>
             </div>

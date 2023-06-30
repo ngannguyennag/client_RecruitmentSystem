@@ -9,6 +9,13 @@
     top: 0;
     z-index: 10000;
 }
+.logo img{
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgb(65, 145, 211);
+    border-radius: 5px;
+    margin-left: 10px;
+}
 #menu {
     /* height: 100%; */
     /* margin: auto; */
@@ -29,11 +36,14 @@
 .logo{
    display: flex;
    justify-content: flex-start;
+   align-items: center;
+   cursor: pointer;
 }
 .logo span a{
     font-size: 30px;
     color: #fff;
     margin-right: 1rem;
+    /* text-align: center; */
 }
 .menu-list {
     display: flex;

@@ -36,7 +36,7 @@ const ResetPassword = () => {
         </div>
         <h2>Quên mật khẩu</h2>
         <div className="title-email">
-        <div className="title-header"> Hãy nhập email vào khung bên dưới. Chúng tôi sẽ gửi thông tin để bạn thay đổi mật khẩu vào email của mình.</div>
+        <div className="title-header"> Hãy nhập email vào khung bên dưới. Chúng tôi sẽ gửi thông tin đến email của bạn để thay đổi mật khẩu.</div>
         <div className="title-form">
         <Form.Item
           rules={[
@@ -53,7 +53,7 @@ const ResetPassword = () => {
         </div> 
         </div>
           <Form.Item>
-                  <Button type="primary" htmlType="submit" className="btn-submit-email" style={{height: '45px'}}>
+                  <Button type="primary" htmlType="submit" className="btn-submit-email" style={{height: '40px'}}>
                     Send Password Reset Link
                   </Button>   
           </Form.Item>

@@ -44,9 +44,11 @@ function Header(props) {
     <div className="header">
       <section id="menu">
         <div className="logo">
-          {/* <span> */}
+          {/* <div className="imgLogo"> */}
+              <img src="img/J.png"></img>
             <Link to="/"> ANJWork </Link>
-          {/* </span> */}
+          {/* </div> */}
+            
         </div>
         {/* <div className="search">
           <form onSubmit={(e) => SearchProduct(e)}>
