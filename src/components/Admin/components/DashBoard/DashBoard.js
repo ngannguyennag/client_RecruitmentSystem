@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 import "./DashBoard.css";
 import ChartDashBoard from "./ChartDashBoard";
-import {Link} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {SignoutUser} from '../../../../actions/UserAction'
 
@@ -33,11 +32,11 @@ export default function DashBoard() {
           </div>
           <div className="dashboard-top-content">
             <li className="dashboard-top-content-avatar">
-              {/* <img src="https://res.cloudinary.com/caokhahieu/image/upload/v1626334932/gediogbkwlg85kbbsamq.jpg"></img> */}
               <span>Ngân Nguyễn</span>
-              {/* <Button onClick="onSignOut">Sign Out</Button> */}
-              <input type='button' value="Đăng xuất" onClick={onSignOut} />
-              {/* <Link to="/">Sign Out</Link> */}
+              <li className ="file" onClick={onSignOut}>
+              {/* <i className="account-icon-menu"><LogoutOutlined/></i> */}
+                Đăng xuất</li>
+              {/* <input type='button' value="Đăng xuất" onClick={onSignOut} /> */}
             </li>
             <li className="dashboard-top-content-bell">
               <BellOutlined></BellOutlined>

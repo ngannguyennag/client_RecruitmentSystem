@@ -8,23 +8,14 @@ import {useLocation} from "react-router-dom";
 const EnterNewPassword = () => {
     const location = useLocation();
     const params = new URLSearchParams(location.search)
-//   let { user_id } = useParams();
-//   const [searchParams, setSearchParams] = useSearchParams();
   const onFinish = async (values) => {
-    // let token = searchParams.get("token");
     let token = params.get("token");
     const { password } = { ...values };
-    // const data = {
-    //   password,
-    // //   user_id,
-    // //   token,
-    // };
     const newPassword = await axios
       .post("http://localhost:8080/api/v1/auth/reset_password?token=" + token, {
         password,
       })
       .then((res) => {
-        // alert(res.data.message);
         window.location.assign("/login")
       })
       .catch((err) => console.log(err));
@@ -42,7 +33,6 @@ const EnterNewPassword = () => {
         layout="vertical"
         className="form-forgot-password"
       >
-        {/* <h2>ANJWork</h2> */}
         <div className="imgLogo">
           <img src="img/J.png"></img>
         </div>
@@ -94,7 +84,6 @@ const EnterNewPassword = () => {
             Submit
           </Button>
         </Form.Item>
-        {/* <Link to="/login" style={{"textDecoration":"underline"}} >Quay lại trang đăng nhập</Link> */}
       </Form>
         </div>
     </div>

@@ -2,14 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUser } from '../../../../actions/UserAction';
 import ListUser from './ListUser';
-import './AdminUser.css'
+import './AdminUser.css';
+
 
 function AdminUser(props) {
     const dispatch = useDispatch()
     const users = useSelector(state => state.users.user)
+    const token = JSON.parse(localStorage.getItem('userInfo')).access_token
 
     useEffect(() => {
-        dispatch(getAllUser())
+        dispatch(getAllUser(token))
     }, [dispatch])
     return (
         <div className="admin-user">

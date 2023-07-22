@@ -36,7 +36,7 @@ const mockDataJob = [
   },
   {
     companyLogo: "img/job4.png",
-    jobTitle: "Trưởng Nhóm Marketing Tại Hồ Chính Minh (Có Thể Đi Công Tác Các Tỉnh)",
+    jobTitle: "Trưởng Nhóm Marketing Tại Hồ Chính Minh",
     companyName: "VUS - The English Center",
     salary: "$500 - $800",
     cityNames: "Hồ Chí Minh",
@@ -52,7 +52,7 @@ const mockDataJob = [
   },
   {
     companyLogo: "img/job6.png",
-    jobTitle: "Software Engineer (C/C++) - Hai Phong - Up to $2000 & Hybrid Working",
+    jobTitle: "Software Engineer (C/C++) - Hai Phong",
     companyName: "LG Electronics Development Vietnam Company Limite",
     salary: "$800 - $2000",
     cityNames: "Hải Phòng",
@@ -76,7 +76,7 @@ const mockDataJob = [
   },
   {
     companyLogo: "img/job9.png",
-    jobTitle: "Chuyên Viên Quản Lý Nội Dung Nông Nghiệp Số 2 Nông",
+    jobTitle: "Chuyên Viên Quản Lý Nội Dung Nông Nghiệp Số 2",
     companyName: "CÔNG TY CỔ PHẦN PHÂN BÓN DẦU KHÍ CÀ MAU",
     salary: "Thương lượng",
     cityNames: "Cà Mau, Hồ Chí Minh",
@@ -125,22 +125,7 @@ function Carousel(props,title) {
   }, []);
   function fetchData() {
     setUserData(mockDataJob);
-  //  axios.get('http://localhost:8080/api/v1/users/all', {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YW5AZ21haWwuY29tIiwidXNlcm5hbWUiOiJ0YW4iLCJyb2xlcyI6IlJPTEVfQURNSU4iLCJpYXQiOjE2ODgwODM5NTIsImV4cCI6MTY4ODE3MDM1Mn0.EF5TYarN-qAj_3--uUuwrBat1C82YdsN5GmcAErOwEA`
-  //   },
-  // }) 
-  // .then(response => {
-  //   setUserData(response.data);
-  //   // console.log(response);
-  //   // console.log(data);
-  // })
-  // .catch(error => {
-  //   console.log(error);
-  // });
   }
-
   useEffect(() => {
     setNav({
       nav1: slider1,
@@ -152,16 +137,12 @@ function Carousel(props,title) {
     loop:true,
     dots: false,
     infinite: true,
-    // autoplay: true,
-    // autoplaySpeed: 2500,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
- 
   const next = () =>  {
     slider1.slickNext();
   }

@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 
 function Contact(props) {
     let socket
-    const ENDPOINT = 'localhost:5000';
+    const ENDPOINT = 'localhost:8080';
     const dispatch = useDispatch()
     const conversationList = useSelector(state => state.chat.conversationList)
     const idConversation = useSelector(state => state.chat.idConversation)

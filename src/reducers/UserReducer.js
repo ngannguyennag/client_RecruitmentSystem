@@ -42,10 +42,24 @@ export const getAllUserReducer = (state = {}, action) => {
     }
 }
 
-// export const deleteUserReducer = (state = {}, action) => {
-//     switch (action.type) {
+export const getAccountInfoReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_ACCOUNT_INFO':{
+            return {...state, user: action.payload}
+        }
+
+        case 'DELETE_USER':{
+            return {...state}
+        }
+
+        default: return state
+    }
+}
+
+export const deleteUserReducer = (state = {}, action) => {
+    switch (action.type) {
         
             
-//         default: return state
-//     }
-// }
+        default: return state
+    }
+}

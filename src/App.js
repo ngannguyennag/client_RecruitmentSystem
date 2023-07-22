@@ -9,6 +9,7 @@ import CartPage from './pages/CartPage';
 import OrderPage from './pages/OrderPage';
 import SearchPage from './pages/SearchPage';
 import AdminPage from './pages/AdminPage';
+import UserPage from './pages/UserPage';
 import ResetScroll from './components/ResetScroll/ResetScroll';
 import MyOrderPage from './pages/MyOrderPage';
 import ChatPage from './pages/ChatPage';
@@ -18,6 +19,10 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ConfirmEmailPage from './components/Signup/ConfirmEmail';
 import React from "react";
+import UserFilePage from './pages/UserFilePage';
+// import UserFileUpdatePage from './pages/UserFileUpdatePage';
+import UserManageAccountPage from './pages/UserManageAccountPage';
+
 // import { useRoutes} from "react-router-dom";
 // import routes from "./configs/routes";
 
@@ -92,17 +97,24 @@ function App() {
           <AdminPage></AdminPage>
         </Route>
         
+        <Route path='/user'>
+          <UserPage></UserPage>
+        </Route>
+
+        <Route path='/userfile'>
+          <UserFilePage></UserFilePage>
+        </Route>
+
+        {/* <Route path='/userfileupdate'>
+          <UserFileUpdatePage></UserFileUpdatePage>
+        </Route> */}
+
+        <Route path='/usermanage'>
+          <UserManageAccountPage></UserManageAccountPage>
+        </Route>
       </Router>
     </div>
   );
 }
 
  export default App;
-// export default function App() {
-//   const routing = useRoutes(routes);
-//   return (
-//     <>
-//       {routing}
-//     </>
-//   );
-// }

@@ -76,13 +76,14 @@ function AdminCreate(props) {
 
   return (
     <div className="admin-create">
-      <span>Create Product</span>
+      <span>Create User</span>
       <form
         className="admin-create-product"
         onSubmit={handleSubmit(onSubmit)}
         encType="multipart/form-data"
       >
-        <input {...register("name")} placeholder="Name"></input>
+        <input {...register("name")} placeholder="UserName"></input>
+        <input {...register("name")} placeholder="PassWord"></input>
         <input
           {...register("amount")}
           placeholder="Amount"
@@ -119,7 +120,7 @@ function AdminCreate(props) {
           {...register("image")}
           onChange={handleFileImageChange}
         ></input>
-        <button type="submit">Add Product</button>
+        <button type="submit">Add User</button>
       </form>
     </div>
   );

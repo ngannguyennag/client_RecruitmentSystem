@@ -19,7 +19,7 @@ function HomePage(props) {
             <Header></Header>
             <Carousel></Carousel>
             <CarouselJob></CarouselJob>
-            <CarouselCompany></CarouselCompany>
+            {/* <CarouselCompany></CarouselCompany> */}
             {/* <Carousel></Carousel> */}
             {/* <Carousel></Carousel> */}
 

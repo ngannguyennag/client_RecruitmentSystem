@@ -19,24 +19,17 @@ function Login(props) {
 
   const user = useSelector((state) => state.userSignin);
   const { userInfo, error } = user;
- 
-
   const onSubmit = (data) => {
-    console.log(data.email);
     dispatch(login(data));
   };
 
   useEffect(() => {
     if(userInfo){ 
       var string = userInfo['access_token'];
-    // console.log(string);
-  
     var decodedHeader = jwt_decode(string);
-    console.log(decodedHeader);
     var roleAdmin = decodedHeader.roles;
-    console.log(roleAdmin);
       if (roleAdmin === "ROLE_USER") {
-        history.push("/");
+        history.push("/user");
       }
       else if(roleAdmin === "ROLE_ADMIN"){
         history.push("/admin");

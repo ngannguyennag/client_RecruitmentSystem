@@ -6,9 +6,11 @@ import { DeleteOutlined} from '@ant-design/icons';
 function User(props) {
     const {user, number} = props
     const dispatch = useDispatch()
+    const token = JSON.parse(localStorage.getItem('userInfo')).access_token
+
     const handleDeleteUser = async (user) => {
         await dispatch(deleteUser(user._id))
-        dispatch(getAllUser())
+        dispatch(getAllUser(token))
     }
     const FormatDate=(time) => {
         var dateFormat = new Date(time*1000);

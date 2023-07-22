@@ -6,11 +6,6 @@ import { useHistory } from "react-router";
 import { searchProduct } from "../../actions/ProductAction";
 import {Link} from "react-router-dom";
 
-import {
-  DownOutlined,
-  ShoppingCartOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
 
 function Header(props) {
   const dispatch = useDispatch();
@@ -44,11 +39,8 @@ function Header(props) {
     <div className="header">
       <section id="menu">
         <div className="logo">
-          {/* <div className="imgLogo"> */}
               <img src="img/J.png"></img>
             <Link to="/"> ANJWork </Link>
-          {/* </div> */}
-            
         </div>
         {/* <div className="search">
           <form onSubmit={(e) => SearchProduct(e)}>
@@ -66,9 +58,6 @@ function Header(props) {
           </form>
         </div> */}
         <ul className="menu-list" id={menu ? "hidden" : ""}>
-          {/* <li className="active">
-            <Link to="/"> Trang Chủ </Link>
-          </li> */}
           <li>
             <Link to="/jobs"> Việc Làm </Link>
           </li>
@@ -87,58 +76,8 @@ function Header(props) {
             <Link to="register"> Đăng kí </Link>
             <Link to="login"> Đăng nhập </Link>
         </div>
-        
-       
-
-          {/* {userInfo ? (
-            <li onClick={() => setShowAccount2(!showAccount2)}>
-              <Link>
-                {userInfo.name}
-                <DownOutlined style={{ fontSize: "14px" }} />
-              </Link>
-              {showAccount2 ? (
-                <div className="menu-drop">
-                  {userInfo.isAdmin ? <Link to="/admin">Admin</Link> : ""}
-                  <Link to="/myOrder">Đơn hàng</Link>
-                  <Link onClick={() => handleSignout()}>Đăng xuất</Link>
-                </div>
-              ) : (
-                ""
-              )}
-            </li>
-          ) : (
-            <li onClick={() => setShowAccount(!showAccount)}>
-              <Link>
-                Tài khoản
-                <DownOutlined style={{ fontSize: "14px" }} />
-              </Link>
-
-              {showAccount ? (
-                <div className="menu-drop">
-                  <Link to="register">Đăng kí</Link>
-                  <Link to="login">Đăng nhập</Link>
-                </div>
-              ) : (
-                ""
-              )}
-            </li>
-          )} */}
-          {/* <li className="shop-cart">
-            <Link to="/cart" className="shop-cart">
-              <ShoppingCartOutlined
-                style={{ fontSize: "30px" }}
-              ></ShoppingCartOutlined>
-              <span className="count"> {amount} </span>
-            </Link>
-          </li> */}
-        {/* <div className="bar" onClick={() => setMenu(!menu)}>
-          <span className="line"></span>
-          <span className="line"></span>
-          <span className="line"></span>
-        </div> */}
       </section>
     </div>
   );
 }
-
 export default Header;
