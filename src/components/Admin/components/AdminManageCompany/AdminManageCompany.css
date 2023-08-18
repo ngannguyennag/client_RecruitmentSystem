@@ -1,13 +1,13 @@
-.admin-user span{
+.admin-company span{
     display: flex;
     padding: 1rem;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #2071a7;
 }
-.admin-user-list{
+.admin-company-list{
     margin: 0 .5rem 0 1rem;
-    color: white;
+    color: rgb(242, 239, 239);
     padding: 1rem;
     border-radius: 4px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -27,7 +27,7 @@ table th{
     background:  rgb(112, 173, 223);
     font-size: 16px;
     font-weight: 600;
-    color: #f9f9f9;
+    color: #f1eded;
     padding: .5rem 0;
     min-width: 32px;
     border-right: 1px solid black;
@@ -41,9 +41,6 @@ table td{
 .form-div,table td button{
     color: black;
     cursor: pointer;
-}
-.form-div{
-    padding-bottom: 10px;
 }
 tr .delete-user{
     height: 28px;
@@ -60,5 +57,5 @@ tr .delete-user:hover{
     transition: .3s;
 }
 tr .delete-user:hover span{
-    color: white;
+    color: rgb(93, 25, 25);
 }

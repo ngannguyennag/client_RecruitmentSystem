@@ -31,8 +31,8 @@ function UserFileUpdate(props) {
       }
     });
     return (
-      <div className="signup-page">
-        <div className="signup">
+      <div className="user-page">
+        <div className="userUp">
 
         <h2>Sửa thông tin liên hệ</h2>
         <form onSubmit={handleSubmit(onSubmit)} classname="form-signup">

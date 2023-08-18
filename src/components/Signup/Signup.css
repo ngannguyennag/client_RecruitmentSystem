@@ -1,16 +1,5 @@
 
 .signup-page{
-    /* position: absolute;
-    width: 500px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,0%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1rem;
-    font-size: 30px; */
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -64,7 +53,7 @@
     height: 10px;
     /* margin-right: 100px; */
 }
-.form{
+.formSignUp{
     display: flex;
     width: 100%;
     margin: 3.5px;
@@ -80,7 +69,7 @@
     font-size: 16px;
 }
 .form-input input{
-    width: 100%;
+    /* width: 100%; */
     height: 5.5vh;
     border-radius: 10px;
 }
@@ -104,16 +93,16 @@
 .signup-page input[type="submit"]:hover {
     background: rgb(216, 47, 20);
 }
-.transmit span{
+.transmitSignUp span{
     color: rgb(50, 94, 126);
     font-size: 16px;
 }
-.transmit a{
+.transmitSignUp a{
     cursor: pointer;
     margin-left: 30px;
     color: rgb(4, 139, 222);
 }
-.transmit a:hover{
+.transmitSignUp a:hover{
     color: rgb(216, 47, 20);
 }
 

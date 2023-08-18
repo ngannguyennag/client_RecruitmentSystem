@@ -56,9 +56,25 @@ export const getAccountInfoReducer = (state = {}, action) => {
     }
 }
 
+export const getAccountUpdateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_ACCOUNT_UPDATE':{
+            return {...state, userUpdate: action.payload}
+        }
+
+        case 'DELETE_USER':{
+            return {...state}
+        }
+
+        default: return state
+    }
+}
+
 export const deleteUserReducer = (state = {}, action) => {
     switch (action.type) {
-        
+        case 'DELETE_USER_SUCCESS':{
+            return {...state, userUpdate: action.payload}
+        }
             
         default: return state
     }

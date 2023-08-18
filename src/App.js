@@ -20,8 +20,10 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import ConfirmEmailPage from './components/Signup/ConfirmEmail';
 import React from "react";
 import UserFilePage from './pages/UserFilePage';
+import CompanyPage from './pages/CompanyPage';
 // import UserFileUpdatePage from './pages/UserFileUpdatePage';
 import UserManageAccountPage from './pages/UserManageAccountPage';
+import UserManagePasswordPage from './pages/UserManagePasswordPage';
 
 // import { useRoutes} from "react-router-dom";
 // import routes from "./configs/routes";
@@ -111,6 +113,12 @@ function App() {
 
         <Route path='/usermanage'>
           <UserManageAccountPage></UserManageAccountPage>
+        </Route>
+       <Route path='/usermanagepassword'>
+        <UserManagePasswordPage></UserManagePasswordPage>
+       </Route>
+        <Route path="/company">
+          <CompanyPage></CompanyPage>
         </Route>
       </Router>
     </div>

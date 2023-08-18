@@ -17,9 +17,9 @@ function HeaderUser(props) {
   const users = useSelector(state => state.getAccountInfo.user);
   const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
     useEffect(() => {
+      if(!users)
       dispatch(getAccountInfo(token));
-    }, [dispatch]);
-    console.log(users);
+    }, [dispatch,token,users]);
 
   const userSignin = useSelector((state) => state.userSignin);
   const {userInfo, error } = userSignin;
@@ -57,7 +57,7 @@ function HeaderUser(props) {
   const handleIconClick = () => {
     setShowAccount2(!showAccount2);
   };
-
+  console.log(users);
   return (
     <div className="header">
       <section id="menu">
@@ -81,7 +81,7 @@ function HeaderUser(props) {
         </ul>
         <div className="create-account">
           <i className="account-icon" onClick={handleIconClick}>
-            <img src={users.imgUrl}></img>
+            <img src={users?.imgUrl}></img>
           </i>
           {showAccount2 && (
             <ul className="account-menu">

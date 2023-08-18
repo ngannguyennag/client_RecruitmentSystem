@@ -36,7 +36,7 @@ function Signup(props) {
 
         <h2>Đăng Ký Thành Viên!</h2>
         <form onSubmit={handleSubmit(onSubmit)} classname="form-signup">
-          <div className="form">
+          <div className="formSignUp">
             <div className="form-input"> FirstName
               <input {...register("firstname")}  required></input>
             </div>
@@ -44,7 +44,7 @@ function Signup(props) {
               <input {...register("lastname")}  required></input>
             </div>
           </div>
-          <div className='form'>
+          <div className='formSignUp'>
             <div className='form-input'> UserName
               <input {...register("username")}  required></input>
             </div>
@@ -57,7 +57,7 @@ function Signup(props) {
             </div>
           </div>
          
-         <div className='form'>
+         <div className='formSignUp'>
           <div className='form-input'> Password
             <input
               {...register("password")}
@@ -76,7 +76,7 @@ function Signup(props) {
           </div>
          </div>
          
-         <div className="form">
+         <div className="formSignUp">
           <div className='form-input'> Phone
             <input
               {...register("phone")}
@@ -103,7 +103,7 @@ function Signup(props) {
             </div>
           </div> 
           <input type="submit" value="Đăng Kí"></input>
-          <div className="transmit">
+          <div className="transmitSignUp">
             <span>Bạn là thành viên của ANJWork? </span>
             <Link to="/login">Đăng nhập</Link>
           </div>

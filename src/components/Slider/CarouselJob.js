@@ -7,93 +7,12 @@ import "slick-carousel/slick/slick-theme.css";
 // import {CarouselItem} from "./CarouselItem";
 import {CarouselItemJob} from "./CarouselItem";
 import axios from "axios";
+import { getJobTop } from "../../actions/JobAction";
+import { useSelector, useDispatch } from 'react-redux';
 
-
-const mockDataJob = [
-  {
-    companyLogo: "img/job1.png",
-    jobTitle: "Kĩ Sư Cao Cấp Thiết Kế Phần Cứng - Senior Hardware Engineer",
-    companyName: "Vines - Vingroup",
-    salary: "Thương lượng",
-    cityNames: "Hà Nội",
-    url: "https://www.vietnamworks.com/ki-su-cao-cap-thiet-ke-phan-cung-senior-hardware-engineer-1663725-jv"
-  },
-  {
-    companyLogo: "img/job2.png",
-    jobTitle: "Nhân Viên Caddie - Novaworld Phan Thiet (Golf)",
-    companyName: "Novaland",
-    salary: "Thương lượng",
-    cityNames: "Bình Dương",
-    url: "https://www.vietnamworks.com/nhan-vien-caddie-novaworld-phan-thiet-golf-1-1663578-jv"
-  },
-  {
-    companyLogo: "img/job3.png",
-    jobTitle: "Giám Đốc Quản Lý Quan Hệ Khách Hàng",
-    companyName: "Techcombank",
-    salary: "Thương lượng",
-    cityNames: "Hồ Chí Minh",
-    url: "https://www.vietnamworks.com/giam-doc-quan-ly-quan-he-khach-hang-1659311-jv"
-  },
-  {
-    companyLogo: "img/job4.png",
-    jobTitle: "Trưởng Nhóm Marketing Tại Hồ Chính Minh",
-    companyName: "VUS - The English Center",
-    salary: "$500 - $800",
-    cityNames: "Hồ Chí Minh",
-    url: "https://www.vietnamworks.com/truong-nhom-marketing-tai-ho-chinh-minh-co-the-di-cong-tac-cac-tinh-1651886-jv"
-  },
-  {
-    companyLogo: "img/job5.png",
-    jobTitle: "Sales Representative – Đại Diện Kinh Doanh",
-    companyName: "Công Ty TNHH Cibes Lift Việt Nam",
-    salary: "Thương lượng",
-    cityNames: "Hà Nội, Hải Phòng, Quảng Ninh",
-    url: "https://www.vietnamworks.com/sales-representative-dai-dien-kinh-doanh-7-1647419-jv"
-  },
-  {
-    companyLogo: "img/job6.png",
-    jobTitle: "Software Engineer (C/C++) - Hai Phong",
-    companyName: "LG Electronics Development Vietnam Company Limite",
-    salary: "$800 - $2000",
-    cityNames: "Hải Phòng",
-    url: "https://www.vietnamworks.com/software-engineer-c-c-plus-plus-hai-phong-up-to-2000-hybrid-working-1665865-jv"
-  },
-  {
-    companyLogo: "img/job7.png",
-    jobTitle: "Associate Manager Distribution Compensation",
-    companyName: "Sun Life Vietnam (Sun Life)",
-    salary: "Thương lượng",
-    cityNames: "Hồ Chí Minh",
-    url: "https://www.vietnamworks.com/associate-manager-distribution-compensation-1-1-1663777-jv"
-  },
-  {
-    companyLogo: "img/job8.png",
-    jobTitle: "Associate Manager Claim Assessor",
-    companyName: "Sun Life Vietnam (Sun Life)",
-    salary: "Thương lượng",
-    cityNames: "Hồ Chí Minh",
-    url: "https://www.vietnamworks.com/associate-manager-claim-assessor-1665759-jv"
-  },
-  {
-    companyLogo: "img/job9.png",
-    jobTitle: "Chuyên Viên Quản Lý Nội Dung Nông Nghiệp Số 2",
-    companyName: "CÔNG TY CỔ PHẦN PHÂN BÓN DẦU KHÍ CÀ MAU",
-    salary: "Thương lượng",
-    cityNames: "Cà Mau, Hồ Chí Minh",
-    url: "https://www.vietnamworks.com/chuyen-vien-quan-ly-noi-dung-nong-nghiep-so-2-nong-1-1665837-jv"
-  },
-  {
-    companyLogo: "img/job10.png",
-    jobTitle: "Chuyên Viên Triển Khai Phần Mềm",
-    companyName: "1C Vietnam LLC",
-    salary: "Thương lượng",
-    cityNames: "Hà Nội",
-    url: "https://www.vietnamworks.com/chuyen-vien-trien-khai-phan-mem-9-1665828-jv"
-  },
-
-]
 function SampleNextArrow(props) {
   const { className, onClick } = props;
+ 
   return (
     <div
       className={`${className}`}
@@ -118,14 +37,13 @@ function Carousel(props,title) {
   let {slider, slider1, slider2} = props
   const [nav, setNav] = useState({nav1: null, nav2: null})
   const [data, setUserData] = useState([]);
-
-  // Fetch data or use mock data
-  useEffect(() => {
-    fetchData();
-  }, []);
-  function fetchData() {
-    setUserData(mockDataJob);
-  }
+  const jobTop = useSelector(state => state.getJobTop.jobTop);
+  const dispatch = useDispatch();
+    useEffect(() => {
+      if (!jobTop) {
+        dispatch(getJobTop());
+      }
+    }, []);
   useEffect(() => {
     setNav({
       nav1: slider1,
@@ -138,8 +56,8 @@ function Carousel(props,title) {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 5,
+    slidesToScroll: 5,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
@@ -156,18 +74,19 @@ function Carousel(props,title) {
         <div className="carousel-left">
           <div className="title">Việc làm tốt nhất</div>
           <div className="carousel-left-slide">
-            <Slider asNavFor={nav.nav2}
+            {jobTop && jobTop.length > 0 ? (
+              <Slider asNavFor={nav.nav2}
                     ref={slider => (slider1 = slider)} 
-                    {...settings} slidesToShow={4}>
-              {data.map((e,i)=> {
+                    {...settings} slidesToShow={5}>
+              {jobTop.map((item,i)=> {
                 return (
                   <div key={i} className="carouselItem">
-                    <CarouselItemJob e={e} ></CarouselItemJob>
-                    {/* <CarouselItemJob e= {e}></CarouselItemJob> */}
+                    <CarouselItemJob dataFromParent={item} ></CarouselItemJob>
                   </div>
                 )
-              })}      
+              })} 
             </Slider>
+            ) : null}
             <div className='carousel-left-move' onClick={() => previous()}>
                 <div className="prev">
                     <LeftOutlined></LeftOutlined>

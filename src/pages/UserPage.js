@@ -17,7 +17,6 @@ function UserPage(props) {
             <Carousel></Carousel>
             <CarouselJob></CarouselJob>
             <CarouselCompany></CarouselCompany>
-
             <Footer></Footer>
             <ScrollToTop></ScrollToTop>
             {

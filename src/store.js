@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
-import { getAccountInfoReducer, getAllUserReducer, UserSigninReducer, UserSignupReducer} from './reducers/UserReducer'
+import { getAccountInfoReducer, getAccountUpdateReducer, getAllUserReducer, UserSigninReducer, UserSignupReducer} from './reducers/UserReducer'
 import {getProductByTypeReducer, getAllProductReducer, getProductByIdReducer, paginationProductReducer, ascendingProductReducer, descendingProductReducer, searchProductReducer, reviewProductReducer} from './reducers/ProductReducer'
 
 import { CartReducer} from './reducers/CartReducer'
@@ -9,8 +9,9 @@ import { ChatReducer } from './reducers/ChatReducer'
 import { SelectListReducer, UpdateSelectListReducer } from "./reducers/SelectListReducer";
 import { ListTypeProductReducer, TypeProductReducer } from './reducers/ListTypeProductReducer'
 import { InfoGhnReducer } from './reducers/GhnReducer'
-import { CompanyReducer } from './reducers/CompanyReducer'
+import { getCompanyReducer, getAllCompanyReducer } from './reducers/CompanyReducer'
 import { getHotCategoryReducer } from './reducers/HotCategoryReducer'
+import { getAllJobReducer, getJobTopReducer } from './reducers/JobReducer'
 
 const initialState = {
   userSignin: {
@@ -33,6 +34,10 @@ const reducer = combineReducers({
   userSignin: UserSigninReducer,
   userSignup: UserSignupReducer,
   getAccountInfo: getAccountInfoReducer,
+  getAccountUpdate: getAccountUpdateReducer,
+  companies: getAllCompanyReducer,
+  jobs: getAllJobReducer,
+  getJobTop: getJobTopReducer,
   allProduct: getAllProductReducer,
   getProductById: getProductByIdReducer,
 
@@ -40,7 +45,7 @@ const reducer = combineReducers({
 
   cart: CartReducer,
 
-  allOrder: getAllOrderReducer,
+  // allOrder: getAllOrderReducer,
   address: addressReducer,
   orderByUser: getOrderByUserReducer,
   orderInfo: OrderInfoReducer,
@@ -55,8 +60,8 @@ const reducer = combineReducers({
 
   allTypeProduct: ListTypeProductReducer,
   detailType: TypeProductReducer,
-  company: CompanyReducer,
-  hotCategory: getHotCategoryReducer,
+  getCompany: getCompanyReducer,
+  getHotCategory: getHotCategoryReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

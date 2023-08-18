@@ -1,10 +1,23 @@
-export const CompanyReducer = (state = {}, action) => {
+export const getCompanyReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'COMPANY_SUCCESS':
-            return {...state, userInfo: action.payload };
-        case 'COMPANY_FAIL':
+        case 'GETCOMPANY_SUCCESS':
+            return {...state, company: action.payload };
+        case 'GETCOMPANY_FAIL':
             return {...state, error: action.payload };
       default:
         return state;
+    }
+};
+export const getAllCompanyReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_ALL_COMPANY':{
+            return {...state, company: action.payload}
+        }
+
+        case 'DELETE_COMPANY':{
+            return {...state}
+        }
+
+        default: return state
     }
 };

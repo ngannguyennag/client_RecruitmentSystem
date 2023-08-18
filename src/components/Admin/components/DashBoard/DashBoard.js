@@ -91,7 +91,7 @@ export default function DashBoard() {
               </li>
             </div>
           </div>
-          <ChartDashBoard></ChartDashBoard>
+          {/* <ChartDashBoard></ChartDashBoard> */}
         </div>
 
         <div className="dashboard-new">

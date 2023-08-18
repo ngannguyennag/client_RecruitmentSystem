@@ -14,24 +14,24 @@ import {
 function Sidebar(props) {
   const dispatch = useDispatch();
   const location = useLocation()
-  const { orderPendding } = useSelector((state) => state.allOrder);
+  // const { orderPendding } = useSelector((state) => state.allOrder);
   let totalNewOrder
   
-  if(orderPendding){
-    totalNewOrder = orderPendding.length
-  }
+  // if(orderPendding){
+  //   totalNewOrder = orderPendding.length
+  // }
 
-  useEffect(() => {
-    const getNewOrder = () => {
-      dispatch(GetAllOrderPendding());
-    }
-    getNewOrder()
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const getNewOrder = () => {
+  //     dispatch(GetAllOrderPendding());
+  //   }
+  //   getNewOrder()
+  // }, [dispatch]);
 
   return (
     <div className="sidebar">
       <div className="sidebar-top">
-        <img src="img/J.png"></img>
+        <img src="/img/J.png"></img>
       </div>
       <div className="sidebar-list">
         <Link to="/admin" className={'sidebar-list-item'}>
@@ -52,25 +52,25 @@ function Sidebar(props) {
           </span>
           <p>Quản lý tài khoản</p>
         </Link>
-        <Link to="/admin/order" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-company" className={'sidebar-list-item'}>
           <span>
             <OrderedListOutlined></OrderedListOutlined>
           </span>
           <p>
             Quản lý công ty
             <div className="admin-order-new">
-                {totalNewOrder}
+                {/* {totalNewOrder} */}
               </div>
           </p>
         </Link>
-        <Link to="/admin/order" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
           <span>
             <OrderedListOutlined></OrderedListOutlined>
           </span>
           <p>
             Quản lý công việc
             <div className="admin-order-new">
-                {totalNewOrder}
+                {/* {totalNewOrder} */}
               </div>
           </p>
         </Link>
