@@ -10,6 +10,7 @@ import OrderPage from './pages/OrderPage';
 import SearchPage from './pages/SearchPage';
 import AdminPage from './pages/AdminPage';
 import UserPage from './pages/UserPage';
+import HRPage from './pages/HRPage';
 import ResetScroll from './components/ResetScroll/ResetScroll';
 import MyOrderPage from './pages/MyOrderPage';
 import ChatPage from './pages/ChatPage';
@@ -21,9 +22,15 @@ import ConfirmEmailPage from './components/Signup/ConfirmEmail';
 import React from "react";
 import UserFilePage from './pages/UserFilePage';
 import CompanyPage from './pages/CompanyPage';
-// import UserFileUpdatePage from './pages/UserFileUpdatePage';
+import UserFileUpdatePage from './pages/UserFileUpdatePage';
+import UserFileEditPage from './pages/UserFileEditPage';
 import UserManageAccountPage from './pages/UserManageAccountPage';
 import UserManagePasswordPage from './pages/UserManagePasswordPage';
+import UserUploadAvatar from './pages/UserUploadAvatar';
+import HRFileCompanyPage from './components/HR/component/HRFileCompany/HRFileCompany';
+import HRCreateWorkPage from './pages/HRCreateWork';
+import HRManageWorkPage from './pages/HRManageWorkPage';
+import HRListApplicationPage from './pages/HRListApplication';
 
 // import { useRoutes} from "react-router-dom";
 // import routes from "./configs/routes";
@@ -102,23 +109,42 @@ function App() {
         <Route path='/user'>
           <UserPage></UserPage>
         </Route>
-
+        <Route path='/hr'>
+          <HRPage></HRPage>
+        </Route>
         <Route path='/userfile'>
           <UserFilePage></UserFilePage>
         </Route>
-
-        {/* <Route path='/userfileupdate'>
+        <Route path='/userfileedit'>
+          <UserFileEditPage></UserFileEditPage>
+        </Route>
+        <Route path='/userfileupdate'>
           <UserFileUpdatePage></UserFileUpdatePage>
-        </Route> */}
+        </Route>
 
         <Route path='/usermanage'>
           <UserManageAccountPage></UserManageAccountPage>
+        </Route>
+        <Route path='/useruploadavatar'>
+          <UserUploadAvatar></UserUploadAvatar>
         </Route>
        <Route path='/usermanagepassword'>
         <UserManagePasswordPage></UserManagePasswordPage>
        </Route>
         <Route path="/company">
           <CompanyPage></CompanyPage>
+        </Route>
+        <Route path="/file_company">
+          <HRFileCompanyPage></HRFileCompanyPage>
+        </Route>
+        <Route path="/create_work">
+          <HRCreateWorkPage></HRCreateWorkPage>
+        </Route>
+        <Route path="/manage_work">
+          <HRManageWorkPage></HRManageWorkPage>
+        </Route>
+        <Route path="/list_application">
+          <HRListApplicationPage></HRListApplicationPage>
         </Route>
       </Router>
     </div>

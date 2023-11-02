@@ -6,7 +6,7 @@ export const login = (user) => async (dispatch) => {
       dispatch({ type: 'USER_LOGIN_SUCCESS', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (error) {
-      dispatch({ type: 'USER_LOGIN_FAIL', payload: error.response.data.message });
+      dispatch({ type: 'USER_LOGIN_FAIL', payload: error.message });
     }
 };
 
@@ -16,7 +16,12 @@ export const getAccountInfo = (token) => async (dispatch, getState) => {
     userSignin: {userInfo},
   } = getState()
   try {
-    const {data} = await   axios.get('http://localhost:8080/api/v1/user/getAccountInfo?token='+ token
+    const {data} = await   axios.get('http://localhost:8080/api/v1/user/get-info-no-token', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    }
     )
     dispatch({type: 'GET_ACCOUNT_INFO', payload: data})
   } catch (error) {
@@ -34,14 +39,38 @@ export const SignupUser = (user) => async (dispatch) => {
 };
 
 export const getAccountUpdate = (token, user) => async (dispatch) => {
+  console.log(user);
   try {
-    const {data} = await   axios.put('http://localhost:8080/api/v1/user/update?token='+ token, user)
+    const {data} = await   axios.put('http://localhost:8080/api/v1/user/update-no-token',user,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    localStorage.removeItem('userInfo');
     localStorage.setItem('userInfo', JSON.stringify(data));
     dispatch({ type: 'USER_UPDATE_SUCCESS', payload: data });
   } catch (error) {
   }
 };
 
+export const uploadImage = (token,imageData) => async dispatch => {
+  if (imageData.entries().next().value[1] !== null) {
+      const response = await axios.post('http://localhost:8080/api/v1/user/image/upload-no-token', imageData, 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      }
+      );
+      dispatch({
+          type: "UPLOAD_IMAGE",
+          payload: response.data
+      });
+  }
+};
 export const changePassword = (token, managePassword) => async(dispatch) =>{
   try{
     const {data} = await axios.put('http://localhost:8080/api/v1/user/changePassword?token=' + token, managePassword)
@@ -62,7 +91,7 @@ export const getAllUser = (token) => async (dispatch, getState) => {
     userSignin: {userInfo},
   } = getState()
   try {
-    const {data} = await axios.get('http://localhost:8080/api/v1/manage_users/all', {
+    const {data} = await axios.get('http://localhost:8080/api/v1/manage/users/all', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -79,7 +108,7 @@ export const deleteUser = (userId, token) => async (dispatch, getState) => {
     userSignin: {userInfo},
   } = getState()
   try {
-    const {data} = await axios.delete('http://localhost:8080/api/v1/manage_users/delete/'+ userId,{
+    const {data} = await axios.delete('http://localhost:8080/api/v1/manage/users/delete/'+ userId,{
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,

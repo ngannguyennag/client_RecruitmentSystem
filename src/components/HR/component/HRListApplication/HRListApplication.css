@@ -1,0 +1,64 @@
+.admin-user span{
+    display: flex;
+    padding: 1rem;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2071a7;
+}
+.admin-user-list{
+    margin: 0 .5rem 0 1rem;
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+table{
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table tr{
+    border-bottom: 1px solid black;
+    background-color: rgb(20,100,147);
+}
+table th{
+    background:  rgb(112, 173, 223);
+    font-size: 16px;
+    font-weight: 600;
+    color: #f9f9f9;
+    padding: .5rem 0;
+    min-width: 32px;
+    border-right: 1px solid black;
+}
+table td{
+    padding: .5rem 0;
+    font-size: 16px;
+    border-right: 1px solid black;
+
+}
+.form-div,table td button{
+    color: black;
+    cursor: pointer;
+}
+.form-div{
+    padding-bottom: 10px;
+}
+tr .delete-user{
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+}
+tr .delete-user span{
+    border-radius: 50%;
+}
+tr .delete-user:hover{
+    background: rgb(237, 52, 52);
+    transition: .3s;
+}
+tr .delete-user:hover span{
+    color: white;
+}

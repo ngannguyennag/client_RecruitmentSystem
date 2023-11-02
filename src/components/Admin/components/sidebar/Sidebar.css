@@ -1,5 +1,4 @@
 .sidebar{
-   
     min-width: 300px;
     height: 100vh;
     position: fixed;
@@ -11,7 +10,6 @@
     font-size: 30px;
     font-weight: 600;
     padding: 1.5rem 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +24,11 @@
     position: relative;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 1rem;
-
+    padding: 0.6rem;
     border-radius: 18px;
-    color: #6b6b6b;
+    color: #043461;
 }
 .sidebar-list-item.active{
     background: #1890ff;
@@ -40,24 +37,20 @@
 .sidebar-list-item p{
    margin:0 0 0 1rem;
 }
-
 .sidebar-list-item:hover{
     background: #1890ff;
     color: white;
     transition: .3s;
 }
-
 .admin-order-new{
     position: absolute;
     top: 0px;
     right: -10px;
-
     width: 30px;
     height: 30px;
     border-radius: 50%;
     line-height: 30px;
     text-align: center;
-
     background: #1890ff;
     color: white;
     font-size: 13px;

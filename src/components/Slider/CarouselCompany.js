@@ -4,7 +4,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {CarouselItemCompany} from "./CarouselItem";
+import { CarouselItemCompany } from "./CarouselItem";
 import { useSelector, useDispatch } from 'react-redux';
 import { getCompany } from "../../actions/CompanyAction";
 import axios from "axios";
@@ -25,30 +25,23 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={`${className}`}
-      style={{ display: 'none'}}
+      style={{ display: 'none' }}
       onClick={onClick}
     />
   );
 }
 
-function Carousel(props,title) {
-  let {slider, slider1, slider2} = props
-  const [nav, setNav] = useState({nav1: null, nav2: null})
+function Carousel(props, title) {
+  let { slider, slider1, slider2 } = props
+  const [nav, setNav] = useState({ nav1: null, nav2: null })
   const [data, setUserData] = useState([]);
   const company = useSelector(state => state.getCompany.company);
   const dispatch = useDispatch();
-    useEffect(() => {
-      if (!company) {
-        dispatch(getCompany());
-      }
-    }, []);
-  // Fetch data or use mock data
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-//   function fetchData() {
-//     setUserData(mockDataCompany);
-//   }
+  useEffect(() => {
+    if (!company) {
+      dispatch(getCompany());
+    }
+  }, []);
 
   useEffect(() => {
     setNav({
@@ -58,16 +51,16 @@ function Carousel(props,title) {
   }, [])
 
   const settings = {
-    loop:true,
+    loop: true,
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  const next = () =>  {
+  const next = () => {
     slider1.slickNext();
   }
   const previous = () => {
@@ -80,19 +73,19 @@ function Carousel(props,title) {
         <div className="carousel-left">
           <div className="title">Công ty hàng đầu</div>
           <div className="carousel-left-slide">
-          {company && company.length > 0 ? (
-            <Slider asNavFor={nav.nav2}
-                    ref={slider => (slider1 = slider)} 
-                    {...settings} slidesToShow={5}>
-              {company.map((item,i)=> {
-                return (
-                  <div key={i} className="carouselItem">
-                    <CarouselItemCompany dataFromParent={item}></CarouselItemCompany>
-                  </div>
-                )
-              })}  
-            </Slider>
-             ) : null} 
+            {company && company.length > 0 ? (
+              <Slider asNavFor={nav.nav2}
+                ref={slider => (slider1 = slider)}
+                {...settings} slidesToShow={5}>
+                {company.map((item, i) => {
+                  return (
+                    <div key={i} className="carouselItem">
+                      <CarouselItemCompany dataFromParent={item}></CarouselItemCompany>
+                    </div>
+                  )
+                })}
+              </Slider>
+            ) : null}
             {/* <Slider asNavFor={nav.nav2}
                     ref={slider => (slider1 = slider)} 
                     {...settings} slidesToShow={5}>
@@ -105,21 +98,21 @@ function Carousel(props,title) {
               })}      
             </Slider> */}
             <div className='carousel-left-move' onClick={() => previous()}>
-                <div className="prev">
-                    <LeftOutlined></LeftOutlined>
-                </div>
-                <div className="next" onClick={() => next()}>
-                    <RightOutlined></RightOutlined>
-                </div>
+              <div className="prev">
+                <LeftOutlined></LeftOutlined>
+              </div>
+              <div className="next" onClick={() => next()}>
+                <RightOutlined></RightOutlined>
+              </div>
             </div>
           </div>
           <div className="carousel-left-bottom">
             <Slider asNavFor={nav.nav1}
-                    ref={slider => (slider2 = slider)}
-                    slidesToShow={2}
-                    swipeToSlide={true}
-                    focusOnSelect={true}
-                     >
+              ref={slider => (slider2 = slider)}
+              slidesToShow={2}
+              swipeToSlide={true}
+              focusOnSelect={true}
+            >
             </Slider>
           </div>
         </div>

@@ -9,6 +9,7 @@ import { EditOutlined, CameraOutlined } from '@ant-design/icons';
 
 function UserFile(props) {
   const dispatch = useDispatch();
+  const [ setGenderValue] = useState(users && users.gender);
   const [password, setPassword] = useState('');
   const history = useHistory();
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -40,7 +41,7 @@ function UserFile(props) {
   };
   const userSignup = useSelector((state) => state.userSignup);
   const users = useSelector(state => state.getAccountInfo.user);
-  const userUpdate = useSelector(state => state.getAccountUpdate.userUpdate)
+  const userUpdate = useSelector(state => state.getAccountUpdate.userUpdate);
   const { userInfo, error } = userSignup;
   
   useEffect(() => {
@@ -74,6 +75,7 @@ function UserFile(props) {
     setIsEditMode(false);
     setIsSaved(false); // Reset biến trạng thái khi hủy chỉnh sửa
     setAvatar(users.imgUrl);
+    setGenderValue(users.gender);
   };
 
   const onSubmit = data => {
@@ -89,7 +91,7 @@ function UserFile(props) {
       formData.append("email", data.email || users.email);
       formData.append("phone", data.phone || users.phoneNumber);
       formData.append("birthday", data.birthday || users.birthday);
-      formData.append("gender", data.gender || users.gender);
+      formData.append("gender", data.gender || genderValue);
       formData.append("file",data.file || avatar.file);
 
       dispatch(getAccountUpdate(token, formData));
@@ -101,7 +103,7 @@ function UserFile(props) {
         email: data.email || users.email,
         phone: data.phone || users.phoneNumber,
         birthday: data.birthday || users.birthday,
-        gender: data.gender || users.gender
+        gender: data.gender || genderValue
       }));
     // Thực hiện logic lưu tại đây
     setIsEditMode(false);

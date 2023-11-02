@@ -6,7 +6,7 @@ export const getAllJob = (token) => async (dispatch, getState) => {
     userSignin: {userInfo},
   } = getState()
   try {
-    const {data} = await axios.get('http://localhost:8080/api/v1/admin/manage_jobs/all', {
+    const {data} = await axios.get('http://localhost:8080/api/v1/admin/manage/jobs/all', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -22,6 +22,6 @@ export const getJobTop = () => async (dispatch) => {
       const {data} = await axios.get('http://localhost:8080/api/v1/jobs/top?pageNo=0&pageSize=6&sortBy=salary')
       dispatch({ type: 'GET_JOBTOP_SUCCESS', payload: data });
     } catch (error) {
-      dispatch({ type: 'GET_JOBTOP_FAIL', payload: error.response.data.message });
+      dispatch({ type: 'GET_JOBTOP_FAIL', payload: error.message});
     }
 };

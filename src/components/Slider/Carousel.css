@@ -1,132 +1,141 @@
-*{
+* {
     box-sizing: border-box;
 }
-#carousel{
+
+#carousel {
     width: 100%;
     margin-top: 1rem;
 }
-.carousel{
+
+.carousel {
     width: 95%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
-.carouselCompany{
+
+.carouselCompany {
     position: relative;
     width: 100%;
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
 }
-.carousel-left{
+
+.carousel-left {
     width: 95%;
     margin: 15px auto;
     position: relative;
 }
-.carousel-leftCompany{
+
+.carousel-leftCompany {
     background-color: rgb(12, 108, 143);
     width: 95%;
-    margin: 25px 0 30px 25px ;
+    margin: 25px 0 30px 25px;
     position: relative;
 }
-.title{
+
+.title {
     font-size: 26px;
     font-weight: 700;
     position: absolute;
     left: 0;
-    /* margin: 30px; */
 }
-.titleCompany{
+
+.titleCompany {
     position: absolute;
     left: 0;
     font-size: 26px;
     font-weight: 700;
 }
 
-.carousel-left-slide{
+.carousel-left-slide {
     position: relative;
     overflow: hidden;
     height: 100%;
     margin-top: 35px;
 }
-.carousel-left-slide img{
+
+.carousel-left-slide img {
     width: 100%;
-    /* margin: 50px; */
 }
-.carousel-left-slide:hover .prev{
+
+.carousel-left-slide:hover .prev {
     transform: translateX(0);
     transition: .5s;
 }
-.carousel-left-slide:hover .next{
+
+.carousel-left-slide:hover .next {
     transform: translateX(0);
     transition: .5s;
 }
+
 .carouselItem {
-    margin: 10px; 
+    margin: 10px;
     display: flex;
 }
-.carouselItem_item{
+
+.carouselItem_item {
     background-color: rgb(220, 240, 247);
-    margin: 10px; 
-    /* width: 100%; */
+    margin: 10px;
     height: 180px;
     cursor: pointer;
 }
 
-.carouselItemJob_item{
+.carouselItemJob_item {
     background-color: rgb(220, 240, 247);
-    margin: 10px; 
-    /* width: 100%; */
+    margin: 10px;
     height: 220px;
     cursor: pointer;
 }
-.carouselItemJob_companyName{
+
+.carouselItemJob_companyName {
     color: rgb(92, 90, 90);
 }
-.carouselItemJob_salary{
+
+.carouselItemJob_salary {
     color: rgba(235, 91, 39, 0.858);
 }
-.carouselItemCompany_item{
+
+.carouselItemCompany_item {
     background-color: rgb(220, 240, 247);
-    margin: 10px; 
-    /* width: 100%; */
+    margin: 10px;
     height: 220px;
     cursor: pointer;
     position: relative;
 }
-.carouselItem_item img{
-    height: 50%;
+
+.carouselItem_item img {
     width: 50%;
+    padding: 10px;
     transform: translate(50%);
 }
-.carouselItemJob_item img{
+
+.carouselItemJob_item img {
     width: 50%;
-    height: 40%;
-    padding-top: 15px;
-    /* border-radius: 5px; */
+    padding: 15px;
     margin-bottom: 8px;
     transform: translate(50%);
 }
-.carouselItemJob_cityNames{
+
+.carouselItemJob_cityNames {
     color: rgb(92, 90, 90);
 }
-.carouselItemCompany_item img{
-    /* margin:10px 0 0  30px; */
+
+.carouselItemCompany_item img {
     width: 50%;
-    /* height: 50%; */
     padding: 15px;
-    /* border-radius: 5px; */
     transform: translate(50%);
 }
-.carouselItemCompany_button{
-    /* margin-left: 50px; */
-    /* border-radius: 5px; */
+
+.carouselItemCompany_button {
     width: 100%;
     height: 30%;
     position: relative;
     margin-bottom: 20px;
 }
-.carouselItemCompany_button button{
+
+.carouselItemCompany_button button {
     cursor: pointer;
     background-color: rgb(54, 140, 215);
     color: white;
@@ -137,28 +146,34 @@
     font-size: 16px;
     transform: translate(-50%);
 }
-.carouselItem_title{
+
+.carouselItem_title {
     font-size: 18px;
     font-weight: 500;
 }
-.carouselItemCompany_title{
+
+.carouselItemCompany_title {
     font-size: 16px;
     font-weight: 500;
     position: relative;
     height: 40px;
 }
-.carouselItemJob_title{
-    font-size: 16px;
+
+.carouselItemJob_title {
+    font-size: 17px;
     font-weight: 500;
 }
+
 .carouselItem_item .carouselItem_title:hover {
     color: red;
 }
-.carouselItem_total{
+
+.carouselItem_total {
     font-size: 16px;
     font-weight: 400;
 }
-.carousel-left-move{
+
+.carousel-left-move {
 
     width: 100%;
     position: absolute;
@@ -169,7 +184,9 @@
     justify-content: space-between;
     transition: .4s;
 }
-.carousel-left-slide .prev,.carousel-left-slide .next{
+
+.carousel-left-slide .prev,
+.carousel-left-slide .next {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -184,54 +201,51 @@
     cursor: pointer;
     transition: .3s;
 }
-.prev{
+
+.prev {
     transform: translateX(-40px);
 }
-.next{
+
+.next {
     transform: translateX(40px);
 }
 
-/* .carousel-left-bottom{
-    border: 1px solid #eee;
-    padding:1rem 0;
-    width: 100%;
-    font-family: Sans-serif!important;
-    font-size: 13px;
-    cursor: pointer;
-} */
-.slick-current{
+.slick-current {
     font-weight: 600;
 }
-.slick-slider button, .slick-next{
-    /* opacity: 0; */
-}
-.carousel-right{
+
+.carousel-right {
     width: 30%;
-    margin:0 auto;
+    margin: 0 auto;
     margin-left: .5rem;
 }
-.carousel-right-item{
+
+.carousel-right-item {
     margin-bottom: .5rem;
 }
-.carousel-right-item img{
+
+.carousel-right-item img {
     width: 100%;
     height: 140px;
 }
 
-@media screen and (max-width: 800px){
-    #carousel{
+@media screen and (max-width: 800px) {
+    #carousel {
         margin-top: 0;
     }
+
     .carousel {
         width: 100%;
         padding: .5rem;
     }
+
     .carousel-left {
         width: 100%;
         margin: 0 auto;
         position: relative;
     }
-    .carousel-right{
+
+    .carousel-right {
         display: none;
     }
 }

@@ -5,6 +5,6 @@ export const getHotCategory = () => async (dispatch) => {
       const {data} = await axios.get('http://localhost:8080/api/v1/categories/hot?pageNo=0&pageSize=20&sortBy=total')
       dispatch({ type: 'HOTCATEGORY_SUCCESS', payload: data });
     } catch (error) {
-      dispatch({ type: 'HOTCATEGORY_FAIL', payload: error.response.data.message });
+      dispatch({ type: 'HOTCATEGORY_FAIL', payload: error.message });
     }
 };

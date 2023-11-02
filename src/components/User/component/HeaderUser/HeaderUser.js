@@ -11,7 +11,6 @@ import { UserOutlined,FileOutlined,SettingOutlined,BellOutlined,LogoutOutlined  
 function HeaderUser(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const [showAccount, setShowAccount] = useState(false);
   const [showAccount2, setShowAccount2] = useState(false);
   const users = useSelector(state => state.getAccountInfo.user);
@@ -34,7 +33,6 @@ function HeaderUser(props) {
     const handleIconClick = () => {
       setIsMenuOpen(!isMenuOpen);
     };
-
     return (
       <div className="create-account">
         <i className="account-icon" onClick={handleIconClick}>
@@ -50,7 +48,6 @@ function HeaderUser(props) {
       </div>
     );
   };
-
   const handleMenuToggle = () => {
     setMenu(!menu);
   };

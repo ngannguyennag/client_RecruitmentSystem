@@ -4,7 +4,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {CarouselItem} from "./CarouselItem";
+import { CarouselItem } from "./CarouselItem";
 import axios from "axios";
 import { getHotCategory } from "../../actions/HotCategoryAction";
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,8 +15,7 @@ function SampleNextArrow(props) {
     <div
       className={`${className}`}
       style={{ display: 'none' }}
-      onClick={onClick}
-    />
+      onClick={onClick} />
   );
 }
 
@@ -25,23 +24,22 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={`${className}`}
-      style={{ display: 'none'}}
-      onClick={onClick}
-    />
+      style={{ display: 'none' }}
+      onClick={onClick} />
   );
 }
 
-function Carousel(props,title) {
-  let {slider, slider1, slider2} = props
-  const [nav, setNav] = useState({nav1: null, nav2: null})
+function Carousel(props, title) {
+  let { slider, slider1, slider2 } = props
+  const [nav, setNav] = useState({ nav1: null, nav2: null })
   const [data, setUserData] = useState([]);
   const hotCategory = useSelector(state => state.getHotCategory.hotCategory);
   const dispatch = useDispatch();
-    useEffect(() => {
-      if (!hotCategory) {
-        dispatch(getHotCategory());
-      }
-    }, []);
+  useEffect(() => {
+    if (!hotCategory) {
+      dispatch(getHotCategory());
+    }
+  }, []);
 
   useEffect(() => {
     setNav({
@@ -51,18 +49,18 @@ function Carousel(props,title) {
   }, [])
 
   const settings = {
-    loop:true,
+    loop: true,
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
 
- 
-  const next = () =>  {
+
+  const next = () => {
     slider1.slickNext();
   }
   const previous = () => {
@@ -75,39 +73,35 @@ function Carousel(props,title) {
         <div className="carousel-left">
           <div className="title">Ngành nghề trọng điểm</div>
           <div className="carousel-left-slide">
-          {hotCategory && hotCategory.length > 0 ? (
-            <Slider asNavFor={nav.nav2}
-                    ref={slider => (slider1 = slider)} 
-                    {...settings} slidesToShow={5}>
-              {hotCategory.map((item,i)=> {
-                return (
-                  <div key={i} className="carouselItem">
-                    <CarouselItem dataFromParent={item}></CarouselItem>
-                  </div>
-                )
-              })}  
-                {/* {
-                hotCategory ? (<CarouselItem users={hotCategory}></CarouselItem>) : (<h2> Loading</h2>)
-            } */}
-
-            </Slider>
-             ) : null} 
+            {hotCategory && hotCategory.length > 0 ? (
+              <Slider asNavFor={nav.nav2}
+                ref={slider => (slider1 = slider)}
+                {...settings} slidesToShow={5}>
+                {hotCategory.map((item, i) => {
+                  return (
+                    <div key={i} className="carouselItem">
+                      <CarouselItem dataFromParent={item}></CarouselItem>
+                    </div>
+                  )
+                })}
+              </Slider>
+            ) : null}
             <div className='carousel-left-move' onClick={() => previous()}>
-                <div className="prev">
-                    <LeftOutlined></LeftOutlined>
-                </div>
-                <div className="next" onClick={() => next()}>
-                    <RightOutlined></RightOutlined>
-                </div>
+              <div className="prev">
+                <LeftOutlined></LeftOutlined>
+              </div>
+              <div className="next" onClick={() => next()}>
+                <RightOutlined></RightOutlined>
+              </div>
             </div>
           </div>
           <div className="carousel-left-bottom">
             <Slider asNavFor={nav.nav1}
-                    ref={slider => (slider2 = slider)}
-                    slidesToShow={4}
-                    swipeToSlide={true}
-                    focusOnSelect={true}
-                     >
+              ref={slider => (slider2 = slider)}
+              slidesToShow={4}
+              swipeToSlide={true}
+              focusOnSelect={true}
+            >
             </Slider>
           </div>
         </div>

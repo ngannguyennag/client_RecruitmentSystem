@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import UserManageAccount from './UserManagePassword'; // Import UserManageAccount component from file 2
 const UserManage = () => {
-  const [currentEmail, setCurrentEmail] = useState('ngannguyennag@gmail.com');
-  const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [notificationEmail, setNotificationEmail] = useState('');
-
-  const handleEmailChange = (e) => {
-    setNewEmail(e.target.value);
-  };
-
   const handlePasswordChange = (e) => {
     setNewPassword(e.target.value);
   };
@@ -19,11 +11,11 @@ const UserManage = () => {
     setNotificationEmail(e.target.value);
   };
 
-  const handleSubmitEmailChange = (e) => {
-    e.preventDefault();
-    setCurrentEmail(newEmail);
-    setNewEmail('');
-  };
+  // const handleSubmitEmailChange = (e) => {
+  //   e.preventDefault();
+  //   setCurrentEmail(newEmail);
+  //   setNewEmail('');
+  // };
 
   const handleSubmitPasswordChange = (e) => {
     e.preventDefault();
@@ -48,7 +40,7 @@ const UserManage = () => {
         <div className='transmit'>
           <div className='row'>
             <h2>Email đăng nhập & mật khẩu</h2>
-            <p>Email truy cập hiện tại: {currentEmail}</p>
+            {/* <p>Email truy cập hiện tại: {currentEmail}</p> */}
           </div>
           <div className='links'>
             <Link to="/usermanagepassword">Thay đổi mật khẩu</Link>

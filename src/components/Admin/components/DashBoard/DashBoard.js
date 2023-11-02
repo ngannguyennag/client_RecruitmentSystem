@@ -3,9 +3,10 @@ import {
   BellOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
-  ShoppingOutlined,
+  LogoutOutlined,
   DollarCircleOutlined,
   FileTextOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import "./DashBoard.css";
 import ChartDashBoard from "./ChartDashBoard";
@@ -32,11 +33,10 @@ export default function DashBoard() {
           </div>
           <div className="dashboard-top-content">
             <li className="dashboard-top-content-avatar">
-              <span>Ngân Nguyễn</span>
+              <span style={{color:'black'}}>Welcome back, Admin</span>
               <li className ="file" onClick={onSignOut}>
-              {/* <i className="account-icon-menu"><LogoutOutlined/></i> */}
+              <i className="account-icon-menu"><LogoutOutlined/></i>
                 Đăng xuất</li>
-              {/* <input type='button' value="Đăng xuất" onClick={onSignOut} /> */}
             </li>
             <li className="dashboard-top-content-bell">
               <BellOutlined></BellOutlined>
@@ -49,10 +49,11 @@ export default function DashBoard() {
             <div className="dashboard-middle-statistic-content">
               <li>
                 <div className="dashboard-middle-statistic-icon">
-                  <ShoppingOutlined></ShoppingOutlined>
+                  {/* <ShoppingOutlined></ShoppingOutlined> */}
+                  <UserOutlined />
                 </div>
                 <div className="dashboard-middle-statistic-title">
-                  <span className="total">1666</span>
+                  <span className="total">782</span>
                   <span className="title">Users</span>
                 </div>
               </li>

@@ -27,7 +27,7 @@ function Login(props) {
     if(userInfo){ 
       var string = userInfo['access_token'];
     var decodedHeader = jwt_decode(string);
-    var roleAdmin = decodedHeader.roles;
+    var roleAdmin = decodedHeader.role;
       if (roleAdmin === "ROLE_USER") {
         history.push("/user");
       }
@@ -35,7 +35,7 @@ function Login(props) {
         history.push("/admin");
       }
       else if(roleAdmin === "ROLE_HR"){
-        history.push("/")
+        history.push("/hr")
       }
     }
     

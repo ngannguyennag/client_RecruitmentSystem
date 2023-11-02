@@ -11,6 +11,7 @@ import ReviewProduct from './AdminProduct/ReviewProduct/ReviewProduct';
 import DataFilterProduct from './AdminProduct/DataFilterProduct/DataFilterProduct';
 import AdminManageCompany from './AdminManageCompany/AdminManageCompany';
 import AdminManageJob from './AdminManageJob/AdminManageJob';
+import AdminManageAccount from './AdminManageAccount/AdminManageAccount';
 
 function Routes(props) {
     return (
@@ -25,6 +26,7 @@ function Routes(props) {
 
             <Route path='/admin/manage-company' component={AdminManageCompany}/>
             <Route path='/admin/manage-job' component={AdminManageJob}/>
+            <Route path = '/admin/manage-account' component={AdminManageAccount}></Route>
             <Route path='/admin/chat' component={AppChat}/>
         </Switch>
     );

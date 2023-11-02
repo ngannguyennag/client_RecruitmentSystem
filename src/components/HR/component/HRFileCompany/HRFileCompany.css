@@ -1,0 +1,29 @@
+/* .fileCompany{
+    margin-top: 20px;
+    background-color: rgba(2, 11, 11, 0.646);
+}
+
+.form-FileCompany {
+  display: flex;
+  gap: 16px; /* Adjust the gap as needed */
+/* } */
+
+/* .form-input {
+  flex-grow: 1;
+}
+.form-item {
+    margin-bottom: 8px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .form-input {
+    display: block;
+    width: 30%;
+  }  */
+  .formHR{
+    background-color: black;
+  }

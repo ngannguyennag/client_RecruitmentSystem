@@ -9,6 +9,7 @@ import {
   ShopOutlined,
   OrderedListOutlined,
   WechatOutlined,
+  NotificationOutlined,
 } from "@ant-design/icons";
 
 function Sidebar(props) {
@@ -46,7 +47,7 @@ function Sidebar(props) {
           </span>
           <p>Quản lý các user</p>
         </Link>
-        <Link to="/admin/product" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-account" className={'sidebar-list-item'}>
           <span>
             <ShopOutlined></ShopOutlined>
           </span>
@@ -58,9 +59,9 @@ function Sidebar(props) {
           </span>
           <p>
             Quản lý công ty
-            <div className="admin-order-new">
-                {/* {totalNewOrder} */}
-              </div>
+            {/* <div className="admin-order-new">
+                {totalNewOrder}
+              </div> */}
           </p>
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
@@ -69,9 +70,20 @@ function Sidebar(props) {
           </span>
           <p>
             Quản lý công việc
-            <div className="admin-order-new">
-                {/* {totalNewOrder} */}
-              </div>
+            {/* <div className="admin-order-new">
+                {totalNewOrder}
+              </div> */}
+          </p>
+        </Link>
+        <Link to="/admin/notification" className={'sidebar-list-item'}>
+          <span>
+            <NotificationOutlined/>
+          </span>
+          <p>
+            Thông báo
+            {/* <div className="admin-order-new">
+                {totalNewOrder}
+              </div> */}
           </p>
         </Link>
         {/* <Link to="/admin/chat" className={location.pathname === '/admin/chat' ? 'sidebar-list-item active': 'sidebar-list-item'}>

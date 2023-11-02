@@ -13,11 +13,21 @@ export const getAllCompanyReducer = (state = {}, action) => {
         case 'GET_ALL_COMPANY':{
             return {...state, company: action.payload}
         }
-
         case 'DELETE_COMPANY':{
             return {...state}
         }
+        default: return state
+    }
+};
 
+export const getDetailCompanyReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_DETAIL_COMPANY':{
+            return {...state, company: action.payload}
+        }
+        case 'DELETE_COMPANY':{
+            return {...state}
+        }
         default: return state
     }
 };

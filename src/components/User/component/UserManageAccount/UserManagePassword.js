@@ -37,9 +37,6 @@ const UserManagePassword = () => {
         window.location.assign("/usermanage")
       })
       .catch((err) => console.log(err));
-    console.log(password);
-    console.log(currentPassword);
-    console.log(newPassword);
   };
   const on = async (values) => {
     let token = params.get("token");
