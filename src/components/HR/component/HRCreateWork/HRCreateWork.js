@@ -49,20 +49,10 @@ export default function HRCreateWork() {
             </Select>
           </Form.Item>
           <Form.Item label="Học vấn tối thiểu *" name="establishedYear" style={{ fontWeight: '500', marginTop: '20px' }}>
-          <Select>
-              <Select.Option value="demo">Không yêu cầu</Select.Option>
-              <Select.Option value="demo">Cử nhân</Select.Option>
-              <Select.Option value="demo">Kỹ sư</Select.Option>
-              <Select.Option value="demo">Thạc sĩ</Select.Option>
-            </Select>
+            <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
           </Form.Item>
           <Form.Item label="Kinh nghiệm *" name="establishedYear" style={{ fontWeight: '500', marginTop: '20px' }}>
-          <Select>
-              <Select.Option value="demo">Chưa có kinh nghiệm</Select.Option>
-              <Select.Option value="demo">Dưới 1 năm</Select.Option>
-              <Select.Option value="demo">1 năm</Select.Option>
-              <Select.Option value="demo">Trên 5 năm</Select.Option>
-            </Select>
+            <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
           </Form.Item>
           <Form.Item label="Giới tính *" name="establishedYear" style={{ fontWeight: '500', marginTop: '20px' }}>
           <Select>
@@ -74,12 +64,12 @@ export default function HRCreateWork() {
           <Form.Item label="Số lượng tuyển " name="count" style={{ fontWeight: '500', marginTop: '20px' }}>
             <Input  style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
           </Form.Item>
-          <Form.Item label="Cần gấp nhân viên *" name="hurry" style={{ fontWeight: '500', marginTop: '20px' }}>
+          {/* <Form.Item label="Cần gấp nhân viên *" name="hurry" style={{ fontWeight: '500', marginTop: '20px' }}>
           <Select>
               <Select.Option value="demo">Có</Select.Option>
               <Select.Option value="demo">Không</Select.Option>
             </Select>
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item label="Ngày hết hạn " name="establishedYear" style={{ fontWeight: '500', marginTop: '20px' }}>
             <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
           </Form.Item>

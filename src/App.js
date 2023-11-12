@@ -31,6 +31,7 @@ import HRFileCompanyPage from './components/HR/component/HRFileCompany/HRFileCom
 import HRCreateWorkPage from './pages/HRCreateWork';
 import HRManageWorkPage from './pages/HRManageWorkPage';
 import HRListApplicationPage from './pages/HRListApplication';
+import DetailCompanyPage from './pages/DetailCompanyPage';
 
 // import { useRoutes} from "react-router-dom";
 // import routes from "./configs/routes";
@@ -145,6 +146,9 @@ function App() {
         </Route>
         <Route path="/list_application">
           <HRListApplicationPage></HRListApplicationPage>
+        </Route>
+        <Route path="/detail_companies">
+          <DetailCompanyPage></DetailCompanyPage>
         </Route>
       </Router>
     </div>

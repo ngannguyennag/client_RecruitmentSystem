@@ -111,7 +111,7 @@ function UserFileUpdate() {
                       {...register("gender")}
                       type="radio"
                       value="NA"
-                      defaultChecked={users?.gender === "NA"}
+                      defaultChecked={users?.gender === "OTHER"}
                     />
                     Prefer not to say
                   </span>

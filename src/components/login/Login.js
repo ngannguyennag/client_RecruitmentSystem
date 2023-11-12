@@ -27,14 +27,14 @@ function Login(props) {
     if(userInfo){ 
       var string = userInfo['access_token'];
     var decodedHeader = jwt_decode(string);
-    var roleAdmin = decodedHeader.role;
-      if (roleAdmin === "ROLE_USER") {
+    var roleAdmin = decodedHeader.role[0].authority;
+      if (roleAdmin === "CANDIDATE") {
         history.push("/user");
       }
-      else if(roleAdmin === "ROLE_ADMIN"){
+      else if(roleAdmin === "ADMIN"){
         history.push("/admin");
       }
-      else if(roleAdmin === "ROLE_HR"){
+      else if(roleAdmin === "COMPANY"){
         history.push("/hr")
       }
     }

@@ -9,9 +9,10 @@ import { ChatReducer } from './reducers/ChatReducer'
 import { SelectListReducer, UpdateSelectListReducer } from "./reducers/SelectListReducer";
 import { ListTypeProductReducer, TypeProductReducer } from './reducers/ListTypeProductReducer'
 import { InfoGhnReducer } from './reducers/GhnReducer'
-import { getCompanyReducer, getAllCompanyReducer } from './reducers/CompanyReducer'
+import { getCompanyReducer, getAllCompanyReducer, getDetailCompanyReducer, getProvinceReducer, getDistrictReducer, getWardsReducer, getIndustryReducer } from './reducers/CompanyReducer'
 import { getHotCategoryReducer } from './reducers/HotCategoryReducer'
 import { getAllJobReducer, getJobTopReducer } from './reducers/JobReducer'
+
 
 const initialState = {
   userSignin: {
@@ -36,13 +37,16 @@ const reducer = combineReducers({
   getAccountInfo: getAccountInfoReducer,
   getAccountUpdate: getAccountUpdateReducer,
   companies: getAllCompanyReducer,
+  getDetailCompany: getDetailCompanyReducer,
   jobs: getAllJobReducer,
   getJobTop: getJobTopReducer,
   allProduct: getAllProductReducer,
   getProductById: getProductByIdReducer,
-
+  getProvince: getProvinceReducer,
+  getDistrict: getDistrictReducer,
+  getWards: getWardsReducer,
+  getIndustry: getIndustryReducer,
   searchProduct: searchProductReducer,
-
   cart: CartReducer,
 
   // allOrder: getAllOrderReducer,
