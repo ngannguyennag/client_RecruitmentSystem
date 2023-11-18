@@ -10,14 +10,14 @@ export default function HRFileCompany(props) {
   const [current, setCurrent] = useState('basic-info');
   const history = useHistory();
   const [avatarUrl, setAvatarUrl] = useState(null); // State for avatar URL
-  const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
+  // const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
   const users = useSelector(state => state.getDetailCompany.company);
   const dispatch = useDispatch();
   const handleMenuClick = (e) => {
     setCurrent(e.key);
   };
   useEffect(() => {
-    dispatch(getDetailCompany(token));
+    // dispatch(getDetailCompany(token));
   }, [dispatch]);
   const industryData = useSelector((state) => state.getIndustry.industry);
 

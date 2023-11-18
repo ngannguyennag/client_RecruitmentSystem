@@ -1,0 +1,85 @@
+.about {
+    border: 1px solid rgb(241, 241, 241);
+    background-color: white;
+    margin: 80px;
+}
+.company-list{
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 20px 50px;
+    transition: all 0.25s ease 0s;
+    border-radius: 12px;
+    border: 1px solid rgb(241, 241, 241);
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+}
+.company-list img{
+    width: 10%;
+    margin-left: 10px;
+}
+.detail-job{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    align-items: flex-start;
+}
+.detail-list-job-item{
+    display: flex;
+    flex-direction: row;
+}
+.list-job-item{
+    display: flex;
+    flex-direction: row;
+    
+}
+.list-job-item li{
+    background-color: rgba(210, 201, 201, 0.973);
+    color: rgb(48, 47, 47);
+    margin: 0 5px;
+    padding: 2px;
+    border-radius: 5px;;
+}
+.detail-job-item ul{
+    display: flex;
+    flex-direction: row;
+}
+.negotiate{
+    color: orange;
+}
+/* .detail-job-item{
+    display: flex;
+    flex-direction: row;
+} */
+
+@media screen and (max-width:940px) {
+    .about .container {
+        grid-template-columns: 1fr;
+    }
+
+    .about .container {
+        width: 100%;
+    }
+
+    .about .container img {
+        padding: 0rem;
+        width: 90vw;
+    }
+
+    .about .container .col-2 {
+        padding: 0;
+    }
+
+    .about button {
+        margin-bottom: 1rem;
+    }
+}
+
+
+
+
+
+
+
+
+

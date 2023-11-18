@@ -6,28 +6,20 @@ import { useHistory } from "react-router";
 import { searchProduct } from "../../actions/ProductAction";
 import {Link} from "react-router-dom";
 
-
 function Header(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  
-
   const [showAccount, setShowAccount] = useState(false);
   const [showAccount2, setShowAccount2] = useState(false);
-
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo, error } = userSignin;
   const [search, setSearch] = useState("");
   const cartItems = useSelector((state) => state.cart.cartItems);
   const amount = cartItems.reduce((a, b) => a + b.qty, 0);
-
   const [menu, setMenu] = useState(true);
-
   const handleSignout = () => {
     dispatch(SignoutUser());
   };
-
   const SearchProduct = async (e) => {
     e.preventDefault()
     await history.push("/search");

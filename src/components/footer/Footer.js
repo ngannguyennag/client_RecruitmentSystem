@@ -1,15 +1,10 @@
 import React from 'react';
 import './Footer.css'
-
-
 function Footer(props) {
     return (
         <section id="footer">
             <div className="footer">
                 <div className="footer-top">
-                    {/* <div className="footer-top-name">
-                        <h2>AMJ Work</h2>
-                    </div> */}
                     <div className="footer-top-about">
                         <h2>ANJWork </h2>
                         <ul>
