@@ -1,0 +1,106 @@
+.aboutJob {
+    /* border: 1px solid rgb(241, 241, 241); */
+    /* background-color: white; */
+    /* margin: 100px; */
+}
+.containerJob{
+    margin: 50px;
+}
+.titleAboutCompany{
+    background-color: #e2ebebca;
+    margin-top: 20px;
+    padding: 20px;
+}
+.titleAboutCompany p{
+    color: rgb(87, 86, 86);
+}
+.companyList{
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 20px 100px;
+    transition: all 0.25s ease 0s;
+    border-radius: 12px;
+    border: 1px solid rgb(241, 241, 241);
+    background-color: rgb(218, 238, 250);
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.companyList:hover{
+    background-color: aliceblue;
+}
+.searchJob{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+.dropdown{
+    margin: 0 50px;
+}
+.searchJob form {
+    position: relative;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin: 0 50px;
+
+  }
+  .searchJob input {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 0.5rem 2rem .5rem 1rem;
+    color: black;
+  }
+  .searchJob span {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+.companyList img{
+    width: 12%;
+    height: 100px;
+    margin: 0 20px 0 30px;
+    cursor: pointer;
+}
+
+.about-company{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    align-items: flex-start;
+}
+
+.about-company h4{
+    color: #4a4f4fca;
+}
+
+/* .buttonCompany {
+    width: 100%;
+    height: 30%;
+    position: relative;
+    margin-bottom: 20px;
+} */
+
+.buttonCompany button {
+    padding: 2px 6px;
+    background-color: #48bbff;
+    border: 1px solid rgba(0,90,255,.3);
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+
+
+
+
+
+
+
+
