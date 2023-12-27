@@ -6,8 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CarouselItemCompany } from "./CarouselItem";
 import { useSelector, useDispatch } from 'react-redux';
-import { getCompany } from "../../actions/CompanyAction";
-import axios from "axios";
+import { getCompanyTop } from "../../actions/CompanyAction";
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
@@ -15,8 +14,7 @@ function SampleNextArrow(props) {
     <div
       className={`${className}`}
       style={{ display: 'none' }}
-      onClick={onClick}
-    />
+      onClick={onClick}/>
   );
 }
 
@@ -26,8 +24,7 @@ function SamplePrevArrow(props) {
     <div
       className={`${className}`}
       style={{ display: 'none' }}
-      onClick={onClick}
-    />
+      onClick={onClick}/>
   );
 }
 
@@ -35,11 +32,11 @@ function Carousel(props, title) {
   let { slider, slider1, slider2 } = props
   const [nav, setNav] = useState({ nav1: null, nav2: null })
   const [data, setUserData] = useState([]);
-  const company = useSelector(state => state.getCompany.company);
+  const company = useSelector(state => state.getCompanyTop.companyTop);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!company) {
-      dispatch(getCompany());
+      dispatch(getCompanyTop());
     }
   }, []);
 
@@ -55,7 +52,7 @@ function Carousel(props, title) {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
@@ -80,23 +77,12 @@ function Carousel(props, title) {
                 {company.map((item, i) => {
                   return (
                     <div key={i} className="carouselItem">
-                      <CarouselItemCompany dataFromParent={item}></CarouselItemCompany>
+                      <CarouselItemCompany dataFromParent={item}/>
                     </div>
                   )
                 })}
               </Slider>
             ) : null}
-            {/* <Slider asNavFor={nav.nav2}
-                    ref={slider => (slider1 = slider)} 
-                    {...settings} slidesToShow={5}>
-              {data.map((e,i)=> {
-                return (
-                  <div key={i} className="carouselItem">
-                    <CarouselItemCompany e={e} ></CarouselItemCompany>
-                  </div>
-                )
-              })}      
-            </Slider> */}
             <div className='carousel-left-move' onClick={() => previous()}>
               <div className="prev">
                 <LeftOutlined></LeftOutlined>
@@ -109,10 +95,9 @@ function Carousel(props, title) {
           <div className="carousel-left-bottom">
             <Slider asNavFor={nav.nav1}
               ref={slider => (slider2 = slider)}
-              slidesToShow={2}
+              slidesToShow={4}
               swipeToSlide={true}
-              focusOnSelect={true}
-            >
+              focusOnSelect={true}>
             </Slider>
           </div>
         </div>

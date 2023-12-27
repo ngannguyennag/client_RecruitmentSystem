@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { GetAllOrderPendding } from "../../../../actions/OrderAction";
+import React from "react";
+import { useDispatch} from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 import {
@@ -8,27 +7,27 @@ import {
   UsergroupAddOutlined,
   ShopOutlined,
   OrderedListOutlined,
-  WechatOutlined,
   NotificationOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-
+import {SignoutUser} from '../../../../actions/UserAction';
 function Sidebar(props) {
   const dispatch = useDispatch();
-  const location = useLocation()
+  const location = useLocation();
+  const onSignOut = () => {
+    dispatch(SignoutUser());
+  };
   // const { orderPendding } = useSelector((state) => state.allOrder);
-  let totalNewOrder
-  
+  // let totalNewOrder
   // if(orderPendding){
   //   totalNewOrder = orderPendding.length
   // }
-
   // useEffect(() => {
   //   const getNewOrder = () => {
   //     dispatch(GetAllOrderPendding());
   //   }
   //   getNewOrder()
   // }, [dispatch]);
-
   return (
     <div className="sidebar">
       <div className="sidebar-top">
@@ -45,7 +44,7 @@ function Sidebar(props) {
           <span>
             <UsergroupAddOutlined></UsergroupAddOutlined>
           </span>
-          <p>Quản lý các user</p>
+          <p>Quản lý ứng viên</p>
         </Link>
         <Link to="/admin/manage-account" className={'sidebar-list-item'}>
           <span>
@@ -70,9 +69,6 @@ function Sidebar(props) {
           </span>
           <p>
             Quản lý công việc
-            {/* <div className="admin-order-new">
-                {totalNewOrder}
-              </div> */}
           </p>
         </Link>
         <Link to="/admin/notification" className={'sidebar-list-item'}>
@@ -81,9 +77,14 @@ function Sidebar(props) {
           </span>
           <p>
             Thông báo
-            {/* <div className="admin-order-new">
-                {totalNewOrder}
-              </div> */}
+          </p>
+        </Link>
+        <Link to="/hr/logout" className={'sidebar-list-item'} onClick={onSignOut}>
+          <span>
+          <LogoutOutlined/>
+          </span>
+          <p>
+            Đăng xuất
           </p>
         </Link>
         {/* <Link to="/admin/chat" className={location.pathname === '/admin/chat' ? 'sidebar-list-item active': 'sidebar-list-item'}>

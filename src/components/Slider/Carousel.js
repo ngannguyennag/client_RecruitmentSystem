@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CarouselItem } from "./CarouselItem";
-import axios from "axios";
 import { getHotCategory } from "../../actions/HotCategoryAction";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -29,7 +28,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-function Carousel(props, title) {
+function CarouselCategory(props, title) {
   let { slider, slider1, slider2 } = props
   const [nav, setNav] = useState({ nav1: null, nav2: null })
   const [data, setUserData] = useState([]);
@@ -40,7 +39,7 @@ function Carousel(props, title) {
       dispatch(getHotCategory());
     }
   }, []);
-
+  // console.log(hotCategory);
   useEffect(() => {
     setNav({
       nav1: slider1,
@@ -53,13 +52,11 @@ function Carousel(props, title) {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
-
   const next = () => {
     slider1.slickNext();
   }
@@ -100,8 +97,7 @@ function Carousel(props, title) {
               ref={slider => (slider2 = slider)}
               slidesToShow={4}
               swipeToSlide={true}
-              focusOnSelect={true}
-            >
+              focusOnSelect={true}>
             </Slider>
           </div>
         </div>
@@ -110,4 +106,4 @@ function Carousel(props, title) {
   );
 }
 
-export default Carousel;
+export default CarouselCategory;

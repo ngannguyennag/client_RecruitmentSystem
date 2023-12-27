@@ -3,22 +3,13 @@ import {
   BellOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
-  LogoutOutlined,
   DollarCircleOutlined,
   FileTextOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import "./DashBoard.css";
-import ChartDashBoard from "./ChartDashBoard";
-import { useDispatch } from 'react-redux';
-import {SignoutUser} from '../../../../actions/UserAction'
-
 
 export default function DashBoard() {
-  const dispatch = useDispatch();
-  const onSignOut = () => {
-    dispatch(SignoutUser());
-  };
   return (
     <section id="dashboard">
       <div className="dashboard">
@@ -33,10 +24,7 @@ export default function DashBoard() {
           </div>
           <div className="dashboard-top-content">
             <li className="dashboard-top-content-avatar">
-              <span style={{color:'black'}}>Welcome back, Admin</span>
-              <li className ="file" onClick={onSignOut}>
-              <i className="account-icon-menu"><LogoutOutlined/></i>
-                Đăng xuất</li>
+              <span style={{color:'#0e599f', fontSize:'16px'}}>Welcome back, Admin</span>
             </li>
             <li className="dashboard-top-content-bell">
               <BellOutlined></BellOutlined>
@@ -49,7 +37,6 @@ export default function DashBoard() {
             <div className="dashboard-middle-statistic-content">
               <li>
                 <div className="dashboard-middle-statistic-icon">
-                  {/* <ShoppingOutlined></ShoppingOutlined> */}
                   <UserOutlined />
                 </div>
                 <div className="dashboard-middle-statistic-title">
@@ -92,7 +79,6 @@ export default function DashBoard() {
               </li>
             </div>
           </div>
-          {/* <ChartDashBoard></ChartDashBoard> */}
         </div>
 
         <div className="dashboard-new">

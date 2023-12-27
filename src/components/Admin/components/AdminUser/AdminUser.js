@@ -1,32 +1,46 @@
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUser, deleteUser } from '../../../../actions/UserAction';
-import axios from 'axios';
+import { getAllUser, deleteUser, getUserByName } from '../../../../actions/UserAction';
 import './AdminUser.css';
-
 function AdminUser(props) {
     const dispatch = useDispatch();
-    const [userId, setUserId] = useState('');
     const [name, setName] = useState('');
     const users = useSelector(state => state.users.user);
+    const userSearch = useSelector(state => state.userSearch.user);
     const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
     const [isLoading, setIsLoading] = useState(false);
     const [updatedUsers, setUpdatedUsers] = useState([]); // State mới để lưu trữ danh sách user sau khi xóa thành công
+    const [updateSearchUsers, setUpdateSearchUsers] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
+    const shouldShowAllUsers = searchInput === '';
+    const displayedUsers = shouldShowAllUsers ? updatedUsers : updateSearchUsers;
+    // State và hàm mới cho form chi tiết người dùng
+    const [showDetails, setShowDetails] = useState(false);
+    const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     useEffect(() => {
         dispatch(getAllUser(token));
     }, [dispatch]);
     useEffect(() => {
         setUpdatedUsers(users); // Cập nhật state mới sau mỗi lần danh sách user thay đổi
     }, [users]);
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const id = users[users.length - 1].id;
-        axios.post('http://localhost:3000/users', { id: id, userId: userId, name: name })
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }
-
+    useEffect(() => {
+        if (userSearch) {
+            setUpdateSearchUsers(userSearch);
+        }
+    }, [userSearch]);
+    useEffect(() => {
+        if (name === '') {
+            handleSearchUser('', token);
+        }
+    }, [name, token]);
+    // Các useEffect, hàm xử lý và render khác
+    const handleViewDetails = (user) => {
+        setSelectedUserDetails(user);
+        setShowDetails(true);
+    };
+    const handleHideDetails = () => {
+        setShowDetails(false);
+    };
     const handleDeleteUser = (userId, token) => {
         setIsLoading(true);
         dispatch(deleteUser(userId, token))
@@ -40,66 +54,124 @@ function AdminUser(props) {
                 setIsLoading(false); // Ẩn loading nếu xóa không thành công
             });
     }
-
+    const handleSearchUser = (name, token) => {
+        setSearchInput(name);
+        let searchResult = [];
+        dispatch(getUserByName(name, token))
+            .then(() => {
+                searchResult = userSearch;
+                setUpdateSearchUsers(searchResult);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
     const FormatDate = (time) => {
-        var dateFormat = new Date(time * 1000);
-        return dateFormat.getDate() +
-            "/" + (dateFormat.getMonth() + 1) +
-            "/" + dateFormat.getFullYear();
-    }
-    console.log(updatedUsers);
-    console.log(setUpdatedUsers);
-
-
+        if (time && Array.isArray(time)) {
+            const date = new Date(Date.UTC(...time));
+            const dateString = date.toISOString().split('T')[0];
+            return dateString;
+        } else {
+            return null;
+        }
+    };
     return (
-        <div className="admin-user">
-            <span>Danh sách các user</span>
+        <div className="adminUser">
+            <div className='titleHome' >Home / User Management</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>
                 ) : (
-                    <div className="admin-user-list">
+                    <div className="adminUserList">
                         <div className="form-div">
-                            <form onSubmit={handleSubmit}>
-                                <input type="text" placeholder="Nhập vào id của user" onChange={e => setUserId(e.target.value)}  style={{width: "250px", height:"35px"}}/>
-                                <input type="text" placeholder="Nhập vào tên của user" onChange={e => setName(e.target.value)}  style={{width: "250px", height:"35px"}}/>
-                                <button  style={{width: "50px", height:"35px"}}>Add</button>
+                            <form onSubmit={e => {
+                                e.preventDefault();
+                                handleSearchUser(name, token);
+                            }}>
+                                <input type="text" placeholder="Nhập vào tên hoặc email của user" onChange={e => setName(e.target.value)} style={{ width: "300px", height: "35px", marginRight: '20px', borderRadius: '5px' }} />
+                                <button style={{ width: "10%", height: "35px" }} type="submit">Tìm kiếm</button>
                             </form>
                         </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>UserId</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Date Created</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {updatedUsers && updatedUsers.map((item, index) => ( // Render danh sách từ updatedUsers thay vì users
+                        {displayedUsers && displayedUsers.length === 0 ? (
+                            <p style={{ color: 'black', fontSize: '20px' }}>Không có kết quả </p>
+                        ) : (
+                            <table>
+                                <thead>
                                     <tr>
-                                        <td>{index + 1}</td>
-                                        <td>{item.id}</td>
-                                        <td>{item.username}</td>
-                                        <td>{item.email}</td>
-                                        <td>{FormatDate(item.createdAt)}</td>
-                                        <td>{item.roleName}</td>
-                                        <td>
-                                            <button>Edit</button>
-                                            <button onClick={() => handleDeleteUser(item.id, token)}>Delete</button>
-                                        </td>
+                                        <th>STT</th>
+                                        <th>Avatar</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
+                                        <th>Date Created</th>
+                                        <th>Action</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {displayedUsers && displayedUsers.map((item, index) => (
+                                        <React.Fragment key={item.id}>
+                                            <tr>
+                                                <td>{index + 1}</td>
+                                                <td><img src={item.imgUrl} /></td>
+                                                <td>{item.email}</td>
+                                                <td>{item.phoneNumber}</td>
+                                                <td>{FormatDate(item.createDate)}</td>
+                                                <td>
+                                                    <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>{'>>'}</button>
+                                                    <button onClick={() => handleDeleteUser(item.id, token)}>Delete</button>
+                                                </td>
+                                            </tr>
+                                            {selectedUserDetails && selectedUserDetails.id === item.id && (
+                                                <tr>
+                                                    <td colSpan="6">
+                                                        <div className='userDetail'>
+                                                            <div className={`user-details ${showDetails ? 'show' : ''}`} >
+                                                                <div className='detailButton'>
+                                                                    <button onClick={handleHideDetails} style={{ width: '6%', color: 'red', marginRight: '10px' }}>x</button>
+                                                                    <h3>Chi tiết ứng viên</h3>
+                                                                </div>
+                                                                <h3 className="table-heading" >{item.fullName}</h3>
+                                                                <table >
+                                                                    <tr>
+                                                                        <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Học vấn</td>
+                                                                        <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{item.education[0].degreeName}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Giới tính</td>
+                                                                        <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{item.gender}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Nơi sinh sống</td>
+                                                                        <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{item.address && item.address.fullAddress}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Ngày sinh</td>
+                                                                        <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{item.birthday}</td>
+                                                                    </tr>
+                                                                </table>
+                                                                <h3 className="table-heading">Lộ trình học tập</h3>
+                                                                {item.education.map((educationItem, index) => (
+                                                                    <div className='detailEducation' key={index}>
+                                                                        <p>{educationItem.startDate} - {educationItem.endDate}:</p>
+                                                                        <p style={{color:'#0e599f'}}> {educationItem.major} ở {educationItem.schoolName}   </p>
+            <p style={{color:'grey', textAlign:'left'}}>{educationItem.description}</p>
+                                                                    </div>
+                                                                ))}
+                                                                <h3 className="table-heading">Kinh nghiệm làm việc</h3>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
                     </div>
                 )
             }
         </div>
     );
 }
-
 export default AdminUser;

@@ -23,7 +23,7 @@ export const getAccountInfo = (token) => async (dispatch, getState) => {
       },
     }
     )
-    dispatch({type: 'GET_ACCOUNT_INFO', payload: data})
+    dispatch({type: 'GET_ACCOUNT_INFO_SUCCESS', payload: data})
   } catch (error) {
     dispatch({type: 'GET_ACCOUNT_INFO_FAIL', payload: error.message})
   }
@@ -81,9 +81,16 @@ export const changePassword = (token, managePassword) => async(dispatch) =>{
   }
 }
 export const SignoutUser = (user) => async (dispatch) => {
+  try{
+    // await axios.get('http://localhost:8080/api/v1/auth/logout')
   localStorage.removeItem('userInfo')
   dispatch({type: 'USER_SIGNOUT_SUCCESS', payload: {} })
   document.location.href = '/';
+  }
+  catch(error){
+    dispatch({type: 'USER_SIGNOUT_FAIL', payload: error.message})
+  }
+  
 };
 
 export const getAllUser = (token) => async (dispatch, getState) => {
@@ -91,7 +98,7 @@ export const getAllUser = (token) => async (dispatch, getState) => {
     userSignin: {userInfo},
   } = getState()
   try {
-    const {data} = await axios.get('http://localhost:8080/api/v1/manage/users/all', {
+    const {data} = await axios.get('http://localhost:8080/api/v1/admin/manage/users/all', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -108,7 +115,7 @@ export const deleteUser = (userId, token) => async (dispatch, getState) => {
     userSignin: {userInfo},
   } = getState()
   try {
-    const {data} = await axios.delete('http://localhost:8080/api/v1/manage/users/delete/'+ userId,{
+    const {data} = await axios.delete('http://localhost:8080/api/v1/admin/manage/users/delete/'+ userId,{
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -117,5 +124,22 @@ export const deleteUser = (userId, token) => async (dispatch, getState) => {
     dispatch({type: 'DELETE_USER_SUCCESS', payload: data})
   } catch (error) {
     dispatch({type: 'DELETE_USER_FAIL', payload: error.message})
+  }
+}
+
+export const getUserByName = (name, token) => async (dispatch, getState) =>{
+  const {
+    userSignin: {userInfo},
+  } = getState()
+  try {
+    const {data} = await axios.get('http://localhost:8080/api/v1/admin/manage/users/find?name=' +name,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    dispatch({type: 'GET_USER_BY_NAME_SUCCESS', payload: data})
+  } catch(error){
+    dispatch({type:'GET_USER_BY_NAME_FAIL', payload: error.message})
   }
 }

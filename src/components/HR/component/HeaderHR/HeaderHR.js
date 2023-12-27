@@ -6,8 +6,6 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import {getAccountInfo} from '../../../../actions/UserAction';
 
-import { UserOutlined,FileOutlined,SettingOutlined,BellOutlined,LogoutOutlined  } from "@ant-design/icons";
-
 function HeaderHR(props) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,26 +28,26 @@ function HeaderHR(props) {
     dispatch(SignoutUser());
   };
 
-  const AccountMenu = () => {
-    const handleIconClick = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
+  // const AccountMenu = () => {
+  //   const handleIconClick = () => {
+  //     setIsMenuOpen(!isMenuOpen);
+  //   };
 
-    return (
-      <div className="create-account">
-        <i className="account-icon" onClick={handleIconClick}>
-          <UserOutlined />
-        </i>
-        {isMenuOpen && (
-          <ul className="account-menu">
-            <li>Hồ sơ của tôi</li>
-            <li>Quản lý tài khoản</li>
-            <li>Đăng xuất</li>
-          </ul>
-        )}
-      </div>
-    );
-  };
+  //   return (
+  //     <div className="create-account">
+  //       <i className="account-icon" onClick={handleIconClick}>
+  //         <UserOutlined />
+  //       </i>
+  //       {isMenuOpen && (
+  //         <ul className="account-menu">
+  //           <li>Hồ sơ của tôi</li>
+  //           <li>Quản lý tài khoản</li>
+  //           <li>Đăng xuất</li>
+  //         </ul>
+  //       )}
+  //     </div>
+  //   );
+  // };
 
   const handleMenuToggle = () => {
     setMenu(!menu);
@@ -70,7 +68,7 @@ function HeaderHR(props) {
             <Link to="/jobs"> Việc Làm </Link>
           </li>
           <li>
-            <Link to="/detail_companies"> Công ty </Link>
+            <Link to="/companies"> Công ty </Link>
           </li>
           <li>
             <Link to="/career"> Nghề nghiệp </Link>
@@ -83,7 +81,7 @@ function HeaderHR(props) {
           <i className="account-icon" onClick={handleIconClick}>
             <img src={users?.imgUrl}></img>
           </i>
-          {showAccount2 && (
+          {/* {showAccount2 && (
             <ul className="account-menu">
                 <li className="file">
                     <i className="account-icon-menu"><FileOutlined/></i>
@@ -110,7 +108,7 @@ function HeaderHR(props) {
                     </Link>
                 </li>
             </ul>
-          )}
+          )} */}
         </div>
       </section>
     </div>

@@ -1,12 +1,18 @@
-.admin-company span{
+.adminCompany{
+    margin: 0 .5rem 0 1rem;
+    background-color: white;
+}
+.titleHome{
     display: flex;
-    padding: 1rem;
     font-size: 18px;
     font-weight: 600;
     color: #2071a7;
+    background-color: rgb(236, 232, 236);
+    margin: 1rem 0  1rem 0;
+    padding-bottom: 0.5rem;
 }
 .admin-company-list{
-    margin: 0 .5rem 0 1rem;
+    /* margin: 0 .5rem 0 1rem; */
     color: rgb(242, 239, 239);
     padding: 1rem;
     border-radius: 4px;
@@ -38,10 +44,26 @@ table td{
     border-right: 1px solid black;
 
 }
-.form-div,table td button{
-    color: black;
-    cursor: pointer;
+.action{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
+    /* padding: 0; */
 }
+.detailButton{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    /* padding: 0; */
+}
+h3.table-heading {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 15px;
+  }
+
 tr .delete-user{
     height: 28px;
     width: 28px;

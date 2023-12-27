@@ -7,4 +7,4 @@ export const getHotCategoryReducer = (state = {}, action) => {
       default:
         return state;
     }
-  }
+  };

@@ -4,6 +4,7 @@
     position: fixed;
     left: 0;
     top: 0;
+    background-color: #fefefe;
 }
 .sidebar-top{
     color: #1890ff;
@@ -38,20 +39,13 @@
    margin:0 0 0 1rem;
 }
 .sidebar-list-item:hover{
-    background: #1890ff;
+    background-color: rgb(20,100,147);
     color: white;
     transition: .3s;
 }
-.admin-order-new{
-    position: absolute;
-    top: 0px;
-    right: -10px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    line-height: 30px;
-    text-align: center;
-    background: #1890ff;
+.sidebar-list-item.clicked{
+    background-color: rgb(20,100,147);
     color: white;
-    font-size: 13px;
+    transition: .3s;
 }
+

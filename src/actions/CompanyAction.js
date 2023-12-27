@@ -1,31 +1,45 @@
 import axios from 'axios'
 
-export const getCompany = () => async (dispatch) => {
+export const getAllCompany = () => async (dispatch, getState) => {
+  const {
+    userSignin: {userInfo},
+  } = getState()
   try {
-    const { data } = await axios.get('http://localhost:8080/api/v1/companies/top?pageNo=0&pageSize=6&sortBy=companyId')
-    dispatch({ type: 'GETCOMPANY_SUCCESS', payload: data });
+    const { data } = await axios.get('http://localhost:8080/api/v1/companies/all')
+    dispatch({ type: 'GET_ALL_COMPANY_SUCCESS', payload: data });
   } catch (error) {
-    dispatch({ type: 'GETCOMPANY_FAIL', payload: error.message });
+    dispatch({ type: 'GET_ALL_COMPANY_FAIL', payload: error.message });
   }
 };
 
 
-export const getAllCompany = (token) => async (dispatch, getState) => {
+export const getAllCompanyByAdmin = (token) => async (dispatch, getState) => {
   const {
     userSignin: { userInfo },
   } = getState()
   try {
-    const { data } = await axios.get('http://localhost:8080/api/v1/manage/companies/all', {
+    const { data } = await axios.get('http://localhost:8080/api/v1/admin/manage/companies/all', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
     })
-    dispatch({ type: 'GET_ALL_COMPANY', payload: data })
+    dispatch({ type: 'GET_ALL_COMPANY_BY_ADMIN', payload: data })
   } catch (error) {
-    dispatch({ type: 'GET_ALL_COMPANY_FAIL', payload: error.message })
+    dispatch({ type: 'GET_ALL_COMPANY_FAIL_BY_ADMIN', payload: error.message })
   }
 }
+
+
+export const getCompanyTop = () => async (dispatch) => {
+  try {
+    const {data} = await axios.get('http://localhost:8080/api/v1/companies/top?pageNo=0&pageSize=6&sortBy=companyId')
+    dispatch({ type: 'COMPANYTOP_SUCCESS', payload: data });
+  } catch (error) {
+    dispatch({ type: 'COMPANYTOP_FAIL', payload: error.message});
+  }
+};
+
 
 // export const getDetailCompany = (token) => async(dispatch, getState)=>{
 //   const {
@@ -43,6 +57,39 @@ export const getAllCompany = (token) => async (dispatch, getState) => {
 //     dispatch({type: 'GET_DETAIL_COMPANY_FAIL', payload: error.message})
 //   }
 // }
+export const deleteCompany = (companyId, token) => async (dispatch, getState) => {
+  const {
+    userSignin: {userInfo},
+  } = getState()
+  try {
+    const {data} = await axios.delete('http://localhost:8080/api/v1/admin/manage/companies/delete/'+ companyId,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    dispatch({type: 'DELETE_COMPANY_SUCCESS', payload: data})
+  } catch (error) {
+    dispatch({type: 'DELETE_COMPANY_FAIL', payload: error.message})
+  }
+}
+
+export const getCompanyByName = (name, token) => async (dispatch, getState) =>{
+  const {
+    userSignin: {userInfo},
+  } = getState()
+  try {
+    const {data} = await axios.get('http://localhost:8080/api/v1/companies/find?name=' +name,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+    dispatch({type: 'GET_COMPANY_BY_NAME_SUCCESS', payload: data})
+  } catch(error){
+    dispatch({type:'GET_COMPANY_BY_NAME_FAIL', payload: error.message})
+  }
+}
 export const getDetailCompany = (token) => async (dispatch, getState) => {
   try {
     const {
@@ -61,7 +108,7 @@ export const getDetailCompany = (token) => async (dispatch, getState) => {
 
     const { data } = response;
     console.log(data);
-    dispatch({ type: 'GET_DETAIL_COMPANY', payload: data });
+    dispatch({ type: 'GET_DETAIL_COMPANY_SUCCESS', payload: data });
   } catch (error) {
     dispatch({ type: 'GET_DETAIL_COMPANY_FAIL', payload: error.message });
   }
@@ -118,7 +165,6 @@ export const getIndustry = () => async (dispatch, getState) => {
       'http://localhost:8080/api/v1/industries/all',
     );
     const { data } = response;
-    console.log(data);
     dispatch({ type: 'GET_INDUSTRY', payload: data });
   }
   catch (error) {

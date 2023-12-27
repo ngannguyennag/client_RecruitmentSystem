@@ -5,19 +5,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CarouselItemJob } from "./CarouselItem";
-import axios from "axios";
 import { getJobTop } from "../../actions/JobAction";
 import { useSelector, useDispatch } from 'react-redux';
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
-
   return (
     <div
       className={`${className}`}
       style={{ display: 'none' }}
-      onClick={onClick}
-    />
+      onClick={onClick}/>
   );
 }
 
@@ -27,12 +24,11 @@ function SamplePrevArrow(props) {
     <div
       className={`${className}`}
       style={{ display: 'none' }}
-      onClick={onClick}
-    />
+      onClick={onClick}/>
   );
 }
 
-function Carousel(props, title) {
+function CarouselJob(props, title) {
   let { slider, slider1, slider2 } = props
   const [nav, setNav] = useState({ nav1: null, nav2: null })
   const [data, setUserData] = useState([]);
@@ -43,6 +39,7 @@ function Carousel(props, title) {
       dispatch(getJobTop());
     }
   }, []);
+  console.log(jobTop);
   useEffect(() => {
     setNav({
       nav1: slider1,
@@ -98,10 +95,9 @@ function Carousel(props, title) {
           <div className="carousel-left-bottom">
             <Slider asNavFor={nav.nav1}
               ref={slider => (slider2 = slider)}
-              slidesToShow={2}
+              slidesToShow={4}
               swipeToSlide={true}
-              focusOnSelect={true}
-            >
+              focusOnSelect={true}>
             </Slider>
           </div>
         </div>
@@ -110,4 +106,4 @@ function Carousel(props, title) {
   );
 }
 
-export default Carousel;
+export default CarouselJob;

@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import store from '../../../../store'; import { useHistory } from 'react-router-dom';
+import store from '../../../../store';
 import { Menu, Form, Input, Upload, Button, Select, Avatar } from 'antd';
 import { IdcardOutlined, FileImageOutlined, PlusOutlined } from '@ant-design/icons';
-import { getDetailCompany, getProvince, getDistrict, getWards, getIndustry } from '../../../../actions/CompanyAction';
+import {  getProvince, getDistrict, getWards, getIndustry, getDetailCompany } from '../../../../actions/CompanyAction';
 const { TextArea } = Input;
 export default function HRFileCompany(props) {
   const [current, setCurrent] = useState('basic-info');
-  const history = useHistory();
   const [avatarUrl, setAvatarUrl] = useState(null); // State for avatar URL
   // const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
   const users = useSelector(state => state.getDetailCompany.company);
+  const userSignin = useSelector((state) => state.userSignin.userInfo);
+  const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
   const dispatch = useDispatch();
   const handleMenuClick = (e) => {
     setCurrent(e.key);
   };
   useEffect(() => {
-    // dispatch(getDetailCompany(token));
-  }, [dispatch]);
+    if(!users && token)
+    dispatch(getDetailCompany(token));
+  }, [dispatch, token, users]);
   const industryData = useSelector((state) => state.getIndustry.industry);
-
   var industryCompany = "";
-  if (!(users===undefined)) {
-    console.log(users.industry);
-    industryCompany = users.industry;
-  }
-
+  // if (!(users===undefined)) {
+  //   console.log(users.industry);
+  //   industryCompany = users.industry;
+  // }
   const [selectedIndustry, setSelectedIndustry] = useState(""); // Khởi tạo giá trị rỗng
-
   useEffect(() => {
     // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
     setSelectedIndustry(industryCompany);
@@ -39,8 +38,7 @@ export default function HRFileCompany(props) {
   const IndustrySelector = ({ onSelectIndustry }) => (
     <select
       value={selectedIndustry}
-      onChange={(e) => onSelectIndustry(e.target.value)}
-    >
+      onChange={(e) => onSelectIndustry(e.target.value)}>
       <option value="">Chọn lĩnh vực hoạt động</option>
       {industryData && industryData.length > 0 ? (
         industryData.map((industry) => (
@@ -86,12 +84,12 @@ export default function HRFileCompany(props) {
             <Form.Item name="logo" valuePropName="fileList" getValueFromEvent={normFile} >
               <Upload onChange={(info) => handleImageUpload(info.file)} showUploadList={false}>
                 {avatarUrl ? (
-                  <Avatar size={64} src={avatarUrl} style={{ marginTop: '100px', borderColor: 'blue', border: '13px solid', cursor: 'pointer', width: '200px', height: '200px' }} />
+                  <Avatar size={64} src={users.companyLogo} style={{ marginTop: '100px', borderColor: 'blue', border: '13px solid', cursor: 'pointer', width: '200px', height: '200px' }} />
                 ) : (
                   <div>
                     <div className="sidebarHR-top">
                       <i className="accountHR">
-                        <img src={users.imgUrl} alt="avatar" style={{ marginTop: '100px', border: ' blue 3px', cursor: 'pointer' }} />
+                        <img src={users.companyLogo} alt="avatar" style={{ marginTop: '100px', border: ' blue 3px', cursor: 'pointer' }} />
                       </i>
                     </div>
                   </div>
@@ -99,7 +97,6 @@ export default function HRFileCompany(props) {
               </Upload>
             </Form.Item>
           </div>
-
           <div className='formBasicInfoCompany' style={{ backgroundColor: 'white', display: 'flex', flexWrap: 'wrap' }}>
             <Form.Item name="abbreviation" className="form-item" style={{ margin: '20px 60px 0 25px', width: '30%' }}>
               <label htmlFor="abbreviation" className="form-label" style={{ fontWeight: '500', marginRight: '180px' }} >Tên viết tắt *</label>
@@ -188,11 +185,9 @@ export default function HRFileCompany(props) {
     return (
       <Form onFinish={handleSubmit} style={{ margin: " 40px", backgroundColor: 'white', borderRadius: '10px' }}>
         <div className='FormMediaSocialCompany' style={{ padding: '35px' }}>
-
           <div className='titleMedia' style={{ fontSize: '22px', fontWeight: '700' }}>
             Truyền thông và mạng xã hội
           </div>
-
           <Form.Item label="Số điện thoại liên hệ" name="phone" style={{ fontWeight: '500', marginTop: '20px' }}>
             <Input defaultValue={users && users.phoneNumber} style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }} />
           </Form.Item>
@@ -224,13 +219,33 @@ export default function HRFileCompany(props) {
     const handleSubmit = (values) => {
       console.log('Submitted values:', values);
     };
-
     const tinhThanhPhoData = useSelector((state) => state.getProvince.province);
     const huyenQuanData = useSelector((state) => state.getDistrict.district);
     const xaPhuongData = useSelector((state) => state.getWards.wards );
-    const [selectedTinhThanhPho, setSelectedTinhThanhPho] = useState("");
     const [selectedHuyenQuan, setSelectedHuyenQuan] = useState("");
     const [selectedXaPhuong, setSelectedXaPhuong] = useState("");
+    var tinhThanhPhoCompany = "";
+    var huyenQuanCompany = "";
+    var xaPhuongCompany = "";
+
+    if (!(users===undefined)) {
+      tinhThanhPhoCompany = users.companyAddress.provinceCode;
+      huyenQuanCompany = users.companyAddress.districtCode;
+      xaPhuongCompany = users.companyAddress.wardCode;
+    }
+    const [selectedTinhThanhPho, setSelectedTinhThanhPho] = useState("1");
+    useEffect(() => {
+      // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
+      setSelectedHuyenQuan(huyenQuanCompany);
+    }, [huyenQuanCompany]);
+    useEffect(() => {
+      // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
+      setSelectedXaPhuong(xaPhuongCompany);
+    }, [xaPhuongCompany]);
+    useEffect(() => {
+      // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
+      setSelectedTinhThanhPho(tinhThanhPhoCompany);
+    }, [tinhThanhPhoCompany]);
     useEffect(() => {
       dispatch(getProvince());
     }, []);
@@ -314,6 +329,7 @@ export default function HRFileCompany(props) {
             style={{ fontWeight: "500" }}
           >
             <Input
+            defaultValue={users && users.companyAddress.address}
               style={{ borderRadius: "5px" }}
             />
           </Form.Item>
@@ -330,32 +346,6 @@ export default function HRFileCompany(props) {
       </Form>
     );
   };
-  // return (
-  //   <Form onFinish={handleSubmit} style={{ margin: " 40px", backgroundColor: 'white', borderRadius: '10px' }}>
-  //     <div className='FormAddressCompany' style={{padding:'35px' }}>
-  //     <div className='titleAddress' style={{fontSize:'22px', fontWeight:'700'}}>
-  //       Địa chỉ công ty
-  //     </div>
-  //       <Form.Item label="Tỉnh / thành phố *" name="tinh" style={{ fontWeight: '500' , marginTop: '20px' }}>
-  //         <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
-  //       </Form.Item>
-  //       <Form.Item label="Quận / huyện *" name="huyen" style={{ fontWeight: '500' }}>
-  //         <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
-  //       </Form.Item>
-  //       <Form.Item label="Phường / xã *" name="huyen" style={{ fontWeight: '500' }}>
-  //         <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
-  //       </Form.Item>
-  //       <Form.Item label="Số nhà và tên đường" name="sonha" style={{ fontWeight: '500' }}>
-  //         <Input style={{ borderRadius: '5px', backgroundColor: '#e6f7ff' }}/>
-  //       </Form.Item>
-  //       <Form.Item>
-  //         <Button type="primary" htmlType="submit" style={{ width: '12%', borderRadius: '5px' }}>Lưu</Button>
-  //       </Form.Item>
-  //     </div>
-
-  //   </Form>
-  // );
-  // };
   return (
     <>
       <Menu onClick={handleMenuClick} selectedKeys={[current]} mode="horizontal">
@@ -371,7 +361,6 @@ export default function HRFileCompany(props) {
         <Menu.Item key="address" icon={<IdcardOutlined />} style={{ fontWeight: '500' }}>
           Địa chỉ liên hệ
         </Menu.Item>
-        {/* Add other menu items here */}
       </Menu>
       {current === 'basic-info' && <BasicInfoForm />}
       {current === 'image-description' && <ImageDescriptionForm />}

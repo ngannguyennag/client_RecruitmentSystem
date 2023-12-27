@@ -54,7 +54,7 @@ function Header(props) {
             <Link to="/jobs"> Việc Làm </Link>
           </li>
           <li>
-            <Link to="/detail_companies"> Công ty </Link>
+            <Link to="/companies"> Công ty </Link>
           </li>
           <li>
             <Link to="/career"> Nghề nghiệp </Link>

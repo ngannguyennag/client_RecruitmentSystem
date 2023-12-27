@@ -23,7 +23,6 @@ function Routes(props) {
             <Route path='/admin/product/update/:id' component={AdminUpdate}/>
             <Route path='/admin/product/reviewProduct/:id' component={ReviewProduct}/>
             <Route path='/admin/product' component={AdminProduct}/>
-
             <Route path='/admin/manage-company' component={AdminManageCompany}/>
             <Route path='/admin/manage-job' component={AdminManageJob}/>
             <Route path = '/admin/manage-account' component={AdminManageAccount}></Route>

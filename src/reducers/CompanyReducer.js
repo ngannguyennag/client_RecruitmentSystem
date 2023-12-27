@@ -1,17 +1,29 @@
-export const getCompanyReducer = (state = {}, action) => {
+export const getAllCompanyByAdminReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'GETCOMPANY_SUCCESS':
+        case 'GET_ALL_COMPANY_BY_ADMIN':
             return {...state, company: action.payload };
-        case 'GETCOMPANY_FAIL':
-            return {...state, error: action.payload };
+        case 'DELETE_COMPANY_BY_ADMIN':
+            return {...state};
       default:
         return state;
     }
 };
-export const getAllCompanyReducer = (state = {}, action) => {
+export const getCompanyTopReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'GET_ALL_COMPANY':{
-            return {...state, company: action.payload}
+        case 'COMPANYTOP_SUCCESS':{
+            return {...state, companyTop: action.payload}
+        }
+        case 'DELETE_COMPANY':{
+            return {...state, error: action.payload}
+        }
+        default: return state
+    }
+};
+
+export const getAllCompany = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_ALL_COMPANY_SUCCESS':{
+            return {...state, companyAll: action.payload}
         }
         case 'DELETE_COMPANY':{
             return {...state}
@@ -20,9 +32,30 @@ export const getAllCompanyReducer = (state = {}, action) => {
     }
 };
 
+export const getCompanyByNameReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'GET_COMPANY_BY_NAME_SUCCESS': {
+            return {...state, company: action.payload}
+        }
+        case 'DELETE_USER': {
+            return state;
+        }
+        default:
+            return state;
+    }
+};
+export const deleteCompanyReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'DELETE_COMPANY_SUCCESS':{
+            return {...state, companyUpdate: action.payload}
+        }
+        default: return state
+    }
+}
+
 export const getDetailCompanyReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'GET_DETAIL_COMPANY':{
+        case 'GET_DETAIL_COMPANY_SUCCESS':{
             return {...state, company: action.payload}
         }
         case 'DELETE_COMPANY':{

@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
-import { getAccountInfoReducer, getAccountUpdateReducer, getAllUserReducer, UserSigninReducer, UserSignupReducer} from './reducers/UserReducer'
+import { getAccountInfoReducer, getAccountUpdateReducer, getAllUserReducer, getUserByNameReducer, UserSigninReducer, UserSignupReducer} from './reducers/UserReducer'
 import {getProductByTypeReducer, getAllProductReducer, getProductByIdReducer, paginationProductReducer, ascendingProductReducer, descendingProductReducer, searchProductReducer, reviewProductReducer} from './reducers/ProductReducer'
 
 import { CartReducer} from './reducers/CartReducer'
@@ -9,9 +9,9 @@ import { ChatReducer } from './reducers/ChatReducer'
 import { SelectListReducer, UpdateSelectListReducer } from "./reducers/SelectListReducer";
 import { ListTypeProductReducer, TypeProductReducer } from './reducers/ListTypeProductReducer'
 import { InfoGhnReducer } from './reducers/GhnReducer'
-import { getCompanyReducer, getAllCompanyReducer, getDetailCompanyReducer, getProvinceReducer, getDistrictReducer, getWardsReducer, getIndustryReducer } from './reducers/CompanyReducer'
+import { getCompanyTopReducer, getAllCompany, getAllCompanyByAdminReducer, getDetailCompanyReducer, getProvinceReducer, getDistrictReducer, getWardsReducer, getIndustryReducer, getCompanyByNameReducer } from './reducers/CompanyReducer'
 import { getHotCategoryReducer } from './reducers/HotCategoryReducer'
-import { getAllJobReducer, getJobTopReducer } from './reducers/JobReducer'
+import { getAllJobByAdminReducer, getJobTopReducer, getAllJobByCompanyReducer, getJobByNameReducer, getAllJob, createWorkReducer } from './reducers/JobReducer'
 
 
 const initialState = {
@@ -32,14 +32,23 @@ const initialState = {
 
 const reducer = combineReducers({
   users: getAllUserReducer,
+  userSearch: getUserByNameReducer,
+  companySearch: getCompanyByNameReducer,
+  jobSearch: getJobByNameReducer,
+  createWork: createWorkReducer,
   userSignin: UserSigninReducer,
   userSignup: UserSignupReducer,
   getAccountInfo: getAccountInfoReducer,
   getAccountUpdate: getAccountUpdateReducer,
-  companies: getAllCompanyReducer,
+  companies: getAllCompanyByAdminReducer,
   getDetailCompany: getDetailCompanyReducer,
-  jobs: getAllJobReducer,
+  jobAdmin: getAllJobByAdminReducer,
+  jobCompany: getAllJobByCompanyReducer,
   getJobTop: getJobTopReducer,
+  jobAll: getAllJob,
+  companyAll: getAllCompany,
+  getCompanyTop: getCompanyTopReducer,
+  getHotCategory: getHotCategoryReducer,
   allProduct: getAllProductReducer,
   getProductById: getProductByIdReducer,
   getProvince: getProvinceReducer,
@@ -48,24 +57,18 @@ const reducer = combineReducers({
   getIndustry: getIndustryReducer,
   searchProduct: searchProductReducer,
   cart: CartReducer,
-
   // allOrder: getAllOrderReducer,
   address: addressReducer,
   orderByUser: getOrderByUserReducer,
   orderInfo: OrderInfoReducer,
   payOrder: orderPayReducer,
-
   orderGhn: InfoGhnReducer,
-
   chat: ChatReducer,
-
   selectList: SelectListReducer,
   updateSelect: UpdateSelectListReducer,
-
   allTypeProduct: ListTypeProductReducer,
   detailType: TypeProductReducer,
-  getCompany: getCompanyReducer,
-  getHotCategory: getHotCategoryReducer,
+  
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

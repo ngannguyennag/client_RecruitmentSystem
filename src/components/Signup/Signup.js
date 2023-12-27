@@ -7,11 +7,10 @@ import { SignupUser } from '../../actions/UserAction';
 import { Link } from "react-router-dom";
 
 function Signup(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [password, setPassword] = useState('')
   const history = useHistory();
   const [confirmPassword, setConfirmPassword] = useState('')
-
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
   const onSubmit = data => {
     console.log(data);

@@ -27,7 +27,6 @@ function AdminManageAccount(props) {
   };
 
   const [avatar, setAvatar] = useState();
-
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
     file.preview = URL.createObjectURL(file);
@@ -43,7 +42,7 @@ function AdminManageAccount(props) {
   const users = useSelector(state => state.getAccountInfo.user);
   const userUpdate = useSelector(state => state.getAccountUpdate.userUpdate)
   const { userInfo, error } = userSignup;
-  
+
   useEffect(() => {
     dispatch(getAccountInfo(token));
   }, [dispatch]);
@@ -92,7 +91,6 @@ function AdminManageAccount(props) {
       formData.append("birthday", data.birthday || users.birthday);
       formData.append("gender", data.gender || users.gender);
       formData.append("file",data.file || avatar.file);
-
       dispatch(getAccountUpdate(token, formData));
     } else {
       dispatch(getAccountUpdate(token, {
@@ -119,7 +117,6 @@ function AdminManageAccount(props) {
             {!isEditMode && !isSaved && <Link className="account-icon" onClick={handleEditClick}><EditOutlined /></Link>}
           </div>
         </div>
-
         {isEditMode ? (
           <form onSubmit={handleSubmit(onSubmit)} className="form-signup">
             <div className="form">
@@ -158,7 +155,6 @@ function AdminManageAccount(props) {
                 <input {...register("birthday")} defaultValue={users && users.birthday} required></input>
               </div>
             </div>
-
             <div className='form-input'>Gender
               <div className='check'>
                 <span>
@@ -176,7 +172,6 @@ function AdminManageAccount(props) {
               {<button className='buttonDestroy' type="button" onClick={handleCancelClick}>Hủy</button>}
               {!isSaved && <button className='buttonSave' type="submit" >Lưu </button>}
             </div>
-
           </form>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}
@@ -217,7 +212,6 @@ function AdminManageAccount(props) {
                 <input {...register("birthday")} defaultValue={users && users.birthday} required></input>
               </div>
             </div>
-
             <div className='form-input'>Gender
               <div className='check'>
                 <span>

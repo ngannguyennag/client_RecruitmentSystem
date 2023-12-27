@@ -149,6 +149,9 @@ function App() {
         <Route path="/list_application">
           <HRListApplicationPage></HRListApplicationPage>
         </Route>
+        <Route path="/companies">
+          <CompanyPage></CompanyPage>
+        </Route>
         <Route path="/detail_companies">
           <DetailCompanyPage></DetailCompanyPage>
         </Route>

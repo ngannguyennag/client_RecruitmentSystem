@@ -1,21 +1,29 @@
-.admin-user span{
+.adminUser{
+    margin: 0 .5rem 0 1rem;
+    background-color: white;
+}
+.titleHome{
     display: flex;
-    padding: 1rem;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #2071a7;
+    background-color: rgb(236, 232, 236);
+    margin: 1rem 0  1rem 0;
+    padding-bottom: 0.5rem;
 }
-.admin-user-list{
-    margin: 0 .5rem 0 1rem;
+.adminUserList{
+    /* margin: 0 .5rem 0 1rem; */
     color: white;
-    padding: 1rem;
     border-radius: 4px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 1rem;
+}
+.adminUserList p{
+    color: black;
 }
 table{
     width: 100%;
     text-align: center;
-    padding: 1rem;
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -25,16 +33,14 @@ table tr{
 }
 table th{
     background:  rgb(112, 173, 223);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    color: #f9f9f9;
     padding: .5rem 0;
     min-width: 32px;
     border-right: 1px solid black;
 }
 table td{
-    padding: .5rem 0;
-    font-size: 16px;
+    font-size: 12.5px;
     border-right: 1px solid black;
 
 }
@@ -45,7 +51,36 @@ table td{
 .form-div{
     padding-bottom: 10px;
 }
-tr .delete-user{
+.user-details {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Ban đầu vị trí ẩn form bên phải */
+    width: 400px;
+    height: 100vh;
+    background-color: white;
+    transition: right 0.3s ease; /* Thêm transition để tạo hiệu ứng trượt */
+    overflow-y: auto;
+}
+.user-details.show {
+    right: 0; /* Hiển thị form khi có class 'show' */
+    padding: 10px 20px;
+}
+.detail{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+.detailEducation{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.detailEducation p{
+    font-size: 14px;
+    margin-right: 5px;
+}
+/* tr .delete-user{
     height: 28px;
     width: 28px;
     border-radius: 50%;
@@ -61,4 +96,4 @@ tr .delete-user:hover{
 }
 tr .delete-user:hover span{
     color: white;
-}
+} */
