@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import job1 from './images/job1.png'
 import icon1 from './images/icon1.png'
 import icon2 from './images/icon2.png'
@@ -12,6 +12,21 @@ import {
     SearchOutlined, DashboardOutlined, DollarOutlined, ContactsOutlined, EnvironmentOutlined
 } from "@ant-design/icons";
 const DetailJob = () => {
+    const [isApplied, setIsApplied] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
+  
+    const handleApply = () => {
+      setShowPopup(true);
+    };
+  
+    const handleCancelApply = () => {
+      setShowPopup(false);
+    };
+  
+    const handleConfirmApply = () => {
+      setIsApplied(true);
+      setShowPopup(false);
+    };
     return (
         <div className='detail-job' >
             <div className='tab-job'>
@@ -45,9 +60,29 @@ const DetailJob = () => {
                                 <li>+2</li>
                             </ul>
                         </div>
-                        <div className='job-button'>
-                            Nộp Đơn
-                        </div>
+                        <div
+              className={`job-button ${isApplied ? 'applied' : ''}`}
+              onClick={handleApply}
+            >
+              {isApplied ? 'Đã Ứng Tuyển' : 'Nộp Đơn'}
+            </div>
+            {showPopup && (
+  <div className='popup'>
+    <div className='popup-content'>
+      <h3>Bạn có muốn ứng tuyển không?</h3>
+      <div className='popup-buttons'>
+        <div className='popup-button' onClick={handleCancelApply}>
+          Không ứng tuyển
+        </div>
+        <div className='popup-button' onClick={handleConfirmApply}>
+          Có ứng tuyển
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+    </div>
                     </div>
                 </div>
                 <div className='mobile-box'>
@@ -268,7 +303,7 @@ const DetailJob = () => {
                     </div>
                 </div>
             </div>
-        </div>
+    
     )
 }
 

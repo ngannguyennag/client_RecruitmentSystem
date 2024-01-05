@@ -5,17 +5,11 @@
     left: 0;
     top: 0;
 }
-.sidebarHR-top{
-    color: #1890ff;
-    font-size: 30px;
-    font-weight: 600;
-    /* padding: 0.1rem 0; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .sidebarHR-top img{
-    width: 200px;
+    margin-top: 95px;
+    width: 150px;
+   border: 3px #085389;
+   
 }
 .sidebarHR-list{
     padding: 0 1rem;

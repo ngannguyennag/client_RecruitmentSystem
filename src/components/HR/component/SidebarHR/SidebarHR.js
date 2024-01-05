@@ -16,19 +16,20 @@ import {
 import { Avatar } from "antd";
 import { useDispatch } from 'react-redux';
 import {SignoutUser} from '../../../../actions/UserAction'
+import { companyLogoUrl } from "../../../../actions/CompanyAction";
 function SidebarHR(props) {
   const dispatch = useDispatch();
   const onSignOut = () => {
     dispatch(SignoutUser());
   };
-  const users = useSelector(state => state.getAccountInfo.user);
+  const company = useSelector(state => state.getDetailCompany.company);
   return (
     <div className="sidebarHR">
       <div className="sidebarHR-list">
       <div className="sidebarHR-top">
         <i className="accountHR" >
-        {users?.imgUrl ? (
-              <img src={users.imgUrl} alt="Profile" />
+        {company?.companyLogo ? (
+              <img src={company?.companyLogo} alt="Profile" />
             ) : (
               <Avatar size={64} icon={<UserOutlined />} />
             )}

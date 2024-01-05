@@ -48,7 +48,7 @@ const AboutCompany = () => {
                                                 <Link to='/detail_companies'  style={{color: 'black'}}>  {item.companyFullName} </Link>
                                             </div>
 
-                                            <h4><CreditCardOutlined /> Lĩnh vực {item.industry.industryNameVI}</h4>
+                                            <h4><CreditCardOutlined /> Lĩnh vực {item.companyIndustry.industryNameVI}</h4>
                                             <div className='buttonCompany'>
                                                 <Link to="/company"><button>Việc mới</button></Link>
                                             </div>

@@ -5,6 +5,7 @@ import { SignoutUser } from "../../../../actions/UserAction";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import {getAccountInfo} from '../../../../actions/UserAction';
+import { companyLogoUrl, getDetailCompany } from '../../../../actions/CompanyAction';
 
 function HeaderHR(props) {
   const dispatch = useDispatch();
@@ -12,17 +13,17 @@ function HeaderHR(props) {
 
   const [showAccount, setShowAccount] = useState(false);
   const [showAccount2, setShowAccount2] = useState(false);
-  const users = useSelector(state => state.getAccountInfo.user);
-  const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
-    useEffect(() => {
-      if(!users)
-      dispatch(getAccountInfo(token));
-    }, [dispatch,token,users]);
+  // const users = useSelector(state => state.getAccountInfo.user);
+  // const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
+    // useEffect(() => {
+    //   if(!users)
+    //   dispatch(getAccountInfo(token));
+    // }, [dispatch,token,users]);
+  const company = useSelector((state) => state.getDetailCompany.company);
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const {userInfo, error } = userSignin;
   const [menu, setMenu] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
   const handleSignout = () => {
     dispatch(SignoutUser());
@@ -55,7 +56,6 @@ function HeaderHR(props) {
   const handleIconClick = () => {
     setShowAccount2(!showAccount2);
   };
-  console.log(users);
   return (
     <div className="header">
       <section id="menu">
@@ -79,7 +79,7 @@ function HeaderHR(props) {
         </ul>
         <div className="create-account">
           <i className="account-icon" onClick={handleIconClick}>
-            <img src={users?.imgUrl}></img>
+            <img src={company?.companyLogo} alt='company-logo'></img>
           </i>
           {/* {showAccount2 && (
             <ul className="account-menu">

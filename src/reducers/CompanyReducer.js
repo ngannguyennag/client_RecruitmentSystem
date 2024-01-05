@@ -112,3 +112,63 @@ export const getIndustryReducer = (state = {}, action) => {
         default: return state
     }
 };
+
+export const updateCompanyBasicInfoReducer = (state={}, action) => {
+    switch (action.type) {
+        case "COMPANY_UPDATE_BASIC_INFO_SUCCESS":{
+            return {...state, basicInfo: action.payload}
+        }  
+        case "COMPANY_UPDATE_BASIC_INFO_FAIL":{
+            return {...state, error: action.payload}
+        }   
+        default: return state
+    }
+}
+
+export const updateCompanyDescReducer = (state={}, action) => {
+    switch (action.type) {
+        case "COMPANY_UPDATE_DESC_SUCCESS":{
+            return {...state, desc: action.payload}
+        }  
+        case "COMPANY_UPDATE_DESC_FAIL":{
+            return {...state, error: action.payload}
+        }   
+        default: return state
+    }
+}
+
+export const updateCompanyMediaReducer = (state={}, action) => {
+    switch (action.type) {
+        case "COMPANY_UPDATE_MEDIA_SUCCESS":{
+            return {...state, media: action.payload}
+        }  
+        case "COMPANY_UPDATE_MEDIA_FAIL":{
+            return {...state, error: action.payload}
+        }   
+        default: return state
+    }
+}
+
+export const updateCompanyAddressReducer = (state={}, action) => {
+    switch (action.type) {
+        case "COMPANY_UPDATE_ADDRESS_SUCCESS":{
+            return {...state, address: action.payload}
+        }  
+        case "COMPANY_UPDATE_ADDRESS_FAIL":{
+            return {...state, error: action.payload}
+        }   
+        default: return state
+    }
+}
+
+export const uploadCompanyImageReducer = (state={}, action) => {
+    switch (action.type) {
+        case "COMPANY_UPLOAD_IMAGE_SUCCESS":{
+            return {...state, logo: action.payload}
+        }  
+        case "COMPANY_UPLOAD_IMAGE_FAIL":{
+            return {...state, error: action.payload}
+        }   
+        default: return state
+    }
+}

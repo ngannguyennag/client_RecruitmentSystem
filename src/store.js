@@ -12,8 +12,7 @@ import { InfoGhnReducer } from './reducers/GhnReducer'
 import { getCompanyTopReducer, getAllCompany, getAllCompanyByAdminReducer, getDetailCompanyReducer, getProvinceReducer, getDistrictReducer, getWardsReducer, getIndustryReducer, getCompanyByNameReducer } from './reducers/CompanyReducer'
 import { getHotCategoryReducer } from './reducers/HotCategoryReducer'
 import { getAllJobByAdminReducer, getJobTopReducer, getAllJobByCompanyReducer, getJobByNameReducer, getAllJob, createWorkReducer } from './reducers/JobReducer'
-
-
+import {updateCompanyBasicInfoReducer,updateCompanyAddressReducer,uploadCompanyImageReducer, updateCompanyDescReducer, updateCompanyMediaReducer } from './reducers/CompanyReducer'
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem("userInfo")
@@ -44,6 +43,14 @@ const reducer = combineReducers({
   getDetailCompany: getDetailCompanyReducer,
   jobAdmin: getAllJobByAdminReducer,
   jobCompany: getAllJobByCompanyReducer,
+  updateCompanyBasicInfo: updateCompanyBasicInfoReducer,
+  updateCompanyDesc: updateCompanyDescReducer,
+  updateCompanyMedia: updateCompanyMediaReducer,
+  updateCompanyAddress: updateCompanyAddressReducer,
+  uploadCompanyImage: uploadCompanyImageReducer,
+  updateCompanyBasicInfo: updateCompanyBasicInfoReducer,
+  updateCompanyAddress: updateCompanyAddressReducer,
+  uploadCompanyImage: uploadCompanyImageReducer,
   getJobTop: getJobTopReducer,
   jobAll: getAllJob,
   companyAll: getAllCompany,

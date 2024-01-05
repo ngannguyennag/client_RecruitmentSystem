@@ -6,13 +6,14 @@ import {
 import './AboutJob.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllJob } from "../../../actions/JobAction";
-
+import { useParams } from "react-router-dom";
 const AboutJob = () => {
     const dispatch = useDispatch();
     const jobAll = useSelector((state) => state.jobAll.jobAll);
     useEffect(() => {
         dispatch(getAllJob()); // Gọi hàm getAllJob và truyền token vào
     }, []);
+    const { jobId } = useParams();
     return (
         <div className='aboutJob' >
             {
@@ -32,9 +33,9 @@ const AboutJob = () => {
                                     <div className='company-list'>
                                         <img src={item.companyLogo} />
                                         <div className="about-job">
-                                            <h4>
-                                            <Link to={item.jobUrl}>{item.companyName}</Link>
-                                            </h4>
+                                            <h4> {item.companyName} </h4> 
+                                            <Link to={`/detail_jobs/${item.jobId}`}>{item.jobName}</Link>
+                                            {/* <h4> <Link to='/detail_jobs/:jobId'> </Link> {item.jobName} </h4> */}
                                             <div className='about-job-item'>
                                                 <ul>
                                                     <li className='negotiate'>{item.salary} </li>
