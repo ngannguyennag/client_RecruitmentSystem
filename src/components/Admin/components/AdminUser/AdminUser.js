@@ -111,7 +111,7 @@ function AdminUser(props) {
                                         <React.Fragment key={item.id}>
                                             <tr>
                                                 <td>{index + 1}</td>
-                                                <td><img src={item.imgUrl} /></td>
+                                                <td className='avatarUserFromAdmin'><img src={item.imgUrl} /></td>
                                                 <td>{item.email}</td>
                                                 <td>{item.phoneNumber}</td>
                                                 <td>{FormatDate(item.createDate)}</td>
@@ -153,7 +153,7 @@ function AdminUser(props) {
                                                                     <div className='detailEducation' key={index}>
                                                                         <p>{educationItem.startDate} - {educationItem.endDate}:</p>
                                                                         <p style={{color:'#0e599f'}}> {educationItem.major} ở {educationItem.schoolName}   </p>
-            <p style={{color:'grey', textAlign:'left'}}>{educationItem.description}</p>
+                                                                        <p style={{color:'grey', textAlign:'left'}}>{educationItem.description}</p>
                                                                     </div>
                                                                 ))}
                                                                 <h3 className="table-heading">Kinh nghiệm làm việc</h3>

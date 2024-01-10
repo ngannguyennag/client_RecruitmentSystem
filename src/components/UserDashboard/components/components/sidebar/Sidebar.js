@@ -44,7 +44,7 @@ function Sidebar(props) {
           </span>
           <p>Hồ sơ ứng viên</p>
         </Link>
-        <Link to="/user/customer" className={'sidebar-list-item'}>
+        <Link to="/user/user-list-application" className={'sidebar-list-item'}>
           <span>
             <UnorderedListOutlined />
           </span>

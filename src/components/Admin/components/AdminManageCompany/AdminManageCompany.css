@@ -51,6 +51,9 @@ table td{
     align-items: baseline;
     /* padding: 0; */
 }
+.avatarCompanyFromAdmin img{
+    width: 40px;
+}
 .detailButton{
     display: flex;
     flex-direction: row;

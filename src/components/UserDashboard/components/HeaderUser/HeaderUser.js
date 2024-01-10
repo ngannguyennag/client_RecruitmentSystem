@@ -9,7 +9,6 @@ function HeaderUser(props) {
   const dispatch = useDispatch();
   const users = useSelector(state => state.getAccountInfo.user);
   const userSignin = useSelector((state) => state.userSignin.userInfo);
-  console.log(userSignin);
   const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
   useEffect(() => {
     if (!users && token) {

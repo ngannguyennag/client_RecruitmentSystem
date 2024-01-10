@@ -58,6 +58,19 @@ export const getJobByNameReducer = (state = [], action) => {
     }
 };
 
+export const getJobByIdReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'GET_JOB_BY_ID_SUCCESS': {
+            return {...state, job: action.payload}
+        }
+        case 'GET_JOB_BY_ID_FAIL': {
+            return {...state, error: action.payload}
+        }
+        default:
+            return state;
+    }
+};
+
 export const deleteJobReducer = (state = {}, action) => {
     switch (action.type) {
         case 'DELETE_JOB_SUCCESS':{

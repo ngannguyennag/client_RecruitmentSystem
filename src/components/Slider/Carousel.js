@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CarouselItem } from "./CarouselItem";
-import { getHotCategory } from "../../actions/HotCategoryAction";
+import { getHotCategory } from "../../actions/CategoryAction";
 import { useSelector, useDispatch } from 'react-redux';
 
 function SampleNextArrow(props) {

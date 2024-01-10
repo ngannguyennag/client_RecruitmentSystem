@@ -1,31 +1,65 @@
 .detail-job{
-    background-color: whitesmoke;
+    margin: 30px 120px;
+    background-color: white;
 }
 .detail-job-list{
     display: flex;
     flex-direction: column;
     padding-left: 20px;
     align-items: flex-start;
+    /* background-color: white; */
+}
+.detail-job-list h4{
+  color: rgba(44, 112, 230, 0.717);
 }
 .tab-job{
-    margin: 30px 120px;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
+}
+.detail-job-item .seperate{
+  margin: 0 10px;
+}
+.job-detail-group{
+  display: flex;
+  flex-direction: column;
+}
+.job-detail-item ul{
+
 }
 .row-item{
     display: flex;
     flex-direction: row;
-    padding: 12px 0;
+    padding: 12px 0px;
     align-items: center;
-    margin: 10px 50px;
+    margin: 10px 20px;
     border: 0.5px rgb(92, 91, 91) solid;
 }
 .job-button.applied {
     background-color: red;
-    /* Thêm các thuộc tính CSS khác nếu cần thiết */
-    /* Ví dụ: color: white; để đảm bảo văn bản hiển thị trên nền đỏ */
   }
- /* Add this to your existing CSS */
-
+.infor-job-list{
+  -webkit-box-align: center;
+    align-items: center;
+    margin: 20px 100px;
+    transition: all 0.25s ease 0s;
+    border-radius: 12px;
+    border: 1px solid rgb(241, 241, 241);
+    background-color: rgb(218, 238, 250);
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.infor-job-list img{
+  width: 12%;
+    height: 100px;
+    margin: 0 20px 0 30px;
+    cursor: pointer;
+}
+.job-detail-group{
+  margin: 0 200px;
+  display: flex;
+    float: left;
+    flex-direction: column;
+}
 .popup {
     position: fixed;
     top: 0;

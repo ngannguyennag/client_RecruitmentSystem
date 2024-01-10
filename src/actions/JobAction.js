@@ -71,10 +71,7 @@ export const deleteJob = (jobId, token) => async (dispatch, getState) => {
   }
 }
 
-export const getJobByName = (name, token) => async (dispatch, getState) =>{
-  const {
-    userSignin: {userInfo},
-  } = getState()
+export const getJobByName = (name, token) => async (dispatch) =>{
   try {
     const {data} = await axios.get('http://localhost:8080/api/v1/jobs/find?name=' +name,{
       headers:{
@@ -88,6 +85,15 @@ export const getJobByName = (name, token) => async (dispatch, getState) =>{
   }
 }
 
+export const getJobById = (jobId) => async (dispatch) =>{
+  try {
+    const {data} = await axios.get(`http://localhost:8080/api/v1/job/${jobId}`)
+    dispatch({type: 'GET_JOB_BY_ID_SUCCESS', payload: data})
+  } catch(error){
+    dispatch({type:'GET_JOB_BY_ID_FAIL', payload: error.message})
+  }
+}
+
 export const createWork = (job, token) => async (dispatch) => {
   try {
     const {data} = await axios.post('http://localhost:8080/api/v1/company/mamage/jobs/add', job, {
@@ -96,9 +102,7 @@ export const createWork = (job, token) => async (dispatch) => {
       'Authorization': `Bearer ${token}`,
     },
   })
-    // localStorage.setItem('createWork', JSON.stringify(data));
     dispatch({ type: 'CREATE_WORK_SUCCESS', payload: data });
   } catch (error) {
-    // dispatch({type:'CREATE_WORK_FAIL', payload: error.message})
   }
 };

@@ -110,7 +110,7 @@ function AdminManageCompany(props) {
                                         <React.Fragment key={item.id}>
                                             <tr>
                                                 <td>{index + 1}</td>
-                                                <td>{item.name}</td>
+                                                <td>{item.jobName}</td>
                                                 <td>{FormatDate(item.createdAt)}</td>
                                                 <td>{FormatDate(item.jobExpiredDate)}</td>
                                                 <td>

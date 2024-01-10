@@ -80,6 +80,9 @@ table td{
     font-size: 14px;
     margin-right: 5px;
 }
+.avatarUserFromAdmin img{
+    width: 80px;
+}
 /* tr .delete-user{
     height: 28px;
     width: 28px;

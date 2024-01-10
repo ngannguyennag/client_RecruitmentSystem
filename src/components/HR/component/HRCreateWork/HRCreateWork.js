@@ -121,7 +121,6 @@ export default function HRCreateWork() {
         ) : null}
       </select>
     );
-    console.log(xaPhuongData);
     // useEffect(() => {
     //   if(token)
     //   dispatch(createWork(token));

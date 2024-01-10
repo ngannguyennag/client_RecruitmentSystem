@@ -34,6 +34,7 @@ import HRListApplicationPage from './pages/HRListApplication';
 import DetailCompanyPage from './pages/DetailCompanyPage';
 import JobPage from './pages/JobPage';
 import DetailJobPage from './pages/DetailJobPage';
+import UserListApplicationPage from './pages/UserListApplicationPage';
 
 // import { useRoutes} from "react-router-dom";
 // import routes from "./configs/routes";
@@ -158,8 +159,11 @@ function App() {
         <Route path="/jobs">
           <JobPage></JobPage>
         </Route>
-        <Route path="/detail_jobs">
+        <Route path="/detail_jobs/:jobId">
           <DetailJobPage></DetailJobPage>
+        </Route>
+        <Route path="/user-list-application">
+          <UserListApplicationPage></UserListApplicationPage>
         </Route>
       </Router>
     </div>

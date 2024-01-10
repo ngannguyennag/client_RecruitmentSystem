@@ -104,7 +104,7 @@ function AdminManageCompany(props) {
                                         <tr>
                                         <td>{index + 1}</td>
                                         <td>{item.email}</td>
-                                        <td><img src={item.companyLogo}/></td>
+                                        <td className='avatarCompanyFromAdmin'><img src={item.companyLogo}/></td>
                                         <td>{item.companyFullName}</td>
                                         <td>{item.companyAddress.fullAddress}</td>
                                         <td>
