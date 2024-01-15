@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import "./HeaderUser.css";
-import { SignoutUser } from "../../../../actions/UserAction";
+import { signOut } from "../../../../actions/AuthenticationAction";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import {getAccountInfo} from '../../../../actions/UserAction';
-
+import {getCandidateInfo} from '../../../../actions/CandidateAction';
 import { UserOutlined,FileOutlined,SettingOutlined,BellOutlined,LogoutOutlined  } from "@ant-design/icons";
 
 function HeaderUser(props) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [showAccount, setShowAccount] = useState(false);
   const [showAccount2, setShowAccount2] = useState(false);
-  const users = useSelector(state => state.getAccountInfo.user);
+  const users = useSelector(state => state.getCandidateInfo.user);
   const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
     useEffect(() => {
       if(!users)
-      dispatch(getAccountInfo(token));
+      dispatch(getCandidateInfo(token));
     }, [dispatch,token,users]);
 
-  const userSignin = useSelector((state) => state.userSignin);
+  const userSignin = useSelector((state) => state.userSignIn);
   const {userInfo, error } = userSignin;
   const [menu, setMenu] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignout = () => {
-    dispatch(SignoutUser());
+    dispatch(signOut());
   };
 
   const AccountMenu = () => {

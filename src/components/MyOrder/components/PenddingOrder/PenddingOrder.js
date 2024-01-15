@@ -4,7 +4,7 @@ import {
   cancelOrder,
   getOrderPenddingByUser,
 } from "../../../../actions/OrderAction";
-import { formatPrice } from "../../../../untils/index";
+import { formatPrice } from "../../../../utils/index";
 import "./PenddingOrder.css";
 
 function PenddingOrder(props) {

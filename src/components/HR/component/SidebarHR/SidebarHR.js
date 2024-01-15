@@ -15,12 +15,12 @@ import {
 } from "@ant-design/icons";
 import { Avatar } from "antd";
 import { useDispatch } from 'react-redux';
-import {SignoutUser} from '../../../../actions/UserAction'
+import {signOut} from '../../../../actions/AuthenticationAction'
 import { companyLogoUrl } from "../../../../actions/CompanyAction";
 function SidebarHR(props) {
   const dispatch = useDispatch();
   const onSignOut = () => {
-    dispatch(SignoutUser());
+    dispatch(signOut());
   };
   const company = useSelector(state => state.getDetailCompany.company);
   return (

@@ -8,7 +8,7 @@
 // import {
 //   formatPrice,
 //   formatDateOrderPaypal,
-// } from "../../../../../untils/index";
+// } from "../../../../../utils/index";
 
 // function Order(props) {
 //   const { order } = props;

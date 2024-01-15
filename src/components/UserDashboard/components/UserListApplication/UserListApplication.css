@@ -1,0 +1,51 @@
+.detailInfor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.avatarUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.detailInforCandidate {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+}
+.detailUserApplication {
+    align-items: center;
+    margin: 20px 15px;
+    transition: all 0.25s ease 0s;
+    border-radius: 12px;
+    border: 1px solid rgb(241, 241, 241);
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}
+
+.aboutDetailUserApplication {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    align-items: flex-start;
+}
+
+.job-entries {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.job-entry {
+    width: calc(50%);
+}
+
+.userApplicationStatus {
+    background-color: rgb(241, 139, 76);
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}

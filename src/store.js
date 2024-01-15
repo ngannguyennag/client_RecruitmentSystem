@@ -1,26 +1,18 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import {
-  getAccountInfoReducer,
-  getAccountUpdateReducer,
-  getAllUserReducer,
-  getUserByNameReducer,
+  getCandidateInfoReducer,
+  getCandidateUpdateReducer,
   uploadCVReducer,
   uploadImageReducer,
-  UserSigninReducer,
-  UserSignupReducer,
-  getRecruitmentCandidateReducer
-} from "./reducers/UserReducer";
+  getAllCandidateReducer,
+  getCandidateByNameReducer,
+} from "./reducers/CandidateReducer";
 import {
   getAllProductReducer,
   getProductByIdReducer,
-  paginationProductReducer,
-  ascendingProductReducer,
-  descendingProductReducer,
   searchProductReducer,
-  reviewProductReducer,
 } from "./reducers/ProductReducer";
-
 import { CartReducer } from "./reducers/CartReducer";
 import {
   addressReducer,
@@ -61,6 +53,7 @@ import {
   getAllJob,
   createWorkReducer,
   getJobByIdReducer,
+  getJobByStatusReducer,
 } from "./reducers/JobReducer";
 import {
   updateCompanyBasicInfoReducer,
@@ -69,10 +62,19 @@ import {
   updateCompanyDescReducer,
   updateCompanyMediaReducer,
 } from "./reducers/CompanyReducer";
-import { applyJobReducer } from "./reducers/RecruitmentReducer";
+import {
+  applyJobReducer,
+  getApplicationCandidateByJobAndStatusReducer,
+  getApplicationIntervieweeByJobAndStatusReducer,
+  getRecruitmentCandidateReducer,
+} from "./reducers/RecruitmentReducer";
+import {
+  CandidateSignUpReducer,
+  LoginReducer,
+} from "./reducers/AuthenticationReducer";
 
 const initialState = {
-  userSignin: {
+  userSignIn: {
     userInfo: localStorage.getItem("userInfo")
       ? JSON.parse(localStorage.getItem("userInfo"))
       : undefined,
@@ -85,14 +87,19 @@ const initialState = {
 };
 
 const reducer = combineReducers({
-  users: getAllUserReducer,
-  userSignin: UserSigninReducer,
-  userSignup: UserSignupReducer,
-  userSearch: getUserByNameReducer,
-  getAccountInfo: getAccountInfoReducer,
-  getAccountUpdate: getAccountUpdateReducer,
+  /* Authentication */
+  userSignIn: LoginReducer,
+  userSignUp: CandidateSignUpReducer,
+
+  /* Candidate */
+  candidates: getAllCandidateReducer,
+  candidateSearch: getCandidateByNameReducer,
+  getCandidateInfo: getCandidateInfoReducer,
+  getCandidateUpdate: getCandidateUpdateReducer,
   uploadImage: uploadImageReducer,
   uploadCV: uploadCVReducer,
+
+  /* Company */
   companyAll: getAllCompany,
   companySearch: getCompanyByNameReducer,
   companies: getAllCompanyByAdminReducer,
@@ -103,6 +110,8 @@ const reducer = combineReducers({
   updateCompanyMedia: updateCompanyMediaReducer,
   updateCompanyAddress: updateCompanyAddressReducer,
   uploadCompanyImage: uploadCompanyImageReducer,
+
+  /* Job */
   jobAll: getAllJob,
   jobAdmin: getAllJobByAdminReducer,
   jobCompany: getAllJobByCompanyReducer,
@@ -110,15 +119,28 @@ const reducer = combineReducers({
   createWork: createWorkReducer,
   getJobTop: getJobTopReducer,
   getJobById: getJobByIdReducer,
+  getJobByStatus: getJobByStatusReducer,
+
+  /* Recruitment */
   applyJob: applyJobReducer,
+  getRecruitmentCandidate: getRecruitmentCandidateReducer,
+  getApplicationCandidateByJobAndStatus: getApplicationCandidateByJobAndStatusReducer,
+  getApplicationIntervieweeByJobAndStatus: getApplicationIntervieweeByJobAndStatusReducer,
+
+  /* Category */
   getCategory: getCategoryReducer,
   getHotCategory: getHotCategoryReducer,
-  allProduct: getAllProductReducer,
-  getProductById: getProductByIdReducer,
+
+  /* Address */
   getProvince: getProvinceReducer,
   getDistrict: getDistrictReducer,
   getWards: getWardsReducer,
+
+  /* Industry */
   getIndustry: getIndustryReducer,
+
+  allProduct: getAllProductReducer,
+  getProductById: getProductByIdReducer,
   searchProduct: searchProductReducer,
   cart: CartReducer,
   // allOrder: getAllOrderReducer,
@@ -132,7 +154,6 @@ const reducer = combineReducers({
   updateSelect: UpdateSelectListReducer,
   allTypeProduct: ListTypeProductReducer,
   detailType: TypeProductReducer,
-  getRecruimentCandidate: getRecruitmentCandidateReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

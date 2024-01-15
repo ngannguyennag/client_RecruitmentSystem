@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   filterProductByPrice,
 } from "../../actions/ProductAction";
-import { formatPrice } from "../../untils/index";
+import { formatPrice } from "../../utils/index";
 import FilterMenu from "./FilterMenu/FilterMenu";
 
 

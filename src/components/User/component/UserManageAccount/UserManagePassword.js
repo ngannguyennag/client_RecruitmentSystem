@@ -7,7 +7,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
-import { changePassword } from "../../../../actions/UserAction";
+import { changePassword } from "../../../../actions/CandidateAction";
 const UserManagePassword = () => {
   // useEffect(() => {
   //   dispatch(changePassword());

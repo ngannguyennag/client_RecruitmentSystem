@@ -10,12 +10,12 @@ import {
   NotificationOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import {SignoutUser} from '../../../../actions/UserAction';
+import {signOut} from '../../../../actions/AuthenticationAction';
 function Sidebar(props) {
   const dispatch = useDispatch();
   const location = useLocation();
   const onSignOut = () => {
-    dispatch(SignoutUser());
+    dispatch(signOut());
   };
   // const { orderPendding } = useSelector((state) => state.allOrder);
   // let totalNewOrder

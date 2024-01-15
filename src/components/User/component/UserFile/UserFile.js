@@ -3,7 +3,7 @@ import './UserFile.css'
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { SignupUser, getAccountInfo, getAccountUpdate } from '../../../../actions/UserAction';
+import { SignupUser, getCandidateInfo, getCandidateUpdate } from '../../../../actions/CandidateAction';
 import { Link } from "react-router-dom";
 import { EditOutlined, CameraOutlined } from '@ant-design/icons';
 
@@ -40,12 +40,12 @@ function UserFile(props) {
     console.log(file);
   };
   const userSignup = useSelector((state) => state.userSignup);
-  const users = useSelector(state => state.getAccountInfo.user);
-  const userUpdate = useSelector(state => state.getAccountUpdate.userUpdate);
+  const users = useSelector(state => state.getCandidateInfo.user);
+  const userUpdate = useSelector(state => state.getCandidateUpdate.userUpdate);
   const { userInfo, error } = userSignup;
   
   useEffect(() => {
-    dispatch(getAccountInfo(token));
+    dispatch(getCandidateInfo(token));
   }, [dispatch]);
   useEffect(() => {
     return () => {
@@ -94,9 +94,9 @@ function UserFile(props) {
       formData.append("gender", data.gender || genderValue);
       formData.append("file",data.file || avatar.file);
 
-      dispatch(getAccountUpdate(token, formData));
+      dispatch(getCandidateUpdate(token, formData));
     } else {
-      dispatch(getAccountUpdate(token, {
+      dispatch(getCandidateUpdate(token, {
         firstname: data.firstname || users.firstName,
         lastname: data.lastname || users.lastName,
         username: data.username || users.username,

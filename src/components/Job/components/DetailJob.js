@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import job1 from "./images/job1.png";
 import icon1 from "./images/icon1.png";
 import icon3 from "./images/icon3.png";
 import icon4 from "./images/icon4.png";
@@ -11,12 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getJobById } from "../../../actions/JobAction";
 import { applyJob } from "../../../actions/RecruitmentAction";
 // import { FormatDate } from "../../Utils/FormatDate";
-import {FormatDate} from "../../../untils/FormatDate";
+import {FormatDate} from "../../../utils/FormatDate";
 const DetailJob = () => {
   const dispatch = useDispatch();
   const job = useSelector((state) => state.getJobById.job);
   const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
-
   // Sử dụng useParams để lấy giá trị từ URL
   const { jobId } = useParams();
   useEffect(() => {
@@ -62,11 +60,11 @@ const DetailJob = () => {
         </div>
         <div className="infor-job-list">
           <img src={job?.companyLogo} alt="job1" />
-          <div className="detail-job-list">
+          <div className="detail-job-list-item">
             <Link to="/detail_jobs">
               <h2 >{job?.jobName}</h2>
             </Link>
-            <h4>{job?.companyName}</h4>
+            <h3>{job?.companyName}</h3>
             <div className="detail-job-item">
               <ul>
               <li className="addressProvince"> {getAddress(job?.jobAddress)}</li>
@@ -82,10 +80,7 @@ const DetailJob = () => {
                 ))}
               </ul>
             </div>
-            <div
-              className={`job-button ${isApplied ? "applied" : ""}`}
-              onClick={handleApply}
-            >
+            <div className={`job-button ${isApplied ? "applied" : ""}`}  onClick={handleApply}>
               {isApplied ? "Đã Ứng Tuyển" : "Nộp Đơn"}
             </div>
             {showPopup && (
@@ -107,7 +102,7 @@ const DetailJob = () => {
         </div>
       </div>
       <div className="job-detail-group">
-        <div className="job-detail-item">
+        <div className="job-detail-info-item">
           <h2>THÔNG TIN</h2>
           <div className="row-item">
             <div className="row-box">
@@ -120,7 +115,6 @@ const DetailJob = () => {
               <span className="content">{FormatDate(job?.createdAt)}</span>
             </div>
           </div>
-
           <div className="row-item">
             <div className="row-box">
               <span className="icon">
@@ -157,39 +151,48 @@ const DetailJob = () => {
             </div>
           </div>
         </div>
-
-        <div className="job-detail-item">
-          <h2>CÁC PHÚC LỢI DÀNH CHO BẠN </h2>
-          <ul>
-            {job?.jobBenefit.split("\n").map((benefit, index) => (
-              <li key={index}>{benefit}</li>
-            ))}
-          </ul>
-        </div>
       </div>
-
-      <div className="job-detail-item">
+      <div className="job-detail">
+        <div className="title-job-detail">
+        <h2>CÁC PHÚC LỢI DÀNH CHO BẠN </h2>
+        </div>
+        <div className="job-detail-item">
+          <p>
+            {job?.jobBenefit.split("\n").map((benefit, index) => (
+              <p key={index}>{benefit}</p>
+            ))}
+          </p> 
+          </div>
+        </div>
+        <div className="job-detail">
+        <div className="title-job-detail">
         <h2>MÔ TẢ CÔNG VIỆC</h2>
-        {/* <div className="job-description">{job?.jobDescription}</div> */}
+        </div>
+        <div className="job-detail-item">
         <p
           dangerouslySetInnerHTML={{
             __html: job?.jobDescription.replace(/\n/g, "<br>"),
           }}
         />
       </div>
-
-      <div className="job-detail-list">
+        </div>
+        <div className="job-detail">
+        <div className="title-job-detail">
         <h2>YÊU CẦU CÔNG VIỆC</h2>
-        {/* <div className="job-requirement">{job?.jobRequirement}</div> */}
+        </div>
+      <div className="job-detail-item">
         <p
           dangerouslySetInnerHTML={{
             __html: job?.jobRequirement.replace(/\n/g, "<br>"),
           }}
         />
       </div>
-
-      <div className="job-detail-list">
+        </div>
+      <div className="job-detail">
+        <div className="title-job-detail">
         <h2>ĐỊA ĐIỂM CÔNG VIỆC</h2>
+        </div>
+      <div className="job-detail-item">
         <div className="job-addresses">
           {job?.jobAddress.map((address, index) => (
             <div className="job-address" key={index}>
@@ -201,6 +204,7 @@ const DetailJob = () => {
           ))}
         </div>
       </div>  
+      </div>
       </div>
     </div>
   );

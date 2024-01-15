@@ -16,3 +16,42 @@ export const applyJob = (jobId, token) => async (dispatch) => {
     dispatch({ type: "APPLY_FAIL", payload: error.message });
   }
 };
+
+export const getRecruitmentCandidate = (token) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(
+      "http://localhost:8080/api/v1/recruitment/candidate/all",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    dispatch({ type: "GET_RECRUITMENT_CANDIDATE_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_RECRUITMENT_CANDIDATE_FAIL", payload: error.message });
+  }
+};
+
+export const getApplicationCandidateByJobAndStatus = (jobId, statusId) => async(dispatch) =>{
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8080/api/v1/recruitment/manage/candidate?jobId=${jobId}&statusId=${statusId}`,
+    );
+    dispatch({ type: "GET_APPLICATION_CANDIDATE_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_APPLICATION_CANDIDATE_FAIL", payload: error.message });
+  }
+}
+
+export const getApplicationIntervieweeByJobAndStatus = (jobId, statusId) => async(dispatch) =>{
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8080/api/v1/recruitment/manage/interviewee?jobId=${jobId}&statusId=${statusId}`,
+    );
+    dispatch({ type: "GET_APPLICATION_INTERVIEWEE_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_APPLICATION_INTERVIEWEE_FAIL", payload: error.message });
+  }
+}

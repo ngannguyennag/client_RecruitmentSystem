@@ -1,55 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import "./HeaderHR.css";
-import { SignoutUser } from "../../../../actions/UserAction";
+import { signOut } from "../../../../actions/AuthenticationAction";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import {getAccountInfo} from '../../../../actions/UserAction';
+import {getCandidateInfo} from '../../../../actions/CandidateAction';
 import { companyLogoUrl, getDetailCompany } from '../../../../actions/CompanyAction';
 
 function HeaderHR(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const [showAccount, setShowAccount] = useState(false);
   const [showAccount2, setShowAccount2] = useState(false);
-  // const users = useSelector(state => state.getAccountInfo.user);
+  // const users = useSelector(state => state.getCandidateInfo.user);
   // const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
     // useEffect(() => {
     //   if(!users)
-    //   dispatch(getAccountInfo(token));
+    //   dispatch(getCandidateInfo(token));
     // }, [dispatch,token,users]);
   const company = useSelector((state) => state.getDetailCompany.company);
 
   const [menu, setMenu] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-
   const handleSignout = () => {
-    dispatch(SignoutUser());
+    dispatch(signOut());
   };
-
-  // const AccountMenu = () => {
-  //   const handleIconClick = () => {
-  //     setIsMenuOpen(!isMenuOpen);
-  //   };
-
-  //   return (
-  //     <div className="create-account">
-  //       <i className="account-icon" onClick={handleIconClick}>
-  //         <UserOutlined />
-  //       </i>
-  //       {isMenuOpen && (
-  //         <ul className="account-menu">
-  //           <li>Hồ sơ của tôi</li>
-  //           <li>Quản lý tài khoản</li>
-  //           <li>Đăng xuất</li>
-  //         </ul>
-  //       )}
-  //     </div>
-  //   );
-  // };
-
   const handleMenuToggle = () => {
     setMenu(!menu);
   };

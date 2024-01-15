@@ -3,7 +3,7 @@ import './Signup.css'
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { SignupUser } from '../../actions/UserAction';
+import { signUpCandidate } from '../../actions/AuthenticationAction';
 import { Link } from "react-router-dom";
 
 function Signup(props) {
@@ -15,7 +15,7 @@ function Signup(props) {
   const onSubmit = data => {
     console.log(data);
     if (password === confirmPassword) {
-      dispatch(SignupUser(data))
+      dispatch(signUpCandidate(data))
     } else {
       alert("wrong repeat password")
     }

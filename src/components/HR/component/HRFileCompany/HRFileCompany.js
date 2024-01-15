@@ -22,26 +22,19 @@ import {
 } from "../../../../actions/CompanyAction";
 
 const { TextArea } = Input;
-
 export default function HRFileCompany(props) {
   const dispatch = useDispatch();
-
   const [basicInfoForm] = Form.useForm();
   const [imgDescForm] = Form.useForm();
   const [mediaForm] = Form.useForm();
   const [addressForm] = Form.useForm();
-
   const [current, setCurrent] = useState("basic-info");
-
   const [companyLogo, setCompanyLogo] = useState(null);
   const [companyLicense, setCompanyLicense] = useState([]);
   const [companyImage, setCompanyImage] = useState([]);
-
   const company = useSelector((state) => state.getDetailCompany.company);
-  const userSignin = useSelector((state) => state.userSignin.userInfo);
-  const token = userSignin
-    ? JSON.parse(localStorage.getItem("userInfo")).access_token
-    : null;
+  // const userSignin = useSelector((state) => state.userSignin.userInfo);
+  const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
 
   const handleMenuClick = (e) => {
     setCurrent(e.key);

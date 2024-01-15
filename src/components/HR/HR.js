@@ -6,7 +6,7 @@ import SidebarHR from './component/SidebarHR/SidebarHR'
 import Routes from './component/RouterHR'
 import HeaderHR from './component/HeaderHR/HeaderHR'
 function HR(props) {
-  const userSignin = useSelector((state) => state.userSignin);
+  const userSignin = useSelector((state) => state.userSignIn);
   const { userInfo, error } = userSignin;
   const history = useHistory();
   return (

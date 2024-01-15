@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Header.css";
-import { SignoutUser } from "../../actions/UserAction";
+import { signOut } from "../../actions/CandidateAction";
 import { useHistory } from "react-router";
 import { searchProduct } from "../../actions/ProductAction";
 import { Link } from "react-router-dom";
@@ -20,7 +20,7 @@ function HeaderUser(props) {
   const [menu, setMenu] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleSignout = () => {
-    dispatch(SignoutUser());
+    dispatch(signOut());
   };
   const AccountMenu = () => {
     const handleIconClick = () => {

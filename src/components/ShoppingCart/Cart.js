@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatPrice } from '../../untils';
+import { formatPrice } from '../../utils';
 import './ShoppingCart.css'
 import ListProduct from './ListProduct';
 import {useHistory} from "react-router-dom"; 

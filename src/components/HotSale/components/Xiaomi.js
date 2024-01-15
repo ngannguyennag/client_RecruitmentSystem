@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import ListProduct from '../ListProduct'
 
-import {handlePercentDiscount} from '../../../untils/index'
+import {handlePercentDiscount} from '../../../utils/index'
 import { useDispatch } from 'react-redux';
 
 

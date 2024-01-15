@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ListProduct from './ListProduct'
 import './Sale.css'
-import {handlePercentDiscount} from '../../untils/index'
+import {handlePercentDiscount} from '../../utils/index'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProduct} from '../../actions/ProductAction';
 

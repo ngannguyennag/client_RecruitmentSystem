@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {handlePercentDiscount} from '../../untils/index'
+import {handlePercentDiscount} from '../../utils/index'
 import './Search.css'
 import ListProduct from './ListProduct'
 function Search(props) {

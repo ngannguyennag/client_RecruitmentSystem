@@ -5,7 +5,7 @@ import {
   paginationProduct,
 } from "../../../../actions/ProductAction";
 import { useHistory, Link } from "react-router-dom";
-import { formatPrice } from "../../../../untils/index";
+import { formatPrice } from "../../../../utils/index";
 import { DeleteOutlined, EditOutlined, FormOutlined } from "@ant-design/icons";
 
 

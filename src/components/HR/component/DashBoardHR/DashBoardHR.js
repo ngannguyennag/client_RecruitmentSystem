@@ -9,14 +9,14 @@ import {
 import "./DashBoardHR.css";
 import ChartDashBoard from "./ChartDashBoard";
 import { useDispatch } from 'react-redux';
-import {SignoutUser} from '../../../../actions/UserAction'
+import {signOut} from '../../../../actions/AuthenticationAction'
 import { ScheduleOutlined } from "@ant-design/icons";
 
 
 export default function DashBoardHR() {
   const dispatch = useDispatch();
   const onSignOut = () => {
-    dispatch(SignoutUser());
+    dispatch(signOut());
   };
   return (
     <section id="dashboard">

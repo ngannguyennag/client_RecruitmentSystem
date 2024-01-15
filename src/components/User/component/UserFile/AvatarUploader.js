@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccountInfo, getAccountUpdate, uploadImage } from '../../../../actions/UserAction';
+import { getCandidateInfo, getCandidateUpdate, uploadImage } from '../../../../actions/CandidateAction';
 import { CameraOutlined } from '@ant-design/icons';
 
 function AvatarUploader() {
@@ -12,8 +12,8 @@ function AvatarUploader() {
   const history = useHistory();
   const inputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const users = useSelector(state => state.getAccountInfo.user);
-  const userUpdate = useSelector(state => state.getAccountUpdate.userUpdate);
+  const users = useSelector(state => state.getCandidateInfo.user);
+  const userUpdate = useSelector(state => state.getCandidateUpdate.userUpdate);
   const userSignup = useSelector((state) => state.userSignup);
   const { userInfo} = userSignup;
 
@@ -34,7 +34,7 @@ function AvatarUploader() {
   };
 
   useEffect(() => {
-    dispatch(getAccountInfo(token));
+    dispatch(getCandidateInfo(token));
   }, [dispatch]);
 
   useEffect(() => {

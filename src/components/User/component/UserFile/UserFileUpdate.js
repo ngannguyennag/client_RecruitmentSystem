@@ -3,7 +3,7 @@ import './UserFile.css';
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { getAccountInfo, getAccountUpdate } from '../../../../actions/UserAction';
+import { getCandidateInfo, getCandidateUpdate } from '../../../../actions/CandidateAction';
 import { Link } from "react-router-dom";
 
 function UserFileUpdate() {
@@ -16,12 +16,12 @@ function UserFileUpdate() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
   const userSignup = useSelector((state) => state.userSignup);
-  const users = useSelector(state => state.getAccountInfo.user);
-  const userUpdate = useSelector(state => state.getAccountUpdate.userUpdate)
+  const users = useSelector(state => state.getCandidateInfo.user);
+  const userUpdate = useSelector(state => state.getCandidateUpdate.userUpdate)
   const { userInfo} = userSignup;
   // const genderValue = watch('gender');
   useEffect(() => {
-    dispatch(getAccountInfo(token));
+    dispatch(getCandidateInfo(token));
   }, [dispatch]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function UserFileUpdate() {
   }, [userInfo, history]);
 
   const onSubmit = data => {
-    dispatch(getAccountUpdate(token, {
+    dispatch(getCandidateUpdate(token, {
       firstName: data.firstname || users.firstName,
       lastName: data.lastname || users.lastName,
       username: data.username || users.username,

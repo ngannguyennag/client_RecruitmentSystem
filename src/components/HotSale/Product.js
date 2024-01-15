@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import {AddToCart} from '../../actions/CartAction'
 import {Link} from 'react-router-dom'
-import {formatPrice} from '../../untils/index'
+import {formatPrice} from '../../utils/index'
 import { message} from 'antd';
 
 function Product(props) {

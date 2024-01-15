@@ -8,7 +8,7 @@ import {
 } from "../../actions/ProductAction";
 import { useParams } from "react-router-dom";
 import AllRepComment from "./AllRepComment";
-import { getFirstCharacterUser } from "../../untils";
+import { getFirstCharacterUser } from "../../utils";
 
 function AllComment(props) {
   const { id } = useParams();

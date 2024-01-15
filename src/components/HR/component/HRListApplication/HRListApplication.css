@@ -5,6 +5,7 @@
     font-weight: 600;
     color: #2071a7;
 }
+
 .admin-user-list{
     margin: 0 .5rem 0 1rem;
     color: white;
@@ -12,6 +13,7 @@
     border-radius: 4px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+
 table{
     width: 100%;
     text-align: center;
@@ -61,4 +63,25 @@ tr .delete-user:hover{
 }
 tr .delete-user:hover span{
     color: white;
+}
+
+.selector {
+    width: fit-content;
+}
+
+.custom-input-container {
+    position: relative;
+    display: flex;
+}
+  
+.custom-input {
+    padding-left: 30px;
+    border: 1px solid;
+}
+
+.custom-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
 }

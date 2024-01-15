@@ -12,8 +12,9 @@ const { TextArea } = Input;
 export default function HRCreateWork() {
   const dispatch = useDispatch();
   const users = useSelector(state => state.createWork.createWork);
-  const userSignin = useSelector((state) => state.userSignin.userInfo);
-  const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
+  // const userSignin = useSelector((state) => state.userSignin.userInfo);
+  // const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
+  const token = JSON.parse(localStorage.getItem('userInfo'))?.access_token ;  
     const handleSubmit = (values) => {
       dispatch(createWork(values,token))
     };

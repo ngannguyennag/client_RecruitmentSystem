@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderByUser } from "../../../../actions/OrderAction";
-import {formatPrice} from '../../../../untils/index'
+import {formatPrice} from '../../../../utils/index'
 import "./AllOrder.css";
 
 const orderItem = (item) => (

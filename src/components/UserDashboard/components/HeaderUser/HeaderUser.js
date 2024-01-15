@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import "./HeaderUser.css";
 import { Link } from "react-router-dom";
-import {getAccountInfo} from '../../../../actions/UserAction';
+import {getCandidateInfo} from '../../../../actions/CandidateAction';
 import { DownOutlined } from "@ant-design/icons";
 
 function HeaderUser(props) {
   const dispatch = useDispatch();
-  const users = useSelector(state => state.getAccountInfo.user);
-  const userSignin = useSelector((state) => state.userSignin.userInfo);
+  const users = useSelector(state => state.getCandidateInfo.user);
+  const userSignin = useSelector((state) => state.userSignIn.userInfo);
   const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
   useEffect(() => {
     if (!users && token) {
-      dispatch(getAccountInfo(token));
+      dispatch(getCandidateInfo(token));
     }
   }, [dispatch, token, users]);
   return (

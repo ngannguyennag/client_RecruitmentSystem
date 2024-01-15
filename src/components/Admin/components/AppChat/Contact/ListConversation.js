@@ -1,5 +1,5 @@
 import React from "react";
-import {getFirstCharacterUser} from '../../../../../untils/index'
+import {getFirstCharacterUser} from '../../../../../utils/index'
 
 function ListConversation(props) {
   const { conversationList, onConversationClick } = props;

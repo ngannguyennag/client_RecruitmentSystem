@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUser, deleteUser, getUserByName } from '../../../../actions/UserAction';
+import {  getCandidateByName, getAllCandidate, deleteCandidate } from '../../../../actions/CandidateAction';
 import './AdminUser.css';
 function AdminUser(props) {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function AdminUser(props) {
     const [showDetails, setShowDetails] = useState(false);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
     useEffect(() => {
-        dispatch(getAllUser(token));
+        dispatch(getAllCandidate(token));
     }, [dispatch]);
     useEffect(() => {
         setUpdatedUsers(users); // Cập nhật state mới sau mỗi lần danh sách user thay đổi
@@ -43,9 +43,9 @@ function AdminUser(props) {
     };
     const handleDeleteUser = (userId, token) => {
         setIsLoading(true);
-        dispatch(deleteUser(userId, token))
+        dispatch(deleteCandidate(userId, token))
             .then(() => {
-                dispatch(getAllUser(token));
+                dispatch(getAllCandidate(token));
                 setIsLoading(false);
                 setUpdatedUsers(users);
             })
@@ -57,7 +57,7 @@ function AdminUser(props) {
     const handleSearchUser = (name, token) => {
         setSearchInput(name);
         let searchResult = [];
-        dispatch(getUserByName(name, token))
+        dispatch(getCandidateByName(name, token))
             .then(() => {
                 searchResult = userSearch;
                 setUpdateSearchUsers(searchResult);
