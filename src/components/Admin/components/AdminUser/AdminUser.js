@@ -5,8 +5,8 @@ import './AdminUser.css';
 function AdminUser(props) {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
-    const users = useSelector(state => state.users.user);
-    const userSearch = useSelector(state => state.userSearch.user);
+    const users = useSelector(state => state.candidates.candidates);
+    const userSearch = useSelector(state => state.candidateSearch.candidates);
     const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
     const [isLoading, setIsLoading] = useState(false);
     const [updatedUsers, setUpdatedUsers] = useState([]); // State mới để lưu trữ danh sách user sau khi xóa thành công

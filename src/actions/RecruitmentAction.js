@@ -45,6 +45,30 @@ export const getApplicationCandidateByJobAndStatus = (jobId, statusId) => async(
   }
 }
 
+export const getRecruitmentManageChangeStatus = (applicationId, status) => async(dispatch) =>{
+  try{
+    const {data} = await axios.get(
+      `http://localhost:8080/api/v1/recruitment/manage/change-status?applicationId=${applicationId}&status=${status}`,
+    );
+    dispatch({ type: "GET_RECRUITMENT_MANAGE_CHANGE_STATUS_SUCCESS", payload: data});
+  } catch(error){
+    dispatch({ type: "GET_RECRUITMENT_MANAGE_CHANGE_STATUS_FAIL", payload: error.message});
+  }
+} 
+
+export const getRecruitmentManageAddInterview = (applicationId) => async(dispatch) =>{
+  try{
+    const {data} = await axios.post(
+      `http://localhost:8080/api/v1/recruitment/manage/add-interview/`+ applicationId,
+      {
+        
+      }
+    );
+    dispatch({ type: "GET_RECRUITMENT_MANAGE_ADD_INTERVIEW_SUCCESS", payload: data});
+  } catch(error){
+    dispatch({ type: "GET_RECRUITMENT_MANAGE_ADD_INTERVIEW_FAIL", payload: error.message});
+  }
+} 
 export const getApplicationIntervieweeByJobAndStatus = (jobId, statusId) => async(dispatch) =>{
   try {
     const { data } = await axios.get(

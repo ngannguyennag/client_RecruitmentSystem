@@ -39,7 +39,6 @@ function CarouselJob(props, title) {
       dispatch(getJobTop());
     }
   }, []);
-  console.log(jobTop);
   useEffect(() => {
     setNav({
       nav1: slider1,

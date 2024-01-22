@@ -19,6 +19,7 @@ import {
   updateCompanyDesc,
   uploadCompanyImage,
   updateCompanyMedia,
+  getIndustry,
 } from "../../../../actions/CompanyAction";
 
 const { TextArea } = Input;
@@ -35,7 +36,6 @@ export default function HRFileCompany(props) {
   const company = useSelector((state) => state.getDetailCompany.company);
   // const userSignin = useSelector((state) => state.userSignin.userInfo);
   const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
-
   const handleMenuClick = (e) => {
     setCurrent(e.key);
   };
@@ -43,13 +43,11 @@ export default function HRFileCompany(props) {
   useEffect(() => {
     if (!company && token) dispatch(getDetailCompany(token));
   }, [company, dispatch, token]);
-
   // Company logo upload handler
   const handleLogoUpload = (file) => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file.originFileObj);
-
       dispatch(uploadCompanyImage(token, formData, "logo")).then(
         (uploadedImageUrl) => {
           setCompanyLogo(uploadedImageUrl);
@@ -62,7 +60,6 @@ export default function HRFileCompany(props) {
     if (file) {
       const formData = new FormData();
       formData.append("file", file.originFileObj);
-
       dispatch(uploadCompanyImage(token, formData, "license"))
         .then((uploadedImageUrl) => {
           if (companyLicense === undefined) {
@@ -82,12 +79,10 @@ export default function HRFileCompany(props) {
     const newImageList = companyLicense.filter((_, i) => i !== index);
     setCompanyLicense(newImageList);
   };
-
   const handleAddImage = (file) => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file.originFileObj);
-
       dispatch(uploadCompanyImage(token, formData, "image"))
         .then((uploadedImageUrl) => {
           console.log(uploadedImageUrl);
@@ -103,13 +98,11 @@ export default function HRFileCompany(props) {
         });
     }
   };
-  console.log(companyImage);
 
   const handleDeleteImage = (index) => {
     const newImageList = companyImage.filter((_, i) => i !== index);
     setCompanyImage(newImageList);
   };
-
   useEffect(() => {
     if (company) {
       basicInfoForm.setFieldsValue({
@@ -122,12 +115,10 @@ export default function HRFileCompany(props) {
       });
       setCompanyLogo(company?.companyLogo);
       setCompanyLicense(company?.companyLicense?.split(";"));
-
       imgDescForm.setFieldsValue({
         companyIntroduction: company?.companyIntroduction,
       });
       setCompanyImage(company?.companyImage?.split(";"));
-
       mediaForm.setFieldsValue({
         phoneNumber: company?.phoneNumber,
         email: company?.email,
@@ -151,33 +142,33 @@ export default function HRFileCompany(props) {
 
   const BasicInfoForm = () => {
     const industryData = useSelector((state) => state.getIndustry.industry);
+    
     const [selectedIndustry, setSelectedIndustry] = useState("");
     let industryCompany = "";
-
     if (!(company === undefined)) {
       industryCompany = company.companyIndustry.industryId;
     }
-
+    useEffect(()=>{
+      dispatch(getIndustry())
+    }, []);
     useEffect(() => {
       setSelectedIndustry(industryCompany);
     }, [industryCompany]);
-
     const IndustrySelector = ({ onSelectIndustry }) => {
       const handleSelectChange = (e) => {
         const selectedValue = e.target.value;
         setSelectedIndustry(selectedValue);
         onSelectIndustry(selectedValue);
       };
-
       return (
         <select value={selectedIndustry} onChange={handleSelectChange}>
           <option value="">Chọn lĩnh vực hoạt động</option>
           {industryData && industryData.length > 0
             ? industryData.map((industry) => (
-                <option value={industry.industryId} key={industry.industryId}>
-                  {industry.industryNameVI}
-                </option>
-              ))
+              <option value={industry.industryId} key={industry.industryId}>
+                {industry.industryNameVI}
+              </option>
+            ))
             : null}
         </select>
       );
@@ -190,7 +181,6 @@ export default function HRFileCompany(props) {
       console.log(values);
       dispatch(updateCompanyBasicInfo(token, values));
     };
-
     return (
       <Form
         form={basicInfoForm}
@@ -280,7 +270,7 @@ export default function HRFileCompany(props) {
               name="companyIndustry"
               label="Lĩnh vực hoạt động *"
               style={{
-                margin: "20px 60px 0 25px",
+                margin: "30px 60px 0 25px",
                 width: "55%",
                 fontWeight: "500",
               }}
@@ -295,7 +285,7 @@ export default function HRFileCompany(props) {
               name="companyFoundedYear"
               label="Năm thành lập *"
               style={{
-                margin: "20px 40px 0 0",
+                margin: "30px 40px 0 0",
                 width: "30%",
                 fontWeight: "500",
               }}
@@ -306,7 +296,7 @@ export default function HRFileCompany(props) {
               name="companySize"
               label="Số lượng nhân sự *"
               style={{
-                margin: "20px 60px 0 25px",
+                margin: "30px 60px 0 25px",
                 width: "42.5%",
                 fontWeight: "500",
               }}
@@ -317,7 +307,7 @@ export default function HRFileCompany(props) {
               name="companyMst"
               label="Mã số thuế *"
               style={{
-                margin: "20px 40px 0 0",
+                margin: "30px 40px 0 0",
                 width: "42.5%",
                 fontWeight: "500",
               }}
@@ -330,7 +320,7 @@ export default function HRFileCompany(props) {
               valuePropName="fileList"
               getValueFromEvent={normFile}
               style={{
-                margin: "20px 0 0 25px",
+                margin: "30px 0 0 25px",
                 width: "100%",
                 fontWeight: "500",
               }}
@@ -338,7 +328,7 @@ export default function HRFileCompany(props) {
               {companyLicense && companyLicense.length > 0 ? (
                 <div style={{ display: "flex" }}>
                   <List
-                    grid={{ gutter: 20, column: 2 }}
+                    grid={{ gutter: 100, column: 3 }}
                     dataSource={companyLicense}
                     renderItem={(item, index) => (
                       <List.Item>
@@ -346,7 +336,10 @@ export default function HRFileCompany(props) {
                           src={item}
                           alt={`company license ${index}`}
                           style={{
-                            height: "400px",
+                            width: "100px",
+                            height: "100px",
+                            margin: '10px',
+                            border: '1px solid black',
                             cursor: "pointer",
                           }}
                         />
@@ -384,18 +377,15 @@ export default function HRFileCompany(props) {
                 </div>
               </Upload>
             </Form.Item>
-            <Form.Item
-              className="form-item"
-              style={{ width: "10%", marginLeft: "25px" }}
+            <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "100%", borderRadius: "5px" }}
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ width: "100%", borderRadius: "5px" }}
-              >
-                Lưu
-              </Button>
-            </Form.Item>
+              Lưu
+            </Button>
+          </Form.Item>
           </div>
         </div>
       </Form>
@@ -418,7 +408,12 @@ export default function HRFileCompany(props) {
           backgroundColor: "white",
           borderRadius: "10px",
         }}
-      >
+      ><div
+      className="titleMedia"
+      style={{ fontSize: "22px", fontWeight: "700" }}
+    >
+      Hình ảnh & Mô tả
+    </div>
         <Form
           form={imgDescForm}
           onFinish={handleSubmit}
@@ -510,7 +505,6 @@ export default function HRFileCompany(props) {
       const values = mediaForm.getFieldsValue();
       dispatch(updateCompanyMedia(token, values));
     };
-
     return (
       <Form
         form={mediaForm}
@@ -601,25 +595,20 @@ export default function HRFileCompany(props) {
       const values = addressForm.getFieldsValue();
       dispatch(updateCompanyAddress(token, values));
     };
-
     const tinhThanhPhoData = useSelector((state) => state.getProvince.province);
     const huyenQuanData = useSelector((state) => state.getDistrict.district);
     const xaPhuongData = useSelector((state) => state.getWards.wards);
-
     const [selectedTinhThanhPho, setSelectedTinhThanhPho] = useState("");
     const [selectedHuyenQuan, setSelectedHuyenQuan] = useState("");
     const [selectedXaPhuong, setSelectedXaPhuong] = useState("");
-
     var tinhThanhPhoCompany = "";
     var huyenQuanCompany = "";
     var xaPhuongCompany = "";
-
     if (!(company === undefined)) {
       tinhThanhPhoCompany = company.companyAddress.provinceCode;
       huyenQuanCompany = company.companyAddress.districtCode;
       xaPhuongCompany = company.companyAddress.wardCode;
     }
-
     useEffect(() => {
       // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
       setSelectedHuyenQuan(huyenQuanCompany);
@@ -632,7 +621,6 @@ export default function HRFileCompany(props) {
       // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
       setSelectedTinhThanhPho(tinhThanhPhoCompany);
     }, [tinhThanhPhoCompany]);
-
     useEffect(() => {
       dispatch(getProvince());
     }, []);
@@ -646,50 +634,46 @@ export default function HRFileCompany(props) {
         dispatch(getWards(selectedHuyenQuan));
       }
     }, [selectedHuyenQuan]);
-
     const TinhThanhPhoSelector = ({ onSelectTinhThanhPho }) => {
       const handleSelectChange = (e) => {
         const selectedValue = e.target.value;
         setSelectedTinhThanhPho(selectedValue);
         onSelectTinhThanhPho(selectedValue);
       };
-
       return (
         <select value={selectedTinhThanhPho} onChange={handleSelectChange}>
           <option value="">Chọn tỉnh/thành phố</option>
           {tinhThanhPhoData && tinhThanhPhoData.length > 0
             ? tinhThanhPhoData.map((tinhThanhPho) => (
-                <option
-                  value={tinhThanhPho.provinceCode}
-                  key={tinhThanhPho.provinceCode}
-                >
-                  {tinhThanhPho.fullName}
-                </option>
-              ))
+              <option
+                value={tinhThanhPho.provinceCode}
+                key={tinhThanhPho.provinceCode}
+              >
+                {tinhThanhPho.fullName}
+              </option>
+            ))
             : null}
         </select>
       );
     };
-
     const HuyenQuanSelector = ({ onSelectHuyenQuan }) => {
       const handleSelectChange = (e) => {
         const selectedValue = e.target.value;
         setSelectedHuyenQuan(selectedValue);
         onSelectHuyenQuan(selectedValue);
       };
-
       return (
         <select value={selectedHuyenQuan} onChange={handleSelectChange}>
           <option value="">Chọn huyện/quận</option>
           {huyenQuanData && huyenQuanData.length > 0
             ? huyenQuanData.map((huyenQuan) => (
-                <option
-                  value={huyenQuan.districtCode}
-                  key={huyenQuan.districtCode}
-                >
-                  {huyenQuan.fullName}
-                </option>
-              ))
+              <option
+                value={huyenQuan.districtCode}
+                key={huyenQuan.districtCode}
+              >
+                {huyenQuan.fullName}
+              </option>
+            ))
             : null}
         </select>
       );
@@ -701,21 +685,19 @@ export default function HRFileCompany(props) {
         setSelectedXaPhuong(selectedValue);
         onSelectXaPhuong(selectedValue);
       };
-
       return (
         <select value={selectedXaPhuong} onChange={handleSelectChange}>
           <option value="">Chọn xã/phường</option>
           {xaPhuongData && xaPhuongData.length > 0
             ? xaPhuongData.map((xaPhuong) => (
-                <option value={xaPhuong.wardCode} key={xaPhuong.wardCode}>
-                  {xaPhuong.fullName}
-                </option>
-              ))
+              <option value={xaPhuong.wardCode} key={xaPhuong.wardCode}>
+                {xaPhuong.fullName}
+              </option>
+            ))
             : null}
         </select>
       );
     };
-
     return (
       <Form
         form={addressForm}
@@ -801,7 +783,6 @@ export default function HRFileCompany(props) {
       </Form>
     );
   };
-
   return (
     <>
       <Menu

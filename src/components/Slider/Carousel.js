@@ -35,10 +35,10 @@ function CarouselCategory(props, title) {
   const hotCategory = useSelector(state => state.getHotCategory.hotCategory);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!hotCategory) {
       dispatch(getHotCategory());
-    }
-  }, []);
+  }, [dispatch]);
+  console.log(hotCategory);
+
   // console.log(hotCategory);
   useEffect(() => {
     setNav({

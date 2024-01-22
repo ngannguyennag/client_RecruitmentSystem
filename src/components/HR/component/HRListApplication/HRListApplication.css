@@ -1,3 +1,24 @@
+.detail-candidate-application{
+    align-items: center;
+    margin: 20px 15px;
+    transition: all 0.25s ease 0s;
+    border-radius: 12px;
+    border: 1px solid rgb(241, 241, 241);
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 45px;
+
+}
+.aboutDetailCandidateApplication{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    align-items: flex-start;
+}
+.aboutDetailCandidateApplication h4{
+    font-size: 16px;
+}
 .admin-user span{
     display: flex;
     padding: 1rem;

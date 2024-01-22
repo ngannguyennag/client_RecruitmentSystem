@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./SidebarHR.css";
@@ -16,13 +16,17 @@ import {
 import { Avatar } from "antd";
 import { useDispatch } from 'react-redux';
 import {signOut} from '../../../../actions/AuthenticationAction'
-import { companyLogoUrl } from "../../../../actions/CompanyAction";
+import { companyLogoUrl, getDetailCompany } from "../../../../actions/CompanyAction";
 function SidebarHR(props) {
   const dispatch = useDispatch();
   const onSignOut = () => {
     dispatch(signOut());
   };
   const company = useSelector(state => state.getDetailCompany.company);
+  const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
+  useEffect(() => {
+    if (!company && token) dispatch(getDetailCompany(token));
+  }, [company, dispatch, token]);
   return (
     <div className="sidebarHR">
       <div className="sidebarHR-list">

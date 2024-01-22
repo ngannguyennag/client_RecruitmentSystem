@@ -14,7 +14,6 @@ function UserListApplication(props) {
   const [avatarUrl, setAvatarUrl] = useState(null);
   const job = useSelector((state) => state.getJobById.job);
   // const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
-
   // Sử dụng useParams để lấy giá trị từ URL
   const { jobId } = useParams();
   console.log(jobId);

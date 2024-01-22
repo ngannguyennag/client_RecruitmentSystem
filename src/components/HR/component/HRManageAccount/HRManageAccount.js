@@ -3,7 +3,7 @@ import './HRManageAccount.css'
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import {  getCandidateInfo, getCandidateUpdate } from '../../../../actions/CandidateAction';
+import { getCandidateInfo, getCandidateUpdate } from '../../../../actions/CandidateAction';
 import { Link } from "react-router-dom";
 import { EditOutlined, CameraOutlined } from '@ant-design/icons';
 
@@ -26,7 +26,6 @@ function HRManageAccount(props) {
     inputRef.current.click();
   };
   const [avatar, setAvatar] = useState();
-
   const handlePreviewAvatar = (e) => {
     const file = e.target.files[0];
     file.preview = URL.createObjectURL(file);
@@ -42,7 +41,7 @@ function HRManageAccount(props) {
   const users = useSelector(state => state.getCandidateInfo.user);
   const userUpdate = useSelector(state => state.getCandidateUpdate.userUpdate)
   const { userInfo, error } = userSignup;
-  
+
   useEffect(() => {
     dispatch(getCandidateInfo(token));
   }, [dispatch]);
@@ -90,8 +89,7 @@ function HRManageAccount(props) {
       formData.append("phone", data.phone || users.phoneNumber);
       formData.append("birthday", data.birthday || users.birthday);
       formData.append("gender", data.gender || users.gender);
-      formData.append("file",data.file || avatar.file);
-
+      formData.append("file", data.file || avatar.file);
       dispatch(getCandidateUpdate(token, formData));
     } else {
       dispatch(getCandidateUpdate(token, {
@@ -103,11 +101,11 @@ function HRManageAccount(props) {
         birthday: data.birthday || users.birthday,
         gender: data.gender || users.gender
       }));
-    // Thực hiện logic lưu tại đây
-    setIsEditMode(false);
-    setIsSaved(true); // Đã lưu thông tin thành công
-  };
-}
+      // Thực hiện logic lưu tại đây
+      setIsEditMode(false);
+      setIsSaved(true); // Đã lưu thông tin thành công
+    };
+  }
   const genderValue = users && users.gender;
   return (
     <div className="user-page">
@@ -118,7 +116,6 @@ function HRManageAccount(props) {
             {!isEditMode && !isSaved && <Link className="account-icon" onClick={handleEditClick}><EditOutlined /></Link>}
           </div>
         </div>
-
         {isEditMode ? (
           <form onSubmit={handleSubmit(onSubmit)} className="form-signup">
             <div className="form">
@@ -228,7 +225,6 @@ function HRManageAccount(props) {
                 <span>
                   <input {...register("gender")} type="radio" value="NA" checked={genderValue === "NA"} />Prefer not to say
                 </span>
-                {/* {users && users.gender} */}
               </div>
             </div>
           </form>
@@ -238,7 +234,6 @@ function HRManageAccount(props) {
         <div className="accountImage" >
           {isEditMode ? (
             <div className="form-image-preview">
-              {/* <img src={avatar?.preview} alt="Avatar Preview" style={{ width: '100px', height: '100px' }} /> */}
               <img src={avatar?.preview || users?.imgUrl} alt="Avatar Preview" style={{ width: '100px', height: '100px' }} />
               <div className="form-image-upload">
                 <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={handleImageChange} />

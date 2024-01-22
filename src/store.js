@@ -67,6 +67,8 @@ import {
   getApplicationCandidateByJobAndStatusReducer,
   getApplicationIntervieweeByJobAndStatusReducer,
   getRecruitmentCandidateReducer,
+  getRecruitmentManageAddInterviewReducer,
+  getRecruitmentManageChangeStatusReducer,
 } from "./reducers/RecruitmentReducer";
 import {
   CandidateSignUpReducer,
@@ -126,7 +128,8 @@ const reducer = combineReducers({
   getRecruitmentCandidate: getRecruitmentCandidateReducer,
   getApplicationCandidateByJobAndStatus: getApplicationCandidateByJobAndStatusReducer,
   getApplicationIntervieweeByJobAndStatus: getApplicationIntervieweeByJobAndStatusReducer,
-
+  getRecruitmentManageChangeStatus: getRecruitmentManageChangeStatusReducer,
+  getRecruitmentManageAddInterview: getRecruitmentManageAddInterviewReducer,
   /* Category */
   getCategory: getCategoryReducer,
   getHotCategory: getHotCategoryReducer,

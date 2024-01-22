@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export const getAllCompany = () => async (dispatch, getState) => {
-  const {
-    userSignin: { userInfo },
-  } = getState();
+  // const {
+  //   userSignin: { userInfo },
+  // } = getState();
   try {
     const { data } = await axios.get(
       "http://localhost:8080/api/v1/companies/all"

@@ -33,6 +33,26 @@ export const applyJobReducer = (state = {}, action) => {
     }
   };
   
+  export const getRecruitmentManageChangeStatusReducer = (state = {}, action) => {
+    switch (action.type) {
+      case "GET_RECRUITMENT_MANAGE_CHANGE_STATUS_SUCCESS":
+        return { ...state, changeStatus: action.payload };
+      case "GET_RECRUITMENT_MANAGE_CHANGE_STATUS_FAIL":
+        return { ...state, error: action.payload };
+      default:
+        return state;
+    }
+  };
+  export const getRecruitmentManageAddInterviewReducer = (state = {}, action) =>{
+    switch(action.type){
+      case "GET_RECRUITMENT_MANAGE_ADD_INTERVIEW_SUCCESS":
+        return { ...state, addInterview: action.payload};
+      case "GET_RECRUITMENT_MANAGE_ADD_INTERVIEW_FAIL":
+        return { ...state, error: action.payload};
+        default:
+          return state;
+    }
+  };
   export const getApplicationIntervieweeByJobAndStatusReducer = (state = {}, action) => {
     switch (action.type) {
       case "GET_APPLICATION_INTERVIEWEE_SUCCESS":

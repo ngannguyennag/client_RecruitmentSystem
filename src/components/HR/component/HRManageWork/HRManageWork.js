@@ -15,11 +15,9 @@ function HRManageWork(props) {
     const [searchInput, setSearchInput] = useState('');
     const shouldShowAllJobs = searchInput === '';
     const displayedJobs = shouldShowAllJobs ? updatedJobs : updateSearchJobs;
-    
     useEffect(() => {
         dispatch(getAllJobByCompany(token));
     }, [dispatch]);
-    console.log(displayedJobs);
     useEffect(() => {
         setUpdatedJobs(jobs); // Cập nhật state mới sau mỗi lần danh sách user thay đổi
     }, [jobs]);
@@ -68,6 +66,18 @@ function HRManageWork(props) {
             return null;
         }
     };
+    const getStatusMessage = (status) => {
+        switch (status) {
+            case 0:
+                return 'Đang tuyển';
+            case 1:
+                return 'Đã hoàn thành';
+            case 2:
+                return 'Hết hạn';
+            default:
+                return '';
+        }
+    };
     return (
         <div className="admin-user">
             <span style={{fontSize:'24px'}}>Quản lý công việc</span>
@@ -94,10 +104,10 @@ function HRManageWork(props) {
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên công việc</th>
-                                    <th>Ứng tuyển</th>
-                                    <th>Trúng tuyển</th>
+                                    <th>Số lượng cần tuyển</th>
+                                    <th>Số lượng trúng tuyển</th>
                                     <th>Ngày tạo</th>
-                                    <th>Tình trạng </th>
+                                    <th>Tình trạng</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
@@ -105,11 +115,11 @@ function HRManageWork(props) {
                                 {displayedJobs && displayedJobs.map((item, index) => ( // Render danh sách từ updatedUsers thay vì users
                                     <tr>
                                         <td>{index + 1}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.email}</td>
+                                        <td>{item.jobName}</td>
+                                        <td>{item.jobQuantity}</td>
+                                        <td>{item.jobCandidate}</td>
                                         <td>{FormatDate(item.createdAt)}</td>
-                                        <td>{item.roleName}</td>
+                                        <td>{getStatusMessage(item.jobStatus)}</td>
                                         <td>
                                             <button>Edit</button>
                                             <button onClick={() => handleDeleteJob(item.id, token)}>Delete</button>
