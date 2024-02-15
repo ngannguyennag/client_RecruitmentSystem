@@ -4,7 +4,7 @@ import HeaderUser from "../components/UserDashboard/components/HeaderUser/Header
 function UserPage(props) {
   return (
     <div>
-        <HeaderUser></HeaderUser>
+      <HeaderUser></HeaderUser>
       <User></User>
     </div>
   );

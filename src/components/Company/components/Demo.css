@@ -5,14 +5,12 @@
 }
 
 .demo .containerDemo {
-    /* width: 1240px; */
     margin: 0 60px 0 60px;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     border-top: 2px solid #00b9f2;
     background-color: rgba(245, 240, 240, 0.884);
-
 }
 .demo h2{
     font-size: 3rem;
@@ -23,17 +21,28 @@
     display: flex;
     float: left;
     flex-direction: column;
+    justify-content: center;
 }
 
 .demo .col-2 {
     margin: auto;
+    width: 50%;
+    /* height: 200px; */
+}
+.col-2 img{
+    width: auto;
+    height: 400px;
 }
 .col-1 h3{
     color: rgba(28, 139, 186, 0.9);
     font-weight: 700;
 }
-
-
+.custom-item-content h3{
+font-size: 24px;
+}
+.custom-item-content p{
+    font-size: 16px;
+}
 @media screen and (max-width: 940px) {
     .demo .containerDemo {
         max-width: 100%;

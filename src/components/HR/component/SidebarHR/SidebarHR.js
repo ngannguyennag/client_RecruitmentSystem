@@ -73,14 +73,14 @@ function SidebarHR(props) {
             Danh sách ứng tuyển
           </p>
         </Link>
-        <Link to="/hr/list_interview" className={'sidebarHR-list-item'}>
+        {/* <Link to="/hr/list_interview" className={'sidebarHR-list-item'}>
           <span>
           <ContactsOutlined />
           </span>
           <p>
             Danh sách phỏng vấn
           </p>
-        </Link>
+        </Link> */}
         <Link to="/hr/notification" className={'sidebarHR-list-item'}>
           <span>
           <NotificationOutlined />

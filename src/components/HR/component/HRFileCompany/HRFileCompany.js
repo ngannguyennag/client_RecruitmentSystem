@@ -259,8 +259,8 @@ export default function HRFileCompany(props) {
               name="companyFullName"
               label="Tên đầy đủ *"
               style={{
-                margin: "20px 40px 0 0",
-                width: "55%",
+                margin: "20px 20px 0 0",
+                width: "50%",
                 fontWeight: "500",
               }}
             >
@@ -271,7 +271,7 @@ export default function HRFileCompany(props) {
               label="Lĩnh vực hoạt động *"
               style={{
                 margin: "30px 60px 0 25px",
-                width: "55%",
+                width: "50%",
                 fontWeight: "500",
               }}
             >
@@ -297,7 +297,7 @@ export default function HRFileCompany(props) {
               label="Số lượng nhân sự *"
               style={{
                 margin: "30px 60px 0 25px",
-                width: "42.5%",
+                width: "40%",
                 fontWeight: "500",
               }}
             >
@@ -308,7 +308,7 @@ export default function HRFileCompany(props) {
               label="Mã số thuế *"
               style={{
                 margin: "30px 40px 0 0",
-                width: "42.5%",
+                width: "40%",
                 fontWeight: "500",
               }}
             >
@@ -346,8 +346,8 @@ export default function HRFileCompany(props) {
                         <DeleteOutlined
                           style={{
                             position: "absolute",
-                            top: "5px",
-                            right: "5px",
+                            top: "-5px",
+                            right: "-30px",
                             fontSize: "16px",
                             cursor: "pointer",
                           }}
@@ -377,11 +377,11 @@ export default function HRFileCompany(props) {
                 </div>
               </Upload>
             </Form.Item>
-            <Form.Item>
+            <Form.Item style={{marginLeft: "400px" }}>
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "100%", borderRadius: "5px" }}
+              style={{ width: "100%", borderRadius: "5px", }}
             >
               Lưu
             </Button>

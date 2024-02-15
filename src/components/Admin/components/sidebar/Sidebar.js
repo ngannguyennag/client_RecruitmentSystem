@@ -17,17 +17,6 @@ function Sidebar(props) {
   const onSignOut = () => {
     dispatch(signOut());
   };
-  // const { orderPendding } = useSelector((state) => state.allOrder);
-  // let totalNewOrder
-  // if(orderPendding){
-  //   totalNewOrder = orderPendding.length
-  // }
-  // useEffect(() => {
-  //   const getNewOrder = () => {
-  //     dispatch(GetAllOrderPendding());
-  //   }
-  //   getNewOrder()
-  // }, [dispatch]);
   return (
     <div className="sidebar">
       <div className="sidebar-top">
@@ -46,21 +35,12 @@ function Sidebar(props) {
           </span>
           <p>Quản lý ứng viên</p>
         </Link>
-        <Link to="/admin/manage-account" className={'sidebar-list-item'}>
-          <span>
-            <ShopOutlined></ShopOutlined>
-          </span>
-          <p>Quản lý tài khoản</p>
-        </Link>
         <Link to="/admin/manage-company" className={'sidebar-list-item'}>
           <span>
             <OrderedListOutlined></OrderedListOutlined>
           </span>
           <p>
             Quản lý công ty
-            {/* <div className="admin-order-new">
-                {totalNewOrder}
-              </div> */}
           </p>
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
@@ -71,14 +51,6 @@ function Sidebar(props) {
             Quản lý công việc
           </p>
         </Link>
-        <Link to="/admin/notification" className={'sidebar-list-item'}>
-          <span>
-            <NotificationOutlined/>
-          </span>
-          <p>
-            Thông báo
-          </p>
-        </Link>
         <Link to="/hr/logout" className={'sidebar-list-item'} onClick={onSignOut}>
           <span>
           <LogoutOutlined/>
@@ -87,12 +59,6 @@ function Sidebar(props) {
             Đăng xuất
           </p>
         </Link>
-        {/* <Link to="/admin/chat" className={location.pathname === '/admin/chat' ? 'sidebar-list-item active': 'sidebar-list-item'}>
-          <span>
-            <WechatOutlined></WechatOutlined>
-          </span>
-          <p>Chat</p>
-        </Link> */}
       </div>
     </div>
   );

@@ -12,16 +12,16 @@ function Signup(props) {
   const history = useHistory();
   const [confirmPassword, setConfirmPassword] = useState('')
   const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const user = useSelector((state) => state.userSignUp);
+  const { userInfo, error } = user;
+  const [errorMessage, setErrorMessage] = useState(""); // State để lưu thông báo lỗi
   const onSubmit = data => {
-    console.log(data);
     if (password === confirmPassword) {
       dispatch(signUpCandidate(data))
     } else {
       alert("wrong repeat password")
     }
   }
-  const user = useSelector((state) => state.userSignup);
-  const { userInfo, error } = user;
   useEffect(() => {
     if (userInfo) {
       history.push("/");
@@ -32,16 +32,8 @@ function Signup(props) {
       <div className="signup">
         <h2>Đăng Ký Thành Viên!</h2>
         <form onSubmit={handleSubmit(onSubmit)} classname="form-signup">
-          <div className="formSignUp">
-            <div className="form-input"> FirstName
-              <input {...register("firstname")} required></input>
-            </div>
-            <div className='form-input'> LastName
-              <input {...register("lastname")} required></input>
-            </div>
-          </div>
           <div className='formSignUp'>
-            <div className='form-input'> UserName
+            <div className='form-input'> Họ và tên
               <input {...register("username")} required></input>
             </div>
             <div className='form-input'> Email
@@ -53,7 +45,7 @@ function Signup(props) {
             </div>
           </div>
           <div className='formSignUp'>
-            <div className='form-input'> Password
+            <div className='form-input'> Mật khẩu
               <input
                 {...register("password")}
                 type="password"
@@ -61,7 +53,7 @@ function Signup(props) {
                 required
               ></input>
             </div>
-            <div className='form-input'> Confirm Password
+            <div className='form-input'> Xác nhận mật khẩu
               <input
                 // {...register("confirm password")}
                 type="password"
@@ -71,27 +63,27 @@ function Signup(props) {
             </div>
           </div>
           <div className="formSignUp">
-            <div className='form-input'> Phone
+            <div className='form-input'> Số điện thoại
               <input
                 {...register("phone")}
                 type="phone"
                 required
               ></input>
             </div>
-            <div className='form-input'> Birthday
+            <div className='form-input'> Ngày sinh
               <input {...register("birthday")} required></input>
             </div>
           </div>
-          <div className='form-input'> Gender
+          <div className='form-input'> Giới tính
             <div className='check'>
               <span>
-                <input {...register("gender")} type="radio" value="MALE" />Male
+                <input {...register("gender")} type="radio" value="MALE" />Nam
               </span>
               <span>
-                <input {...register("gender")} type="radio" value="FEMALE" />Female
+                <input {...register("gender")} type="radio" value="FEMALE" />Nữ
               </span>
               <span>
-                <input {...register("gender")} type="radio" value="PREFER NOT TO SAY" />Prefer not to say
+                <input {...register("gender")} type="radio" value="PREFER NOT TO SAY" />Khác
               </span>
             </div>
           </div>

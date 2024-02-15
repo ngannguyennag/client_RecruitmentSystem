@@ -40,6 +40,7 @@ import {
   getWardsReducer,
   getIndustryReducer,
   getCompanyByNameReducer,
+  getCompanyByIdReducer,
 } from "./reducers/CompanyReducer";
 import {
   getCategoryReducer,
@@ -54,6 +55,7 @@ import {
   createWorkReducer,
   getJobByIdReducer,
   getJobByStatusReducer,
+  getCompanyManageJobByIdReducer,
 } from "./reducers/JobReducer";
 import {
   updateCompanyBasicInfoReducer,
@@ -74,6 +76,8 @@ import {
   CandidateSignUpReducer,
   LoginReducer,
 } from "./reducers/AuthenticationReducer";
+import { getNotificationReducer } from "./reducers/NotificationReducer";
+import { getStatisticalByAdminReducer, getStatisticalByCompanyReducer } from "./reducers/SystemReducer";
 
 const initialState = {
   userSignIn: {
@@ -112,6 +116,7 @@ const reducer = combineReducers({
   updateCompanyMedia: updateCompanyMediaReducer,
   updateCompanyAddress: updateCompanyAddressReducer,
   uploadCompanyImage: uploadCompanyImageReducer,
+  getCompanyById: getCompanyByIdReducer,
 
   /* Job */
   jobAll: getAllJob,
@@ -122,6 +127,7 @@ const reducer = combineReducers({
   getJobTop: getJobTopReducer,
   getJobById: getJobByIdReducer,
   getJobByStatus: getJobByStatusReducer,
+  getCompanyManageJobById: getCompanyManageJobByIdReducer,
 
   /* Recruitment */
   applyJob: applyJobReducer,
@@ -141,6 +147,15 @@ const reducer = combineReducers({
 
   /* Industry */
   getIndustry: getIndustryReducer,
+
+  /* Notification */
+  getNotification: getNotificationReducer,
+
+  // System
+  getStatisticalByAdmin: getStatisticalByAdminReducer,
+  getStatisticalByCompany: getStatisticalByCompanyReducer,
+
+
 
   allProduct: getAllProductReducer,
   getProductById: getProductByIdReducer,

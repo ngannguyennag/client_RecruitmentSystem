@@ -1,133 +1,47 @@
-import React from 'react'
-import job1 from './images/job1.png'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import './About.css'
+import { Link } from "react-router-dom";
+import { getCompanyManageJobById } from "../../../actions/JobAction";
 
 const About = () => {
+    const dispatch = useDispatch();
+    const company = useSelector((state) => state.getCompanyManageJobById.company);
+    const { companyId } = useParams();
+    useEffect(() => {
+        dispatch(getCompanyManageJobById(companyId));
+    }, [dispatch, companyId]);
     return (
         <div className='about' id='about'>
             <div className='containerJob'>
                 <div className='panel-group'>
                     <div className='panel-body'>
-                        <h2> "We Have 4 Jobs For You"</h2>
-                        <div id="job-card-listing">
-                            <div>
+                        <h2>We have {company?.length} jobs for you</h2>
+                        {company && company.map((item) => (
+                            <div id="job-card-listing">
                                 <div className='company-list'>
-                                    <img src={job1} alt='job1' />
+                                    <img src={item.companyLogo} />
                                     <div className="about-job">
-                                        <h3>
-                                            Chuyên Viên Giao Dịch Ngoại Tệ Phái Sinh Cấp 1 (Ban Kinh Doanh Vốn và Tiền Tệ - Trụ Sở Chính BIDV)
-                                        </h3>
-                                        <h4>
-                                            Ngân Hàng TMCP Đầu Tư và Phát Triển Việt Nam
-                                        </h4>
-                                        <div className='detail-job-item'>
+                                        <h4> {item.companyName} </h4> 
+                                        <Link to={`/detail_jobs/${item.jobId}`}>{item.jobName}</Link>
+                                        <div className='about-job-item'>
                                             <ul>
-                                                <li className='negotiate'>Negotiate </li>
+                                                <li className='negotiate'>{item.salary} </li>
                                                 <li>| Hà Nội</li>
                                             </ul>
                                         </div>
-                                        <div className='detail-list-job-item'>
-                                            Updated 11/11/2023 |
-                                            <ul className='list-job-item'>
-                                                <li>Giao dịch ngoại tệ </li>
-                                                <li>Tài chính ngân hàng </li>
-                                                <li>Mua bán ngoại tệ </li>
-                                                <li>+2</li>
-                                            </ul>
+                                        <div className='about-list-job-item'>
+                                            {item.jobSkill && item.jobSkill.map((itemSkill) => (
+                                                <ul className='list-job-item'>
+                                                    <li>{itemSkill.skillNameVI} </li>
+                                                </ul>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div>
-                                <div className='company-list'>
-                                    <img src={job1} alt='job1' />
-                                    <div className="about-job">
-                                        <h3>
-                                            Chuyên Viên Quản Lý Tài Sản( Trung Tâm Khách Hàng Cá Nhân Cao Cấp - Trụ Sở Chính BIDV)
-                                        </h3>
-                                        <h4>
-                                            Ngân Hàng TMCP Đầu Tư và Phát Triển Việt Nam
-                                        </h4>
-                                        <div className='detail-job-item'>
-                                            <ul>
-                                                <li className='negotiate'>Negotiate </li>
-                                                <li>| Hà Nội</li>
-                                            </ul>
-                                        </div>
-                                        <div className='detail-list-job-item'>
-                                            Today |
-                                            <ul className='list-job-item'>
-                                                <li>Tài chính ngân hàng </li>
-                                                <li>Quản Lí Tài Sản </li>
-                                                <li>Tư Vấn Đầu Tư</li>
-                                                <li>+2</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className='company-list'>
-                                    <img src={job1} alt='job1' />
-                                    <div className="about-job">
-                                        <h3>
-                                            Trưởng Phòng Quản Lý Khách Hàng( Trung Tâm KH Cá Nhân Cao Cấp - Trụ Sở Chính)
-                                        </h3>
-                                        <h4>
-                                            Ngân Hàng TMCP Đầu Tư và Phát Triển Việt Nam
-                                        </h4>
-                                        <div className='detail-job-item'>
-                                            <ul>
-                                                <li className='negotiate'>Negotiate </li>
-                                                <li>| Hà Nội</li>
-                                            </ul>
-                                        </div>
-                                        <div className='detail-list-job-item'>
-                                            Today |
-                                            <ul className='list-job-item'>
-                                                <li>Dịch Vụ Ngân Hàng </li>
-                                                <li>Quản Trị Rủi Ro </li>
-                                                <li>Tài Chính Ngân Hàng </li>
-                                                <li>+2</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className='company-list'>
-                                    <img src={job1} alt='job1' />
-                                    <div className="about-job">
-                                        <h3>
-                                            Trưởng Phòng Khách Hàng Ưu Tiên - BIDV Chi Nhánh Bắc Giang
-                                        </h3>
-                                        <h4>
-                                            Ngân Hàng TMCP Đầu Tư và Phát Triển Việt Nam
-                                        </h4>
-                                        <div className='detail-job-item'>
-                                            <ul>
-                                                <li className='negotiate'>Negotiate </li>
-                                                <li>| Bắc Giang</li>
-                                            </ul>
-                                        </div>
-                                        <div className='detail-list-job-item'>
-                                            Posted 3 dáy ago |
-                                            <ul className='list-job-item'>
-                                                <li>Tài Chính Ngân Hàng </li>
-                                                <li>Khách Hàng Cá Nhân </li>
-                                                <li>Quản Lý </li>
-                                                <li>+2</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

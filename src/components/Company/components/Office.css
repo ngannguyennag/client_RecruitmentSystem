@@ -47,7 +47,7 @@
     background-position: center center !important;
     overflow: hidden;
     color: #fff;
-    align-items: flex-start;
+    align-items: stretch;
 
 }
 

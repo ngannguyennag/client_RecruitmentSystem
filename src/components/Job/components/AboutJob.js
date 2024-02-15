@@ -35,7 +35,6 @@ const AboutJob = () => {
                                         <div className="about-job">
                                             <h4> {item.companyName} </h4> 
                                             <Link to={`/detail_jobs/${item.jobId}`}>{item.jobName}</Link>
-                                            {/* <h4> <Link to='/detail_jobs/:jobId'> </Link> {item.jobName} </h4> */}
                                             <div className='about-job-item'>
                                                 <ul>
                                                     <li className='negotiate'>{item.salary} </li>
@@ -45,7 +44,7 @@ const AboutJob = () => {
                                             <div className='about-list-job-item'>
                                                 {item.jobSkill && item.jobSkill.map((itemSkill) => (
                                                     <ul className='list-job-item'>
-                                                        <li>{itemSkill.nameVI} </li>
+                                                        <li>{itemSkill.skillNameVI} </li>
                                                         {/* <li>+2</li> */}
                                                     </ul>
                                                 ))}
@@ -57,7 +56,7 @@ const AboutJob = () => {
                         </div>
                     </div>
                 </div>
-            };
+            }
         </div>
     )
 }

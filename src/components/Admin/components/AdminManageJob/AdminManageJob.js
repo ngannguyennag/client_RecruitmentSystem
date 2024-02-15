@@ -75,9 +75,19 @@ function AdminManageCompany(props) {
                 console.log(err);
             });
     };
+    const jobStatus = (statusValue) => {
+        switch (statusValue) {
+          case 0:
+            return 'Đang tuyển';
+          case 1:
+            return 'Đã hoàn thành';
+          case 2:
+            return 'Đã hết hạn';
+        }
+      };
     return (
         <div className="adminJob">
-            <div className='titleHome' >Home / Job Management</div>
+            <div className='titleHome' >Home / Quản lý công việc</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>
@@ -115,8 +125,8 @@ function AdminManageCompany(props) {
                                                 <td>{FormatDate(item.jobExpiredDate)}</td>
                                                 <td>
                                                     <div className='action'>
-                                                        <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>{'>>'}</button>
-                                                        <button onClick={() => handleDeleteJob(item.id, token)}>Delete</button>
+                                                        <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>Xem chi tiết</button>
+                                                        <button onClick={() => handleDeleteJob(item.id, token)}> Xóa </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -140,7 +150,7 @@ function AdminManageCompany(props) {
                                                                 </tr>
                                                                 <tr>
                                                                     <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Trạng thái</td>
-                                                                    <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{item.jobStatus}</td>
+                                                                    <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{jobStatus(item.jobStatus)}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Số lượng tuyển dụng</td>
@@ -170,6 +180,14 @@ function AdminManageCompany(props) {
                                                                 ))}
                                                             </p>                                                           
                                                             <h3 className="table-heading">Các yêu cầu khác</h3>
+                                                            {/* <p className="bullet-point" style={{ color: 'black', fontSize: '12.5px', whiteSpace: 'pre-line', textAlign: 'left' }}>
+                                                                {item.jobExperience.split('\n').map((line, index) => (
+                                                                    <span className="bullet-point"  key={index}>
+                                                                         {line}
+                                                                        <br />
+                                                                    </span>
+                                                                ))}
+                                                            </p>  */}
                                                             <p style={{ color: 'black', fontSize: '12.5px', whiteSpace: 'pre-line', textAlign: 'left' }}> {item.jobExperience}</p>
                                                         </div>
                                                     </td>

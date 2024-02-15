@@ -14,10 +14,7 @@ export const getAllCompany = () => async (dispatch, getState) => {
   }
 };
 
-export const getAllCompanyByAdmin = (token) => async (dispatch, getState) => {
-  const {
-    userSignin: { userInfo },
-  } = getState();
+export const getAllCompanyByAdmin = (token) => async (dispatch) => {
   try {
     const { data } = await axios.get(
       "http://localhost:8080/api/v1/admin/manage/companies/all",
@@ -28,9 +25,9 @@ export const getAllCompanyByAdmin = (token) => async (dispatch, getState) => {
         },
       }
     );
-    dispatch({ type: "GET_ALL_COMPANY_BY_ADMIN", payload: data });
+    dispatch({ type: "GET_ALL_COMPANY_BY_ADMIN_SUCCESS", payload: data });
   } catch (error) {
-    dispatch({ type: "GET_ALL_COMPANY_FAIL_BY_ADMIN", payload: error.message });
+    dispatch({ type: "GET_ALL_COMPANY_BY_ADMIN_FAIL", payload: error.message });
   }
 };
 
@@ -39,9 +36,9 @@ export const getCompanyTop = () => async (dispatch) => {
     const { data } = await axios.get(
       "http://localhost:8080/api/v1/companies/top?pageNo=0&pageSize=6&sortBy=companyId"
     );
-    dispatch({ type: "COMPANYTOP_SUCCESS", payload: data });
+    dispatch({ type: "GET_COMPANY_TOP_SUCCESS", payload: data });
   } catch (error) {
-    dispatch({ type: "COMPANYTOP_FAIL", payload: error.message });
+    dispatch({ type: "GET_COMPANY_TOP_FAIL", payload: error.message });
   }
 };
 
@@ -53,7 +50,7 @@ export const deleteCompany =
     try {
       const { data } = await axios.delete(
         "http://localhost:8080/api/v1/admin/manage/companies/delete/" +
-          companyId,
+        companyId,
         {
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +80,16 @@ export const getCompanyByName = (name, token) => async (dispatch) => {
     dispatch({ type: "GET_COMPANY_BY_NAME_FAIL", payload: error.message });
   }
 };
-
+export const getCompanyById = (companyId) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8080/api/v1/company/${companyId}`
+    );
+    dispatch({ type: "GET_COMPANY_BY_ID_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_COMPANY_BY_ID_FAIL", payload: error.message });
+  }
+}
 export const getDetailCompany = (token) => async (dispatch) => {
   try {
     const response = await axios.get(
@@ -118,7 +124,7 @@ export const getDistrict = (codeProvince) => async (dispatch) => {
   try {
     const response = await axios.get(
       "http://localhost:8080/api/v1/address/districts/province?code=" +
-        codeProvince
+      codeProvince
     );
     const { data } = response;
     dispatch({ type: "GET_DISTRICT", payload: data });
@@ -252,6 +258,7 @@ export const uploadCompanyImage = (token, file, type) => async (dispatch) => {
     }
   }
 };
+
 
 // export const uploadCompanyLicense = (token, license) => async (dispatch) => {
 //   if (license.entries().next().value[1] !== null) {

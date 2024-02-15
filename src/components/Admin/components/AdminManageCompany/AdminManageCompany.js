@@ -69,7 +69,7 @@ function AdminManageCompany(props) {
 
     return (
         <div className="adminCompany">
-            <div className='titleHome'>Home / Company Management</div>
+            <div className='titleHome'>Home / Quản lý công ty</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>
@@ -103,14 +103,14 @@ function AdminManageCompany(props) {
                                         <React.Fragment key={item.id}>
                                         <tr>
                                         <td>{index + 1}</td>
-                                        <td>{item.email}</td>
+                                        <td style={{fontSize:'12px'}}>{item.email}</td>
                                         <td className='avatarCompanyFromAdmin'><img src={item.companyLogo}/></td>
-                                        <td>{item.companyFullName}</td>
-                                        <td>{item.companyAddress.fullAddress}</td>
+                                        <td style={{fontSize:'12px'}}>{item.companyFullName}</td>
+                                        <td style={{fontSize:'12px'}}>{item.companyAddress.fullAddress}</td>
                                         <td>
-                                            <div className='action'>
-                                            <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>{'>>'}</button>
-                                                    <button onClick={() => handleDeleteCompany(item.id, token)}>Delete</button>
+                                            <div className='action' style={{fontSize:'12px'}}>
+                                            <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>Xem</button>
+                                                    <button onClick={() => handleDeleteCompany(item.id, token)}>Xóa</button>
                                             </div>
                                                     
                                                 </td>

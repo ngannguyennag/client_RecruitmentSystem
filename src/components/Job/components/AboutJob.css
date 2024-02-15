@@ -3,6 +3,9 @@
     background-color: white;
     margin: 80px;
 }
+.job-card-listing{
+    background-color: rgb(177, 217, 241);
+}
 .company-list{
     -webkit-box-align: center;
     align-items: center;
@@ -10,21 +13,17 @@
     transition: all 0.25s ease 0s;
     border-radius: 12px;
     border: 1px solid rgb(241, 241, 241);
-    background-color: rgb(218, 238, 250);
+    background-color: aliceblue;
     display: flex;
     flex-direction: row;
     padding: 10px;
-}
-.company-list:hover{
-    background-color: aliceblue;
 }
 .searchJob form {
     position: relative;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin: 0 50px;
-
   }
-  .searchJob input {
+.searchJob input {
     border: none;
     outline: none;
     width: 100%;
@@ -62,7 +61,6 @@
 .list-job-item{
     display: flex;
     flex-direction: row;
-    
 }
 .list-job-item li{
     background-color: rgba(239, 230, 230, 0.973);

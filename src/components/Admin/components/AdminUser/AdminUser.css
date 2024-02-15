@@ -12,7 +12,6 @@
     padding-bottom: 0.5rem;
 }
 .adminUserList{
-    /* margin: 0 .5rem 0 1rem; */
     color: white;
     border-radius: 4px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -46,7 +45,9 @@ table td{
 }
 .form-div,table td button{
     color: black;
+    padding: 5px ;
     cursor: pointer;
+    border-radius: 7px;
 }
 .form-div{
     padding-bottom: 10px;
@@ -83,20 +84,3 @@ table td{
 .avatarUserFromAdmin img{
     width: 80px;
 }
-/* tr .delete-user{
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 0;
-}
-tr .delete-user span{
-    border-radius: 50%;
-}
-tr .delete-user:hover{
-    background: rgb(237, 52, 52);
-    transition: .3s;
-}
-tr .delete-user:hover span{
-    color: white;
-} */

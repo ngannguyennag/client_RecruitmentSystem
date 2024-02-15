@@ -9,7 +9,6 @@ import { SearchOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobById } from "../../../actions/JobAction";
 import { applyJob } from "../../../actions/RecruitmentAction";
-// import { FormatDate } from "../../Utils/FormatDate";
 import {FormatDate} from "../../../utils/FormatDate";
 const DetailJob = () => {
   const dispatch = useDispatch();

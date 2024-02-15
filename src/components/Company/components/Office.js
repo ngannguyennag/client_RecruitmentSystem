@@ -1,16 +1,19 @@
-import React from 'react'
-import office1 from './images/office1.jpg'
-import office2 from './images/office2.jpg'
-import office3 from './images/office3.jpg'
-import office4 from './images/office4.jpg'
-import office5 from './images/office5.jpg'
-import office6 from './images/office6.jpg'
-import office7 from './images/office7.jpg'
-import office8 from './images/office8.jpg'
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getCompanyById } from "../../../actions/CompanyAction";
 import './Office.css'
 
 const Office = () => {
+    const dispatch = useDispatch();
+    const company = useSelector((state) => state.getCompanyById.company);
+    const { companyId } = useParams();
+    const companyImage = company?.companyImage?.split(';')
+    const firstPart = companyImage?companyImage.slice(0, 4):[];
+    const secondPart = companyImage?companyImage.slice(4,8):[];
+    useEffect(() => {
+        dispatch(getCompanyById(companyId));
+    }, [dispatch, companyId]);
     return (
         <div className='office' id='office'>
             <div className='container'>
@@ -18,44 +21,26 @@ const Office = () => {
                 <span className='line'></span>
                 <div className='row'>
                     <ul className='ourOffice'>
-                    <li className='card'>
-                        <img src={office1} alt='office1'/> 
-                    </li>
-                    <li className='card'>
-                        <img src={office2} alt='office2'/> 
-                    </li>
-                    <li className='card'>
-                        <img src={office3} alt='office3'/> 
-                    </li>
-                    <li className='card'>
-                        <img src={office4} alt='office4'/> 
-                    </li>
-                    <li className='card'>
-                        <div className='cardText'>
-                        {/* <h3>ADDRESS</h3> */}
-                        <p>ADDRESS</p>
-                        <p>Tháp BIDV - 194 Trần Quang Khải, Hoàn Kiếm, Hà Nội</p>
-                        <p>Hotline: 19009247</p>
-                        <p>Email: tuyendung.tcns@bidv.com.vn</p>
-                        <p>190 Chi nhánh trên toàn quốc</p>
-                        </div>
-                        
-                    </li>
-                    <li className='card'>
-                        <img src={office5} alt='office5'/> 
-                    </li>
-                    <li className='card'>
-                        <img src={office6} alt='office6'/> 
-                    </li>
-                    <li className='card'>
-                        <img src={office7} alt='office7'/> 
-                    </li>
-                    <li className='card'>
-                        <img src={office8} alt='office8'/> 
-                    </li>
+                    {firstPart.map((item, index) => (
+                            <li key={index} className='card'>
+                                <img src={item} alt='logoCompany' />
+                            </li>
+                        ))}
+                        <li className='card'>
+                            <div className='cardText'>
+                                <p>ADDRESS</p>
+                                <p>{company?.companyAddress.fullAddress}</p>
+                                <p>Hotline: {company?.phoneNumber}</p>
+                                <p>Email: {company?.email}</p>
+                                <p>{company?.companyBranch}</p>
+                            </div>
+                        </li>
+                        {secondPart.map((item, index) => (
+                            <li key={index} className='card'>
+                                <img src={item} alt='logoCompany' />
+                            </li>
+                        ))}
                     </ul>
-                    
-                    
                 </div>
             </div>
         </div>

@@ -194,7 +194,7 @@ export default function ProfileCandidate() {
             />
           </Form.Item>
           <Form.Item
-            label="Công việc/chức vụ * "
+            label="Công việc * "
             name="desiredJob"
             style={{ fontWeight: "500" }}
           >

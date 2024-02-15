@@ -3,10 +3,20 @@
     background-color: white;
     margin: 80px;
 }
+.about-job-by-company{
+    background-color: rgb(218, 238, 250);
+    display: flex;
+    float: left;
+    flex-direction: column;
+    padding: 20px ;
+    margin: 20px 20px;
+    border-radius: 12px;
+    align-items: flex-start;
+}
 .company-list{
     -webkit-box-align: center;
     align-items: center;
-    margin: 20px 50px;
+    margin: 20px 100px;
     transition: all 0.25s ease 0s;
     border-radius: 12px;
     border: 1px solid rgb(241, 241, 241);
@@ -47,10 +57,6 @@
 .negotiate{
     color: orange;
 }
-/* .detail-job-item{
-    display: flex;
-    flex-direction: row;
-} */
 
 @media screen and (max-width:940px) {
     .about .container {

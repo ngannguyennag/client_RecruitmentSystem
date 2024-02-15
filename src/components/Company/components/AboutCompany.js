@@ -46,7 +46,7 @@ const AboutCompany = () => {
                                         <div className='company-list'>
                                             <img src={item.companyLogo} alt='company1' />
                                             <div className="about-company">
-                                                <h4>  <Link to={`/detail_companies/${item.companyId}`}>  {item.companyFullName} </Link></h4>
+                                                <h4>  <Link to={`/detail_companies/${item.companyId}`}>{item.companyFullName} </Link></h4>
                                                 <div className='about-list-company-item'>
                                                     <ul>
                                                         <li className='negotive'> <CreditCardOutlined />Lĩnh vực {item.companyIndustry.industryNameVI} </li>

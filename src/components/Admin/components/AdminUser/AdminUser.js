@@ -77,7 +77,7 @@ function AdminUser(props) {
     };
     return (
         <div className="adminUser">
-            <div className='titleHome' >Home / User Management</div>
+            <div className='titleHome' >Home / Quản lý ứng viên</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>
@@ -116,8 +116,8 @@ function AdminUser(props) {
                                                 <td>{item.phoneNumber}</td>
                                                 <td>{FormatDate(item.createDate)}</td>
                                                 <td>
-                                                    <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>{'>>'}</button>
-                                                    <button onClick={() => handleDeleteUser(item.id, token)}>Delete</button>
+                                                    <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>Xem chi tiết</button>
+                                                    <button onClick={() => handleDeleteUser(item.id, token)}>Xóa</button>
                                                 </td>
                                             </tr>
                                             {selectedUserDetails && selectedUserDetails.id === item.id && (
@@ -157,6 +157,14 @@ function AdminUser(props) {
                                                                     </div>
                                                                 ))}
                                                                 <h3 className="table-heading">Kinh nghiệm làm việc</h3>
+                                                                {item.workingHistory.map((workingHistoryItem, index) =>(
+                                                                    <div className='detailEducation' key={index}>
+                                                                        <p>{workingHistoryItem.startDate} - {workingHistoryItem.endDate}:</p>
+                                                                        <p style={{color:'#0e599f'}}> {workingHistoryItem.jobName} ở {workingHistoryItem.companyName}   </p>
+                                                                        <p style={{color:'grey', textAlign:'left'}}>{workingHistoryItem.description}</p>
+                                                                    </div>
+                                                                ))}
+
                                                             </div>
                                                         </div>
 

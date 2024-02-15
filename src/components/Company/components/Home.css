@@ -12,12 +12,12 @@
     padding: 1rem;
 }
 .logoCompany img{
-    width: 55%;
-    height: 55%;
+    width: auto;
+    height: 200px;
 }
 .nameCompany{
-    color: black;
-    font-size: 24px;
+    color: rgb(6, 88, 132);
+    font-size: 22px;
     font-weight: 600;
 }
 .nameCompany li{
@@ -25,11 +25,11 @@
     flex-direction: row;
     align-items: flex-start;
     font-size: 14px;
-    color:rgb(146, 144, 141);
+    color:rgb(232, 55, 6);
 }
 
 .nameCompany p{
-    color:rgb(119, 167, 208);
+    color:black;
 }
 .hero {
     background-color: var(--overlay);
@@ -81,12 +81,9 @@
 }
 
 .hero .button {
-    /* margin: 1rem 0; */
     width: 8%;
-    /* height: 40px; */
     font-size: 13px;
     background-color: rgb(18, 112, 140);
-    /* border: 1px solid var(--secondary-color); */
     color: #333;
 }
 
@@ -99,7 +96,6 @@
     .hero .content p:nth-child(3) {
         font-size: 2.6rem;
     }
-
     .hero .content p:nth-child(4) {
         font-size: 1.6rem;
     }

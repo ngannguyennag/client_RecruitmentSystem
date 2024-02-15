@@ -35,14 +35,9 @@ import DetailCompanyPage from './pages/DetailCompanyPage';
 import JobPage from './pages/JobPage';
 import DetailJobPage from './pages/DetailJobPage';
 import UserListApplicationPage from './pages/UserListApplicationPage';
-
-// import { useRoutes} from "react-router-dom";
-// import routes from "./configs/routes";
-
 function App() {
   return (
     <div className="App">
-  
       <Router>
         
         <ResetScroll></ResetScroll>
@@ -153,7 +148,7 @@ function App() {
         <Route path="/companies">
           <CompanyPage></CompanyPage>
         </Route>
-        <Route path="/detail_companies">
+        <Route path="/detail_companies/:companyId">
           <DetailCompanyPage></DetailCompanyPage>
         </Route>
         <Route path="/jobs">

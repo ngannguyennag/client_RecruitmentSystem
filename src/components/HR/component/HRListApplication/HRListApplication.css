@@ -1,6 +1,6 @@
 .detail-candidate-application{
     align-items: center;
-    margin: 20px 15px;
+    margin: 20px 0 20px 40px;
     transition: all 0.25s ease 0s;
     border-radius: 12px;
     border: 1px solid rgb(241, 241, 241);
@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: row;
     padding: 15px 45px;
-
+    width: 92%;
 }
 .aboutDetailCandidateApplication{
     display: flex;
@@ -17,7 +17,15 @@
     align-items: flex-start;
 }
 .aboutDetailCandidateApplication h4{
-    font-size: 16px;
+    font-size: 13px;
+}
+.resultApplication{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.userApplicationStatus{
+    margin: 0 20px;
 }
 .admin-user span{
     display: flex;

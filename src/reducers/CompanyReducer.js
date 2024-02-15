@@ -1,6 +1,6 @@
 export const getAllCompanyByAdminReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'GET_ALL_COMPANY_BY_ADMIN':
+        case 'GET_ALL_COMPANY_BY_ADMIN_SUCCESS':
             return {...state, company: action.payload };
         case 'DELETE_COMPANY_BY_ADMIN':
             return {...state};
@@ -10,7 +10,7 @@ export const getAllCompanyByAdminReducer = (state = {}, action) => {
 };
 export const getCompanyTopReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'COMPANYTOP_SUCCESS':{
+        case 'GET_COMPANY_TOP_SUCCESS':{
             return {...state, companyTop: action.payload}
         }
         case 'DELETE_COMPANY':{
@@ -39,6 +39,18 @@ export const getCompanyByNameReducer = (state = [], action) => {
         }
         case 'DELETE_USER': {
             return state;
+        }
+        default:
+            return state;
+    }
+};
+export const getCompanyByIdReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'GET_COMPANY_BY_ID_SUCCESS': {
+            return {...state, company: action.payload}
+        }
+        case 'GET_COMPANY_BY_ID_FAIL': {
+            return {...state, error: action.payload}
         }
         default:
             return state;

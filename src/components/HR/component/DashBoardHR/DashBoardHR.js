@@ -18,13 +18,14 @@ export default function DashBoardHR() {
   const onSignOut = () => {
     dispatch(signOut());
   };
+  
   return (
     <section id="dashboard">
       <div className="dashboard">
         <div className="dashboard-top">
           <div className="dashboard-top-search">
             <form>
-              <input placeholder="Search ..."></input>
+              <input placeholder="Tìm kiếm ..."></input>
               <span>
                 <SearchOutlined></SearchOutlined>
               </span>

@@ -6,6 +6,7 @@ import HRFileCompany from './HRFileCompany/HRFileCompany'
 import HRCreateWork from './HRCreateWork/HRCreateWork';
 import HRManageWork from './HRManageWork/HRManageWork';
 import HRListApplication from './HRListApplication/HRListApplication';
+import HRNotification from './HRNotification/HRNotification';
 function Routes(props) {
     return (
         <Switch>
@@ -15,6 +16,7 @@ function Routes(props) {
             <Route path = '/hr/create_work' component ={HRCreateWork}></Route>
             <Route path = '/hr/manage_work' component ={HRManageWork}></Route>
             <Route path = '/hr/list_application' component={HRListApplication}></Route>
+            <Route path = '/hr/notification' component={HRNotification}></Route>
         </Switch>
     );
 }

@@ -30,12 +30,6 @@ function Sidebar(props) {
         {/* <img src={users.imgUrl}></img> */}
       </div>
       <div className="sidebar-list">
-        {/* <Link to="/user" className={'sidebar-list-item'}>
-          <span>
-            <AppstoreOutlined></AppstoreOutlined>
-          </span>
-          <p>Tổng quan</p>
-        </Link> */}
         <Link to="/user/profile-candidate" className={'sidebar-list-item'}>
           <span>
             <UserOutlined />
@@ -48,14 +42,6 @@ function Sidebar(props) {
           </span>
           <p>Danh sách ứng tuyển</p>
         </Link>
-        {/* <Link to="/user/manage-job" className={'sidebar-list-item'}>
-          <span>
-            <HeartOutlined />    
-          </span>
-          <p>
-            Công việc đã lưu
-          </p>
-        </Link> */}
         <Link to="/admin/notification" className={'sidebar-list-item'}>
           <span>
             <SettingOutlined />          
@@ -64,7 +50,7 @@ function Sidebar(props) {
             Cài đặt tài khoản
           </p>
         </Link>
-        <Link to="/user/manage-company" className={'sidebar-list-item'}>
+        <Link to="/user/notification" className={'sidebar-list-item'}>
           <span>
             <NotificationOutlined />
           </span>

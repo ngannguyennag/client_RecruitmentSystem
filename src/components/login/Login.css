@@ -21,6 +21,11 @@
     color: rgb(38, 70, 96);
     font-size: 18px;
 }
+.errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
 .login h3{
     font-size: 18px;
     color:  rgb(56, 153, 232);

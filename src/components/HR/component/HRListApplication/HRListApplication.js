@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import "./HRListApplication.css";
 import { getJobByStatus } from "../../../../actions/JobAction";
 import { getApplicationCandidateByJobAndStatus, getRecruitmentManageAddInterview, getRecruitmentManageChangeStatus } from "../../../../actions/RecruitmentAction";
 import { FaSearch } from 'react-icons/fa';
-import { DatePicker } from 'antd'
+import { Modal, DatePicker, Input, Select } from 'antd';
+import "./HRListApplication.css";
+
 function HRListApplication() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const jobs = useSelector((state) => state.getJobByStatus.jobs);
-  const changeStatus = useSelector((state) => state.getRecruitmentManageChangeStatus.changeStatus);
-  const addInterview = useSelector((state) => state.getRecruitmentManageAddInterview.addInterview);
   const applications = useSelector((state) => state.getApplicationCandidateByJobAndStatus.applicationCandidate);
   const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
   const [isLoading, setIsLoading] = useState(false);
   const [searchApplications, setSearchApplications] = useState([]); // State mới để lưu trữ danh sách sau khi tìm kiếm thành công
   const [selectedJobStatus, setSelectedJobStatus] = useState("");
-  const [selectedAction, setSelectedAction] = useState("");
-  const [selectedApplicationId, setSelectedApplicationId] = useState("");
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [startDate, setStartDate] = useState(null); // Define startDate state
+  const { Option } = Select;
+
   const JobStatusSelector = () => {
     const handleSelectChange = (e) => {
       const selectedValue = e.target.value;
@@ -36,43 +31,95 @@ function HRListApplication() {
       </select>
     );
   };
-  const handleActionChange = (e) => {
-    const selectedValue = e.target.value;
-    setSelectedAction(selectedValue);
-  };
 
-  const handleStatusChange = (e) => {
-    const selectedValue = e.target.value;
-    setSelectedStatus(selectedValue);
-  };
-  const CompanySelectedAction = () => {
+  const CompanySelectedAction = ({ applicationId, applicationStatus, onActionChange }) => {
+    const [selectedAction, setSelectedAction] = useState("");
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [interviewInfo, setInterviewInfo] = useState({
+      interviewTime: null,
+      interviewAddress: '',
+      interviewType: '',
+    });
+
+    const handleActionChange = (e) => {
+      const selectedValue = e.target.value;
+      setSelectedAction(selectedValue);
+      onActionChange(applicationId, selectedValue);
+      if (selectedValue === "6") {
+        setIsModalVisible(true);
+      }
+    };
+
+    const handleModalOk = () => {
+      // Định dạng ngày giờ thành chuỗi theo định dạng cụ thể
+      const localDateTimeString = interviewInfo.interviewTime.format('YYYY-MM-DDTHH:mm:ss.SSS');
+      setInterviewInfo({...interviewInfo, interviewTime: localDateTimeString});
+      dispatch(getRecruitmentManageAddInterview(applicationId, interviewInfo));
+      setIsModalVisible(false);
+    };
+  
+    const handleModalCancel = () => {
+      // Xử lý khi người dùng nhấn Hủy trong modal
+      setIsModalVisible(false);
+    };
+
     return (
       <div>
         <select className="selector" value={selectedAction} onChange={handleActionChange}>
-          <option value="">Chọn hành động</option>
-          <option value="1">Thông báo đậu hồ sơ</option>
-          <option value="2">Thông báo rớt hồ sơ</option>
-          <option value="6">Thêm lịch phỏng vấn</option>
-          <option value="4">Thông báo đậu phỏng vấn</option>
-          <option value="5">Thông báo trượt phỏng vấn</option>
+          <option value="" hidden>Chọn hành động</option>
+          <option value="1" disabled={applicationStatus !== 0}>Thông báo đậu hồ sơ</option>
+          <option value="2" disabled={applicationStatus !== 0}>Thông báo trượt hồ sơ</option>
+          <option value="6" disabled={applicationStatus !== 1}>Thêm lịch phỏng vấn</option>
+          <option value="4" disabled={applicationStatus === 0 || applicationStatus === 1 || applicationStatus === 2}>Thông báo đậu phỏng vấn</option>
+          <option value="5" disabled={applicationStatus === 0 || applicationStatus === 1 || applicationStatus === 2}>Thông báo trượt phỏng vấn</option>
         </select>
-        {/* {["1", "2", "4", "5"].includes(selectedAction) && (
-          <select className="selector" value={selectedStatus} onChange={handleStatusChange}>
-            <option value="">Chọn trạng thái</option>
-            <option value="1">Đậu hồ sơ</option>
-            <option value="2">Rớt hồ sơ</option>
-          </select>
-        )} */}
+         <Modal
+            title="Thông tin Phỏng vấn"
+            visible={isModalVisible}
+            onCancel={handleModalCancel}
+            onOk={handleModalOk}
+          >
+      <div>
+        <label>Ngày và thời gian:</label>
+        <DatePicker
+          showTime
+          format="YYYY-MM-DD HH:mm"
+          onChange={(date) => setInterviewInfo({ ...interviewInfo, interviewTime: date })}
+        />
+      </div>
+      <div>
+        <label>Hình thức phỏng vấn:</label>
+        <Select
+          placeholder="Chọn hình thức phỏng vấn"
+          value={interviewInfo.interviewType}
+          onChange={(value) =>
+            setInterviewInfo({ ...interviewInfo, interviewType: value })
+          }
+        >
+          <Option value="0">Phỏng vấn trực tuyến</Option>
+          <Option value="1">Phỏng vấn tại cơ sở</Option>
+        </Select>
+      </div>
+      <div>
+        <label>Địa điểm:</label>
+        <Input
+          placeholder="Nhập địa điểm phỏng vấn"
+          value={interviewInfo.interviewAddress}
+          onChange={(e) =>
+            setInterviewInfo({ ...interviewInfo, interviewAddress: e.target.value })
+          }
+        />
+      </div>
+    </Modal>
       </div>
     );
   };
-  useEffect(() => {
-    if (selectedAction === "1" || selectedAction === "2" || selectedAction === "4" || selectedAction === "5") {
-      dispatch(getRecruitmentManageChangeStatus(selectedApplicationId, selectedJob));
-    } else if (selectedAction === "6") {
-      dispatch(getRecruitmentManageAddInterview(selectedApplicationId));
+
+  const handleActionChange = (appId, action) => {
+    if (action === "1" || action === "2" || action === "4" || action === "5") {
+      dispatch(getRecruitmentManageChangeStatus(appId, action));
     }
-  }, [dispatch, selectedAction, selectedApplicationId, selectedJob]);
+  }
 
   const [selectedStatus, setSelectedStatus] = useState("");
   const StatusSelector = () => {
@@ -86,7 +133,7 @@ function HRListApplication() {
         <option value="">Tất cả</option>
         <option value="0">Đang xem xét hồ sơ</option>
         <option value="1">Đậu hồ sơ</option>
-        <option value="2">Rớt hồ sơ</option>
+        <option value="2">Trượt hồ sơ</option>
       </select>
     );
   };
@@ -133,6 +180,24 @@ function HRListApplication() {
       setSearchApplications(searchResult);
     }
   };
+  const getStatusLabel = (statusValue) => {
+    switch (statusValue) {
+      case 0:
+        return 'Đang xem xét';
+      case 1:
+        return 'Đậu hồ sơ';
+      case 2:
+        return 'Trượt hồ sơ';
+      case 3:
+        return 'Đang phỏng vấn';
+      case 4:
+        return 'Đậu phỏng vấn';
+      case 5:
+        return 'Trượt phỏng vấn';
+      default:
+        return 'Không xác định';
+    }
+  };
   return (
     <div className="admin-user">
       <span style={{ fontSize: "24px" }}>Chi tiết ứng tuyển</span>
@@ -162,7 +227,7 @@ function HRListApplication() {
             <div className="job-entries">
               {searchApplications && searchApplications.length > 0
                 ? searchApplications.map((application, index) => (
-                  <div className="detail-candidate-application">
+                  <div className="detail-candidate-application" key={index}>
                     <h4>
                       <img
                         src={application && application.candidateImgUrl}
@@ -173,14 +238,14 @@ function HRListApplication() {
                     <div className="aboutDetailCandidateApplication">
                       <h4>Ứng viên:  {application?.candidateFullName}</h4>
                       <h4>Năm sinh: {application?.candidateBirthday ? new Date(application.candidateBirthday).getFullYear() : ''}</h4>
-                      <div className='userApplicationStatus'>Thời gian ứng tuyển: {application?.applicationTimeAgo}</div>
-                      <button onClick={() => setShowDatePicker(true)}>Chọn lịch phỏng vấn</button>
-                      {showDatePicker && (
-                        <div className='selectDate'>
-                          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} format="DD/MM/YYYY" />
-                        </div>
-                      )}
-                      <CompanySelectedAction></CompanySelectedAction>
+                      <h4 >Thời gian ứng tuyển: {application?.applicationTimeAgo}</h4>
+                    </div> 
+                    <div className='resultApplication'>
+                      <div className='userApplicationStatus'>Kết quả: {getStatusLabel(application.applicationStatus)}</div>
+                      <CompanySelectedAction
+                        applicationId={application.applicationId}
+                        applicationStatus={application.applicationStatus}
+                        onActionChange={(appId, action) => handleActionChange(appId, action)}/>
                     </div>
                   </div>
                 ))

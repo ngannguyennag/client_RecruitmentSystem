@@ -45,6 +45,17 @@ export const getAllJobByCompany = (token) => async (dispatch) => {
   }
 };
 
+export const getCompanyManageJobById = (companyId) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:8080/api/v1/jobs/${companyId}/all`
+    );
+    dispatch({ type: "GET_COMPANY_MANAGE_JOB_BY_ID_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_COMPANY_MANAGE_JOB_BY_ID_FAIL", payload: error.message });
+  }
+};
+
 export const getAllJob = () => async (dispatch, getState) => {
   try {
     const { data } = await axios.get("http://localhost:8080/api/v1/jobs/all");
