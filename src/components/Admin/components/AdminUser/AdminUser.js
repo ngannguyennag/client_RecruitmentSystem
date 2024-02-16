@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  getCandidateByName, getAllCandidate, deleteCandidate } from '../../../../actions/CandidateAction';
 import './AdminUser.css';
+import { FormatDate } from '../../../../utils/FormatDate';
 function AdminUser(props) {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
@@ -66,15 +67,16 @@ function AdminUser(props) {
                 console.log(err);
             });
     };
-    const FormatDate = (time) => {
-        if (time && Array.isArray(time)) {
-            const date = new Date(Date.UTC(...time));
-            const dateString = date.toISOString().split('T')[0];
-            return dateString;
-        } else {
-            return null;
+    const gender = (statusValue) => {
+        switch (statusValue) {
+          case 'MALE':
+            return 'Nam';
+          case 'FEMALE':
+            return 'Nữ';
+          case 'OTHER':
+            return 'Khác';
         }
-    };
+      };
     return (
         <div className="adminUser">
             <div className='titleHome' >Home / Quản lý ứng viên</div>
@@ -88,7 +90,7 @@ function AdminUser(props) {
                                 e.preventDefault();
                                 handleSearchUser(name, token);
                             }}>
-                                <input type="text" placeholder="Nhập vào tên hoặc email của user" onChange={e => setName(e.target.value)} style={{ width: "300px", height: "35px", marginRight: '20px', borderRadius: '5px' }} />
+                                <input type="text" placeholder="Nhập vào tên hoặc email của ứng viên" onChange={e => setName(e.target.value)} style={{ width: "300px", height: "35px", marginRight: '20px', borderRadius: '5px' }} />
                                 <button style={{ width: "10%", height: "35px" }} type="submit">Tìm kiếm</button>
                             </form>
                         </div>
@@ -99,7 +101,7 @@ function AdminUser(props) {
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Avatar</th>
+                                        <th>Tên ứng viên</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Date Created</th>
@@ -111,7 +113,7 @@ function AdminUser(props) {
                                         <React.Fragment key={item.id}>
                                             <tr>
                                                 <td>{index + 1}</td>
-                                                <td className='avatarUserFromAdmin'><img src={item.imgUrl} /></td>
+                                                <td>{item.fullName}</td>
                                                 <td>{item.email}</td>
                                                 <td>{item.phoneNumber}</td>
                                                 <td>{FormatDate(item.createDate)}</td>
@@ -137,7 +139,7 @@ function AdminUser(props) {
                                                                     </tr>
                                                                     <tr>
                                                                         <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Giới tính</td>
-                                                                        <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{item.gender}</td>
+                                                                        <td style={{ backgroundColor: 'white', color: '#0e599f' }}>{gender(item.gender)}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style={{ backgroundColor: '#f0f0f0', color: 'black' }}>Nơi sinh sống</td>

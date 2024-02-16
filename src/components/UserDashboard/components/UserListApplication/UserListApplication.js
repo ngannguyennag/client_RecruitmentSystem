@@ -13,10 +13,8 @@ function UserListApplication(props) {
   const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
   const [avatarUrl, setAvatarUrl] = useState(null);
   const job = useSelector((state) => state.getJobById.job);
-  // const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
   // Sử dụng useParams để lấy giá trị từ URL
   const { jobId } = useParams();
-  console.log(jobId);
   const normFile = (e) => {
     if (Array.isArray(e)) {
       return e;
@@ -65,7 +63,7 @@ function UserListApplication(props) {
   }, [dispatch, jobId]);
   return (
     <div className="userListApplication">
-      <span style={{ fontSize: '24px' }}>Chi tiết ứng tuyển</span>
+      <span style={{ fontSize: '24px' }}>Danh sách ứng tuyển</span>
       <div className="detailInfor">
         <div className="avatarUser">
           <Form.Item name="logo" valuePropName="fileList" getValueFromEvent={normFile}>
@@ -85,7 +83,7 @@ function UserListApplication(props) {
           </Form.Item>
           <div className='detailInforCandidate'>
           <h4>  Ứng viên: {users && users[0].candidateFullName} </h4>
-          <h4>  Ngày sinh: {users && users[0].candidateBirthday}</h4>
+          <h4>  Năm sinh: {users && users[0].candidateBirthday && new Date(users[0].candidateBirthday).getFullYear()}</h4>
           <h4> Đang sinh sống ở: {users && users[0].candidateAddress}</h4>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllJobByCompany, deleteJob, getJobByName } from '../../../../actions/JobAction';
 import './HRManageWork.css';
+import { FormatDate } from '../../../../utils/FormatDate';
 
 function HRManageWork(props) {
     const dispatch = useDispatch();
@@ -57,15 +58,15 @@ function HRManageWork(props) {
                 console.log(err);
             });
     };
-    const FormatDate = (time) => {
-        if (time && Array.isArray(time) ) {
-            const date = new Date(Date.UTC(...time));
-            const dateString = date.toISOString().split('T')[0];
-            return dateString;
-        } else {
-            return null;
-        }
-    };
+    // const FormatDate = (time) => {
+    //     if (time && Array.isArray(time) ) {
+    //         const date = new Date(Date.UTC(...time));
+    //         const dateString = date.toISOString().split('T')[0];
+    //         return dateString;
+    //     } else {
+    //         return null;
+    //     }
+    // };
     const getStatusMessage = (status) => {
         switch (status) {
             case 0:
@@ -121,8 +122,8 @@ function HRManageWork(props) {
                                         <td>{FormatDate(item.createdAt)}</td>
                                         <td>{getStatusMessage(item.jobStatus)}</td>
                                         <td>
-                                            <button>Edit</button>
-                                            <button onClick={() => handleDeleteJob(item.id, token)}>Delete</button>
+                                            <button>Sửa</button>
+                                            <button onClick={() => handleDeleteJob(item.id, token)}>Xóa</button>
                                         </td>
                                     </tr>
                                 ))}

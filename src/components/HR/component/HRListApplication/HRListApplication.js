@@ -200,7 +200,7 @@ function HRListApplication() {
   };
   return (
     <div className="admin-user">
-      <span style={{ fontSize: "24px" }}>Chi tiết ứng tuyển</span>
+      <span style={{ fontSize: "24px" }}>Danh sách ứng viên ứng tuyển</span>
       <span style={{ fontSize: "13px", color: "grey", paddingTop: "0px" }}>
         Xem xét, phê duyệt hồ sơ ứng viên
       </span>

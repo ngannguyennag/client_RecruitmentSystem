@@ -5,9 +5,9 @@ import "./Sidebar.css";
 import {
   AppstoreOutlined,
   UsergroupAddOutlined,
-  ShopOutlined,
+  BankOutlined,
   OrderedListOutlined,
-  NotificationOutlined,
+  SolutionOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import {signOut} from '../../../../actions/AuthenticationAction';
@@ -19,7 +19,7 @@ function Sidebar(props) {
   };
   return (
     <div className="sidebar">
-      <div className="sidebar-top">
+      <div className="sidebar-top-admin">
         <img src="/img/J.png"></img>
       </div>
       <div className="sidebar-list">
@@ -27,7 +27,7 @@ function Sidebar(props) {
           <span>
             <AppstoreOutlined></AppstoreOutlined>
           </span>
-          <p>Dashboard</p>
+          <p>Tổng quan</p>
         </Link>
         <Link to="/admin/customer" className={'sidebar-list-item'}>
           <span>
@@ -37,7 +37,7 @@ function Sidebar(props) {
         </Link>
         <Link to="/admin/manage-company" className={'sidebar-list-item'}>
           <span>
-            <OrderedListOutlined></OrderedListOutlined>
+          <BankOutlined />
           </span>
           <p>
             Quản lý công ty
@@ -49,6 +49,54 @@ function Sidebar(props) {
           </span>
           <p>
             Quản lý công việc
+          </p>
+        </Link>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+          <span>
+          <SolutionOutlined />
+          </span>
+          <p>
+            Quản lý quyền
+          </p>
+        </Link>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+          <span>
+            <OrderedListOutlined></OrderedListOutlined>
+          </span>
+          <p>
+            Quản lý kỹ năng
+          </p>
+        </Link>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+          <span>
+            <OrderedListOutlined></OrderedListOutlined>
+          </span>
+          <p>
+            Quản lý bằng cấp
+          </p>
+        </Link>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+          <span>
+            <OrderedListOutlined></OrderedListOutlined>
+          </span>
+          <p>
+            Quản lý ngành nghề
+          </p>
+        </Link>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+          <span>
+            <OrderedListOutlined></OrderedListOutlined>
+          </span>
+          <p>
+            Quản lý loại hình công việc
+          </p>
+        </Link>
+        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+          <span>
+            <OrderedListOutlined></OrderedListOutlined>
+          </span>
+          <p>
+            Quản lý lĩnh vực hoạt động
           </p>
         </Link>
         <Link to="/hr/logout" className={'sidebar-list-item'} onClick={onSignOut}>

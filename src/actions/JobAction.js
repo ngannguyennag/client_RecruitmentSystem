@@ -85,7 +85,7 @@ export const deleteJob = (jobId, token) => async (dispatch) => {
 export const getJobByName = (name, token) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      "http://localhost:8080/api/v1/jobs/find?name=" + name,
+      "http://localhost:8080/api/v1/jobs/find-by-name?name=" + name,
       {
         headers: {
           "Content-Type": "application/json",

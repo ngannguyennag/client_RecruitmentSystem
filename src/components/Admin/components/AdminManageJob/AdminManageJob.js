@@ -130,7 +130,7 @@ function AdminManageCompany(props) {
                                                     </div>
                                                 </td>
                                             </tr>
-                                            {selectedJobDetails && selectedJobDetails.id === item.id && (
+                                            {selectedJobDetails && selectedJobDetails.jobId === item.jobId && (
                                                 <tr>
                                                     <td colSpan="6">
                                                         <div className={`user-details ${showDetails ? 'show' : ''}`}>

@@ -14,6 +14,7 @@ export default function HRCreateWork() {
   const users = useSelector(state => state.createWork.createWork);
   // const userSignin = useSelector((state) => state.userSignin.userInfo);
   // const token = userSignin ? JSON.parse(localStorage.getItem('userInfo')).access_token : null;
+  const [addressForm] = Form.useForm();
   const token = JSON.parse(localStorage.getItem('userInfo'))?.access_token ;  
     const handleSubmit = (values) => {
       dispatch(createWork(values,token))
@@ -194,33 +195,68 @@ export default function HRCreateWork() {
           <Form.Item label="Kỹ năng *" name="jobSkill" style={{ fontWeight: '500', marginTop: '20px' }}>
             <Select1 options={skills} isMulti/>
           </Form.Item>
-          <Form onFinish={handleSubmit} style={{ backgroundColor: "white", borderRadius: "10px" }} >
-          <div className="FormCreateAddressCompany" >
-            <div className='titlecreateAddress'>
-            Tỉnh / thành phố*
-            </div>
-            <TinhThanhPhoSelector onSelectTinhThanhPho={setSelectedTinhThanhPho}/>
-            <div className='titlecreateAddress'>
-            Quận / huyện*
-            </div>
-            <HuyenQuanSelector onSelectHuyenQuan={setSelectedHuyenQuan} />
-            <div className='titlecreateAddress'>
-            Phường / xã*
-            </div>
-            <XaPhuongSelector onSelectXaPhuong={setSelectedXaPhuong}/>
-  
+          {/* <Form onFinish={handleSubmit} style={{ backgroundColor: "white", borderRadius: "10px" }} > */}
+          <Form
+        form={addressForm}
+        onFinish={handleSubmit}
+        style={{
+          backgroundColor: "white",
+          borderRadius: "10px",
+        }}
+      >
+        {/* <div className="FormAddressCompany" > */}
+          <Form.Item
+            name="provinceCode"
+            label="Tỉnh/Thành phố *"
+            onChange={(e) =>
+              addressForm.setFieldsValue({ provinceCode: e.target.value })
+            }
+            style={{ fontWeight: "500" }}
+          >
+            <TinhThanhPhoSelector
+              onSelectTinhThanhPho={(value) =>
+                addressForm.setFieldsValue({ provinceCode: value })
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name="districtCode"
+            label="Quận/Huyện *"
+            onChange={(e) =>
+              addressForm.setFieldsValue({ districtCode: e.target.value })
+            }
+            style={{ fontWeight: "500" }}
+          >
+            <HuyenQuanSelector
+              onSelectHuyenQuan={(value) =>
+                addressForm.setFieldsValue({ districtCode: value })
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name="wardCode"
+            label="Xã/Phường *"
+            onChange={(e) =>
+              addressForm.setFieldsValue({ wardCode: e.target.value })
+            }
+            style={{ fontWeight: "500" }}
+          >
+            <XaPhuongSelector
+              onSelectXaPhuong={(value) =>
+                addressForm.setFieldsValue({ wardCodeCode: value })
+              }
+            />
+          </Form.Item>
           <Form.Item
             label="Số nhà và tên đường"
-            name="sonha"
-            style={{ fontWeight: "500" }}>
-            <Input
-            defaultValue={users && users.companyAddress.address}
-              style={{ borderRadius: "5px" }}/>
+            name="address"
+            style={{ fontWeight: "500" }}
+          >
+            <Input style={{ borderRadius: "5px" }} />
           </Form.Item>
-          </div>
-          </Form>
+      </Form>
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: '35%', borderRadius: '5px' }}>Xem trước và cập nhật</Button>
+            <Button type="primary" htmlType="submit" style={{ width: '35%', borderRadius: '5px' }}>Lưu</Button>
           </Form.Item>
         </div>
       </Form>

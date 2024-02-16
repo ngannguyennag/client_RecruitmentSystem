@@ -46,7 +46,7 @@ export default function ProfileCandidate() {
         phoneNumber: candidate?.phoneNumber,
         email: candidate?.email,
         educationLevel: candidate?.educationLevel,
-        birthday: FormatDate(candidate?.birthday),
+        birthday: candidate?.birthday,
         category: candidate?.category?.categoryId,
         gender: candidate?.gender,
       });
@@ -62,7 +62,6 @@ export default function ProfileCandidate() {
     const categoryData = useSelector((state) => state.getCategory.category);
     const [selectedCategory, setSelectedCategory] = useState("");
     let category = "";
-    // const { candidateGender, formState: { errors } } = useForm();
     if (!(candidate === undefined)) {
       category = candidate.category.categoryId;
     }
@@ -253,12 +252,6 @@ export default function ProfileCandidate() {
             name="gender"
             label="Giới tính *"
             style={{ fontWeight: "500" }}
-            // rules={[
-            //   {
-            //     required: true,
-            //     message: "Please select your gender!",
-            //   },
-            // ]}
           >
             <Radio.Group>
               <Radio value="MALE">Nam</Radio>
@@ -266,44 +259,6 @@ export default function ProfileCandidate() {
               <Radio value="OTHER">Khác</Radio>
             </Radio.Group>
           </Form.Item>
-          {/* <Form.Item
-            label="Giới tính "
-            style={{ fontWeight: "500", fontSize: "14px" }}
-          > */}
-          {/* <div className="check">
-              <span>
-                <input
-                  {...candidateGender("gender")}
-                  type="radio"
-                  value="Nam"
-                  defaultChecked={candidate && candidate.gender}
-                  name="gender"
-                />
-                Male
-              </span>
-              <span>
-                <input
-                  {...candidateGender("gender")}
-                  type="radio"
-                  value="Nữ"
-                  defaultChecked={candidate && candidate.gender}
-                  name="gender"
-                />{" "}
-                Female
-              </span>
-              <span>
-                <input
-                  {...candidateGender("gender")}
-                  type="radio"
-                  value="Khác"
-                  defaultChecked={candidate && candidate.gender}
-                  name="gender"
-                />{" "}
-                Prefer not to say
-              </span>
-            </div>
-            {errors.gender && <span>This field is required</span>} */}
-          {/* </Form.Item> */}
           <Form.Item
             className="form-item"
             style={{ width: "10%", marginLeft: "25px" }}
@@ -545,12 +500,12 @@ export default function ProfileCandidate() {
           borderRadius: "10px",
         }}
       >
-        <div className="FormAddressCompany" style={{ padding: "35px" }}>
+        <div className="FormAddressCandidate" style={{ padding: "35px" }}>
           <div
             className="titleAddress"
             style={{ fontSize: "22px", fontWeight: "700" }}
           >
-            Địa chỉ công ty
+            Địa chỉ ứng viên
           </div>
           <Form.Item
             name="provinceCode"

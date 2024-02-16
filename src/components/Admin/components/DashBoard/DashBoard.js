@@ -1,11 +1,10 @@
 import React from "react";
 import {
   BellOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-  DollarCircleOutlined,
-  FileTextOutlined,
-  UserOutlined,
+  BankOutlined,
+  FileSearchOutlined,
+  SolutionOutlined, 
+  UserOutlined
 } from "@ant-design/icons";
 import "./DashBoard.css";
 import { Bar } from 'react-chartjs-2';
@@ -35,14 +34,6 @@ export default function DashBoard() {
       <section id="dashboard">
         <div className="dashboard">
           <div className="dashboard-top">
-            <div className="dashboard-top-search">
-              <form>
-                <input placeholder="Search ..."></input>
-                <span>
-                  <SearchOutlined></SearchOutlined>
-                </span>
-              </form>
-            </div>
             <div className="dashboard-top-content">
               <li className="dashboard-top-content-avatar">
                 <span style={{ color: '#0e599f', fontSize: '16px' }}>Welcome back, Admin</span>
@@ -65,41 +56,41 @@ export default function DashBoard() {
                     <UserOutlined />
                   </div>
                   <div className="dashboard-middle-statistic-title">
-                    <span className="total">782</span>
-                    <span className="title">Users</span>
+                    <span className="total">20</span>
+                    <span className="title">Số lượng ứng viên</span>
                   </div>
                 </li>
               </div>
               <div className="dashboard-middle-statistic-content">
                 <li>
                   <div className="dashboard-middle-statistic-icon">
-                    <ShoppingCartOutlined></ShoppingCartOutlined>
+                  <BankOutlined />
                   </div>
                   <div className="dashboard-middle-statistic-title">
-                    <span className="total">25</span>
-                    <span className="title">Users Group</span>
+                    <span className="total">6</span>
+                    <span className="title">Số lượng công ty</span>
                   </div>
                 </li>
               </div>
               <div className="dashboard-middle-statistic-content">
                 <li>
                   <div className="dashboard-middle-statistic-icon">
-                    <DollarCircleOutlined></DollarCircleOutlined>
+                  <FileSearchOutlined />
                   </div>
                   <div className="dashboard-middle-statistic-title">
-                    <span className="total">2000</span>
-                    <span className="title">Total Income</span>
+                    <span className="total">18</span>
+                    <span className="title">Số lượng công việc</span>
                   </div>
                 </li>
               </div>
               <div className="dashboard-middle-statistic-content">
                 <li>
                   <div className="dashboard-middle-statistic-icon">
-                    <FileTextOutlined></FileTextOutlined>
+                  <SolutionOutlined />
                   </div>
                   <div className="dashboard-middle-statistic-title">
-                    <span className="total">1208</span>
-                    <span className="title">Total Orders</span>
+                    <span className="total">20</span>
+                    <span className="title">Số lượt ứng tuyển</span>
                   </div>
                 </li>
               </div>
