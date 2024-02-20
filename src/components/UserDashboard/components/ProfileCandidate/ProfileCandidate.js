@@ -3,17 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider, useSelector, useDispatch } from "react-redux";
 import { Menu, Form, Input, Radio, Upload, Button, Avatar } from "antd";
 import { IdcardOutlined } from "@ant-design/icons";
-import {
-  getCandidateInfo,
-  getCandidateUpdate,
-  uploadCV,
-  uploadImage,
-} from "../../../../actions/CandidateAction";
-import {
-  getProvince,
-  getDistrict,
-  getWards,
-} from "../../../../actions/CompanyAction";
+import { getCandidateInfo, getCandidateUpdate, uploadCV, uploadImage} from "../../../../actions/CandidateAction";
+import {getProvince,getDistrict,getWards} from "../../../../actions/CompanyAction";
 import store from "../../../../store";
 import "./ProfileCandidate.css";
 import { getCategory } from "../../../../actions/CategoryAction";
@@ -97,7 +88,6 @@ export default function ProfileCandidate() {
           setAvatarUrl(uploadedImageUrl);
         });
       }
-      console.log(avatarUrl);
     };
     const handleCVUpload = (file) => {
       if (file) {
@@ -129,54 +119,26 @@ export default function ProfileCandidate() {
       <Form
         form={basicInfoForm}
         onFinish={handleSubmit}
-        style={{
-          margin: " 40px",
-          backgroundColor: "white",
-          borderRadius: "10px",
-        }}
+        style={{ margin: " 40px", backgroundColor: "white", borderRadius: "10px",}}
         className="formUser">
         <div className="formUser" style={{ padding: "35px" }}>
-          <div
-            className="titleUser"
-            style={{ fontSize: "24px", fontWeight: "700" }}
-          >
+          <div  className="titleUser"  style={{ fontSize: "24px", fontWeight: "700" }}>
             Thông tin cơ bản
           </div>
           <Form.Item
             name="imgUrl"
             valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
+            getValueFromEvent={normFile}>
             <Upload
               onChange={(info) => handleImageUpload(info.file)}
-              showUploadList={false}
-            >
+              showUploadList={false}>
               {avatarUrl ? (
-                <Avatar
-                  size={150}
-                  src={avatarUrl}
-                  style={{
-                    // marginTop: "100px",
-                    borderColor: "blue",
-                    border: "13px solid",
-                    cursor: "pointer",
-                    width: "200px",
-                    height: "200px",
-                  }}
-                />
+                <Avatar size={150} src={avatarUrl} style={{ borderColor: "blue",  border: "13px solid",  cursor: "pointer",  width: "200px",  height: "200px",  }}  />
               ) : (
                 <div>
                   <div className="sidebarUser-top">
                     <i className="accountUser">
-                      <img
-                        src="img/candidate.png"
-                        alt="avatar"
-                        style={{
-                          marginTop: "100px",
-                          border: " blue 3px",
-                          cursor: "pointer",
-                        }}
-                      />
+                      <img  src="img/candidate.png" alt="avatar" style={{ marginTop: "100px", border: " blue 3px", cursor: "pointer",  }}/>
                     </i>
                   </div>
                 </div>
@@ -186,73 +148,51 @@ export default function ProfileCandidate() {
           <Form.Item
             label="Tên đầy đủ * "
             name="fullName"
-            style={{ fontWeight: "500" }}
-          >
-            <Input
-              style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}
-            />
+            style={{ fontWeight: "500", width: '100%' }}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff", width: '300px' }} />
           </Form.Item>
           <Form.Item
             label="Công việc * "
             name="desiredJob"
-            style={{ fontWeight: "500" }}
-          >
-            <Input
-              style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}
-            />
+            style={{ fontWeight: "500",  width: '100%' }}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff",  width: '100%' }}/>
           </Form.Item>
           <Form.Item
             label="Ngành nghề * "
             name="category"
-            style={{ fontWeight: "500" }}
-          >
+            style={{ fontWeight: "500" ,  width: '100%'}}>
             <CategorySelector
               onSelectCategory={(value) =>
-                basicInfoForm.setFieldsValue({ category: value })
-              }
-            />
+                basicInfoForm.setFieldsValue({ category: value })}/>
           </Form.Item>
           <Form.Item
             label="Trình độ học vấn * "
             name="educationLevel"
-            style={{ fontWeight: "500" }}
-          >
-            <Input
-              style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}
-            />
+            style={{ fontWeight: "500",  width: '100%' }}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }} />
           </Form.Item>
           <Form.Item
             label="Ngày sinh * "
             name="birthday"
-            style={{ fontWeight: "500" }}
-          >
-            <Input
-              style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}
-            />
+            style={{ fontWeight: "500" }}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }} />
           </Form.Item>
           <Form.Item
             label="Số điện thoại liên hệ"
             name="phoneNumber"
-            style={{ fontWeight: "500", marginTop: "20px" }}
-          >
-            <Input
-              style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}
-            />
+            style={{ fontWeight: "500", marginTop: "20px" }}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }} />
           </Form.Item>
           <Form.Item
             label="Email liên hệ *"
             name="email"
-            style={{ fontWeight: "500" }}
-          >
-            <Input
-              style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}
-            />
+            style={{ fontWeight: "500" }}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff" }}/>
           </Form.Item>
           <Form.Item
             name="gender"
             label="Giới tính *"
-            style={{ fontWeight: "500" }}
-          >
+            style={{ fontWeight: "500" }}>
             <Radio.Group>
               <Radio value="MALE">Nam</Radio>
               <Radio value="FEMALE">Nữ</Radio>
@@ -261,13 +201,11 @@ export default function ProfileCandidate() {
           </Form.Item>
           <Form.Item
             className="form-item"
-            style={{ width: "10%", marginLeft: "25px" }}
-          >
+            style={{ width: "10%", marginLeft: "25px" }}>
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "100%", borderRadius: "5px" }}
-            >
+              style={{ width: "100%", borderRadius: "5px" }}>
               Lưu
             </Button>
           </Form.Item>
@@ -285,18 +223,10 @@ export default function ProfileCandidate() {
     return (
       <Form
         form={studyForm}
-        style={{
-          margin: " 40px",
-          backgroundColor: "white",
-          borderRadius: "10px",
-        }}
-        className="formUser"
-      >
+        style={{  margin: " 40px",  backgroundColor: "white",  borderRadius: "10px"}}
+        className="formUser">
         <div className="fileCompany" style={{ padding: "35px" }}>
-          <h3
-            className="table-heading"
-            style={{ fontSize: "22px", fontWeight: "700" }}
-          >
+          <h3  className="table-heading"  style={{ fontSize: "22px", fontWeight: "700" }}>
             Lộ trình học tập
           </h3>
           {candidate.education.map((educationItem, index) => (
@@ -313,13 +243,11 @@ export default function ProfileCandidate() {
         </div>
         <Form.Item
           className="form-item"
-          style={{ width: "10%", marginLeft: "25px" }}
-        >
+          style={{ width: "10%", marginLeft: "25px" }}>
           <Button
             type="primary"
             htmlType="submit"
-            style={{ width: "100%", borderRadius: "5px" }}
-          >
+            style={{ width: "100%", borderRadius: "5px" }}>
             Lưu
           </Button>
         </Form.Item>
@@ -336,18 +264,12 @@ export default function ProfileCandidate() {
     return (
       <Form
         form={experienceForm}
-        style={{
-          margin: " 40px",
-          backgroundColor: "white",
-          borderRadius: "10px",
-        }}
-        className="formUser"
-      >
+        style={{margin: " 40px",  backgroundColor: "white",  borderRadius: "10px",}}
+        className="formUser">
         <div className="fileCompany" style={{ padding: "35px" }}>
           <h3
             className="table-heading"
-            style={{ fontSize: "22px", fontWeight: "700" }}
-          >
+            style={{ fontSize: "22px", fontWeight: "700" }}>
             Kinh nghiệm làm việc
           </h3>
           {candidate.workingHistory.map((experienceItem, index) => (
@@ -364,13 +286,11 @@ export default function ProfileCandidate() {
         </div>
         <Form.Item
           className="form-item"
-          style={{ width: "10%", marginLeft: "25px" }}
-        >
+          style={{ width: "10%", marginLeft: "25px" }}>
           <Button
             type="primary"
             htmlType="submit"
-            style={{ width: "100%", borderRadius: "5px", alignItems: "center" }}
-          >
+            style={{ width: "100%", borderRadius: "5px", alignItems: "center" }}>
             Lưu
           </Button>
         </Form.Item>
@@ -431,10 +351,7 @@ export default function ProfileCandidate() {
           <option value="">Chọn tỉnh/thành phố</option>
           {tinhThanhPhoData && tinhThanhPhoData.length > 0
             ? tinhThanhPhoData.map((tinhThanhPho) => (
-                <option
-                  value={tinhThanhPho.provinceCode}
-                  key={tinhThanhPho.provinceCode}
-                >
+                <option  value={tinhThanhPho.provinceCode}  key={tinhThanhPho.provinceCode}>
                   {tinhThanhPho.fullName}
                 </option>
               ))
@@ -453,10 +370,7 @@ export default function ProfileCandidate() {
           <option value="">Chọn huyện/quận</option>
           {huyenQuanData && huyenQuanData.length > 0
             ? huyenQuanData.map((huyenQuan) => (
-                <option
-                  value={huyenQuan.districtCode}
-                  key={huyenQuan.districtCode}
-                >
+                <option  value={huyenQuan.districtCode}  key={huyenQuan.districtCode}>
                   {huyenQuan.fullName}
                 </option>
               ))
@@ -501,67 +415,49 @@ export default function ProfileCandidate() {
         }}
       >
         <div className="FormAddressCandidate" style={{ padding: "35px" }}>
-          <div
-            className="titleAddress"
-            style={{ fontSize: "22px", fontWeight: "700" }}
-          >
+          <div  className="titleAddress"  style={{ fontSize: "22px", fontWeight: "700" }}>
             Địa chỉ ứng viên
           </div>
           <Form.Item
             name="provinceCode"
             label="Tỉnh/Thành phố *"
-            onChange={(e) =>
-              addressForm.setFieldsValue({ provinceCode: e.target.value })
-            }
+            onChange={(e) =>  addressForm.setFieldsValue({ provinceCode: e.target.value })}
             style={{ fontWeight: "500" }}
           >
             <TinhThanhPhoSelector
-              onSelectTinhThanhPho={(value) =>
-                addressForm.setFieldsValue({ provinceCode: value })
-              }
+              onSelectTinhThanhPho={(value) =>  addressForm.setFieldsValue({ provinceCode: value })}
             />
           </Form.Item>
           <Form.Item
             name="districtCode"
             label="Quận/Huyện *"
-            onChange={(e) =>
-              addressForm.setFieldsValue({ districtCode: e.target.value })
-            }
+            onChange={(e) =>  addressForm.setFieldsValue({ districtCode: e.target.value })}
             style={{ fontWeight: "500" }}
           >
             <HuyenQuanSelector
               onSelectHuyenQuan={(value) =>
-                addressForm.setFieldsValue({ districtCode: value })
-              }
+                addressForm.setFieldsValue({ districtCode: value })}
             />
           </Form.Item>
           <Form.Item
             name="wardCode"
             label="Xã/Phường *"
-            onChange={(e) =>
-              addressForm.setFieldsValue({ wardCode: e.target.value })
-            }
+            onChange={(e) =>  addressForm.setFieldsValue({ wardCode: e.target.value })  }
             style={{ fontWeight: "500" }}
           >
-            <XaPhuongSelector
-              onSelectXaPhuong={(value) =>
-                addressForm.setFieldsValue({ wardCodeCode: value })
-              }
-            />
+            <XaPhuongSelector onSelectXaPhuong={(value) => addressForm.setFieldsValue({ wardCodeCode: value }) }/>
           </Form.Item>
           <Form.Item
             label="Số nhà và tên đường"
             name="address"
-            style={{ fontWeight: "500" }}
-          >
+            style={{ fontWeight: "500" }}>
             <Input style={{ borderRadius: "5px" }} />
           </Form.Item>
           <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "12%", borderRadius: "5px" }}
-            >
+              style={{ width: "12%", borderRadius: "5px" }}>
               Lưu
             </Button>
           </Form.Item>
@@ -572,37 +468,17 @@ export default function ProfileCandidate() {
 
   return (
     <>
-      <Menu
-        onClick={handleMenuClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-      >
-        <Menu.Item
-          key="basic-info"
-          icon={<IdcardOutlined />}
-          style={{ fontWeight: "500", marginLeft: "25px" }}
-        >
+      <Menu onClick={handleMenuClick} selectedKeys={[current]} mode="horizontal">
+        <Menu.Item key="basic-info" icon={<IdcardOutlined />} style={{ fontWeight: "500", marginLeft: "25px" }}>
           Thông tin cơ bản
         </Menu.Item>
-        <Menu.Item
-          key="study"
-          icon={<IdcardOutlined />}
-          style={{ fontWeight: "500" }}
-        >
+        <Menu.Item key="study" icon={<IdcardOutlined />} style={{ fontWeight: "500" }}>
           Học tập
         </Menu.Item>
-        <Menu.Item
-          key="experience"
-          icon={<IdcardOutlined />}
-          style={{ fontWeight: "500" }}
-        >
+        <Menu.Item key="experience" icon={<IdcardOutlined />} style={{ fontWeight: "500" }}>
           Kinh nghiệm
         </Menu.Item>
-        <Menu.Item
-          key="address"
-          icon={<IdcardOutlined />}
-          style={{ fontWeight: "500" }}
-        >
+        <Menu.Item key="address" icon={<IdcardOutlined />} style={{ fontWeight: "500" }}>
           Địa điểm
         </Menu.Item>
       </Menu>

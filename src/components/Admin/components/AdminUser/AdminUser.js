@@ -3,9 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  getCandidateByName, getAllCandidate, deleteCandidate } from '../../../../actions/CandidateAction';
 import './AdminUser.css';
 import { FormatDate } from '../../../../utils/FormatDate';
+import ReactPaginate from 'react-paginate';
 function AdminUser(props) {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
+    const [pageNumber, setPageNumber] = useState(0); // Thêm state để lưu trữ số trang hiện tại
+    const usersPerPage = 10; // Số người dùng trên mỗi trang
+    const pagesVisited = pageNumber * usersPerPage;
     const users = useSelector(state => state.candidates.candidates);
     const userSearch = useSelector(state => state.candidateSearch.candidates);
     const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
@@ -14,7 +18,10 @@ function AdminUser(props) {
     const [updateSearchUsers, setUpdateSearchUsers] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const shouldShowAllUsers = searchInput === '';
-    const displayedUsers = shouldShowAllUsers ? updatedUsers : updateSearchUsers;
+    const displayedUsers = shouldShowAllUsers && updatedUsers ? updatedUsers.slice(pagesVisited, pagesVisited + usersPerPage) : [];
+    // const displayedUsers = shouldShowAllUsers ? updatedUsers.slice(pagesVisited, pagesVisited + usersPerPage) : updateSearchUsers.slice(pagesVisited, pagesVisited + usersPerPage);
+    // const pageCount = Math.ceil((shouldShowAllUsers ? updatedUsers.length : updateSearchUsers.length) / usersPerPage);
+    const pageCount = Math.ceil((shouldShowAllUsers && updatedUsers ? updatedUsers.length : updateSearchUsers.length) / usersPerPage);
     // State và hàm mới cho form chi tiết người dùng
     const [showDetails, setShowDetails] = useState(false);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
@@ -57,16 +64,21 @@ function AdminUser(props) {
     }
     const handleSearchUser = (name, token) => {
         setSearchInput(name);
-        let searchResult = [];
         dispatch(getCandidateByName(name, token))
-            .then(() => {
-                searchResult = userSearch;
-                setUpdateSearchUsers(searchResult);
+            .then((result) => {
+                if (result && result.length > 0) {
+                    setUpdatedUsers(result); // Cập nhật danh sách người dùng khi tìm kiếm thành công
+                    setPageNumber(0); // Reset trang về trang đầu tiên khi tìm kiếm mới
+                } else {
+                    setUpdatedUsers([]); // Không có kết quả, cập nhật danh sách người dùng trống
+                }
             })
             .catch(err => {
                 console.log(err);
             });
     };
+    
+    
     const gender = (statusValue) => {
         switch (statusValue) {
           case 'MALE':
@@ -77,6 +89,9 @@ function AdminUser(props) {
             return 'Khác';
         }
       };
+      const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
     return (
         <div className="adminUser">
             <div className='titleHome' >Home / Quản lý ứng viên</div>
@@ -112,7 +127,7 @@ function AdminUser(props) {
                                     {displayedUsers && displayedUsers.map((item, index) => (
                                         <React.Fragment key={item.id}>
                                             <tr>
-                                                <td>{index + 1}</td>
+                                            <td>{index + 1 + pageNumber * usersPerPage}</td>
                                                 <td>{item.fullName}</td>
                                                 <td>{item.email}</td>
                                                 <td>{item.phoneNumber}</td>
@@ -166,10 +181,8 @@ function AdminUser(props) {
                                                                         <p style={{color:'grey', textAlign:'left'}}>{workingHistoryItem.description}</p>
                                                                     </div>
                                                                 ))}
-
                                                             </div>
                                                         </div>
-
                                                     </td>
                                                 </tr>
                                             )}
@@ -181,6 +194,14 @@ function AdminUser(props) {
                     </div>
                 )
             }
+             <ReactPaginate
+                previousLabel={'<<'}
+                nextLabel={'>>'}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={'pagination'}
+                activeClassName={'active'}
+            />
         </div>
     );
 }

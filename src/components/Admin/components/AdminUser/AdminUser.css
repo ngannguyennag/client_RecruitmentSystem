@@ -62,6 +62,33 @@ table td{
     transition: right 0.3s ease; /* Thêm transition để tạo hiệu ứng trượt */
     overflow-y: auto;
 }
+.pagination {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+  }
+  .pagination li {
+    margin: 0 5px;
+  }
+  
+  .pagination li a {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 2px 3px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+  }
+  
+  .pagination li.active a {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .pagination li a:hover {
+    background-color: #f0f0f0;
+  }
+  
 .user-details.show {
     right: 0; /* Hiển thị form khi có class 'show' */
     padding: 10px 20px;
