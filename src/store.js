@@ -75,6 +75,11 @@ import {
 import {
   CandidateSignUpReducer,
   LoginReducer,
+  addRoleByAdminReducer,
+  deleteRoleByAdminReducer,
+  getAllRoleReducer,
+  pageRoleByAdminReducer,
+  saveRoleByAdminReducer,
 } from "./reducers/AuthenticationReducer";
 import { getNotificationReducer } from "./reducers/NotificationReducer";
 import { getStatisticalByAdminReducer, getStatisticalByCompanyReducer } from "./reducers/SystemReducer";
@@ -96,7 +101,11 @@ const reducer = combineReducers({
   /* Authentication */
   userSignIn: LoginReducer,
   userSignUp: CandidateSignUpReducer,
-
+  role: getAllRoleReducer,
+  saveRole: saveRoleByAdminReducer,
+  deleteRole: deleteRoleByAdminReducer,
+  addRole: addRoleByAdminReducer,
+  pageRole: pageRoleByAdminReducer,
   /* Candidate */
   candidates: getAllCandidateReducer,
   candidateSearch: getCandidateByNameReducer,

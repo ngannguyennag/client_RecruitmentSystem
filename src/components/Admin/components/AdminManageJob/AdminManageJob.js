@@ -87,7 +87,7 @@ function AdminManageCompany(props) {
       };
     return (
         <div className="adminJob">
-            <div className='titleHome' >Home / Quản lý công việc</div>
+            <div className='titleHome' >Trang chủ / Quản lý công việc</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>

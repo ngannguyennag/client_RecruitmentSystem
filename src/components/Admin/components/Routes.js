@@ -12,6 +12,7 @@ import DataFilterProduct from './AdminProduct/DataFilterProduct/DataFilterProduc
 import AdminManageCompany from './AdminManageCompany/AdminManageCompany';
 import AdminManageJob from './AdminManageJob/AdminManageJob';
 import AdminManageAccount from './AdminManageAccount/AdminManageAccount';
+import AdminManageRole from './AdminManageRole/AdminManageRole';
 
 function Routes(props) {
     return (
@@ -25,6 +26,7 @@ function Routes(props) {
             <Route path='/admin/product' component={AdminProduct}/>
             <Route path='/admin/manage-company' component={AdminManageCompany}/>
             <Route path='/admin/manage-job' component={AdminManageJob}/>
+            <Route path = '/admin/manage-role' component ={AdminManageRole}></Route>
             <Route path = '/admin/manage-account' component={AdminManageAccount}></Route>
             <Route path='/admin/chat' component={AppChat}/>
         </Switch>

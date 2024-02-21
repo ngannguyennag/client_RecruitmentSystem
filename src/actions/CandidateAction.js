@@ -145,6 +145,7 @@ export const getCandidateByName = (name, token) => async (dispatch) => {
         },
       }
     );
+    console.log(data);
     dispatch({ type: "GET_CANDIDATE_BY_NAME_SUCCESS", payload: data });
   } catch (error) {
     dispatch({ type: "GET_CANDIDATE_BY_NAME_FAIL", payload: error.message });

@@ -72,7 +72,7 @@ function AdminManageCompany(props) {
 
     return (
         <div className="adminCompany">
-            <div className='titleHome'>Home / Quản lý công ty</div>
+            <div className='titleHome'>Trang chủ / Quản lý công ty</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>

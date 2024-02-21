@@ -39,44 +39,34 @@ function App() {
   return (
     <div className="App">
       <Router>
-        
         <ResetScroll></ResetScroll>
-
         <Route path="/" exact>
           <HomePage></HomePage>
         </Route>
-
         <Route path="/login">
           <LoginPage></LoginPage>
         </Route>
-
         <Route path="/forgot_password">
           <ForgotPasswordPage></ForgotPasswordPage>
         </Route>
-
         <Route path="/reset_password">
           <ResetPasswordPage></ResetPasswordPage>
         </Route>
-
         <Route path="/register/confirm">
           <ConfirmEmailPage></ConfirmEmailPage>
         </Route>
         <Route path="/register">
           <SignupPage></SignupPage>
         </Route>
-
         <Route path="/product">
           <ProductPage></ProductPage>
         </Route>
-
         <Route path="/detail/:id">
           <DetailPage></DetailPage>
         </Route>
-
         <Route path='/cart'>
           <CartPage></CartPage>
         </Route>
-
         <Route path='/order'>
           <OrderPage></OrderPage>
         </Route>

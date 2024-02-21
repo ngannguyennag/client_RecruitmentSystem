@@ -4,6 +4,8 @@ import {  getCandidateByName, getAllCandidate, deleteCandidate } from '../../../
 import './AdminUser.css';
 import { FormatDate } from '../../../../utils/FormatDate';
 import ReactPaginate from 'react-paginate';
+import { DeleteOutlined, DoubleRightOutlined } from "@ant-design/icons";
+
 function AdminUser(props) {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
@@ -25,6 +27,7 @@ function AdminUser(props) {
     // State và hàm mới cho form chi tiết người dùng
     const [showDetails, setShowDetails] = useState(false);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
+    const [searching, setSearching] = useState(false);
     useEffect(() => {
         dispatch(getAllCandidate(token));
     }, [dispatch]);
@@ -62,21 +65,24 @@ function AdminUser(props) {
                 setIsLoading(false); // Ẩn loading nếu xóa không thành công
             });
     }
-    const handleSearchUser = (name, token) => {
-        setSearchInput(name);
-        dispatch(getCandidateByName(name, token))
-            .then((result) => {
-                if (result && result.length > 0) {
-                    setUpdatedUsers(result); // Cập nhật danh sách người dùng khi tìm kiếm thành công
-                    setPageNumber(0); // Reset trang về trang đầu tiên khi tìm kiếm mới
-                } else {
-                    setUpdatedUsers([]); // Không có kết quả, cập nhật danh sách người dùng trống
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    };
+   const handleSearchUser = (name, token) => {
+    setSearchInput(name);
+    setSearching(true); // Đánh dấu bắt đầu tìm kiếm
+    dispatch(getCandidateByName(name, token))
+        .then((result) => {
+            if (result && result.length > 0) {
+                setUpdatedUsers(result); // Cập nhật danh sách người dùng khi tìm kiếm thành công
+                setPageNumber(0); // Reset trang về trang đầu tiên khi tìm kiếm mới
+            } else {
+                setUpdatedUsers([]); // Không có kết quả, cập nhật danh sách người dùng trống
+            }
+            setSearching(false); // Đánh dấu kết thúc tìm kiếm
+        })
+        .catch(err => {
+            console.log(err);
+            setSearching(false); // Đánh dấu kết thúc tìm kiếm nếu xảy ra lỗi
+        });
+};
     
     
     const gender = (statusValue) => {
@@ -94,7 +100,7 @@ function AdminUser(props) {
     };
     return (
         <div className="adminUser">
-            <div className='titleHome' >Home / Quản lý ứng viên</div>
+            <div className='titleHome' >Trang chủ / Quản lý ứng viên</div>
             {
                 isLoading ? (
                     <h2>Loading...</h2>
@@ -109,7 +115,8 @@ function AdminUser(props) {
                                 <button style={{ width: "10%", height: "35px" }} type="submit">Tìm kiếm</button>
                             </form>
                         </div>
-                        {displayedUsers && displayedUsers.length === 0 ? (
+                        
+                        {updatedUsers && updatedUsers.length === 0 ? (
                             <p style={{ color: 'black', fontSize: '20px' }}>Không có kết quả </p>
                         ) : (
                             <table>
@@ -118,9 +125,9 @@ function AdminUser(props) {
                                         <th>STT</th>
                                         <th>Tên ứng viên</th>
                                         <th>Email</th>
-                                        <th>Phone Number</th>
-                                        <th>Date Created</th>
-                                        <th>Action</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,8 +140,8 @@ function AdminUser(props) {
                                                 <td>{item.phoneNumber}</td>
                                                 <td>{FormatDate(item.createDate)}</td>
                                                 <td>
-                                                    <button onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }}>Xem chi tiết</button>
-                                                    <button onClick={() => handleDeleteUser(item.id, token)}>Xóa</button>
+                                                    <DoubleRightOutlined onClick={() => handleViewDetails(item)} className='viewDetail' style={{ marginRight: '5px' }} />
+                                                    <DeleteOutlined onClick={() => handleDeleteUser(item.id, token)} />
                                                 </td>
                                             </tr>
                                             {selectedUserDetails && selectedUserDetails.id === item.id && (

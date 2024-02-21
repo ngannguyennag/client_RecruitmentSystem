@@ -6,9 +6,14 @@ import {
   AppstoreOutlined,
   UsergroupAddOutlined,
   BankOutlined,
+  BarsOutlined,
   OrderedListOutlined,
-  SolutionOutlined,
+  SafetyOutlined,
   LogoutOutlined,
+  SlackOutlined,
+  HddOutlined,
+  GatewayOutlined,
+  MacCommandOutlined,
 } from "@ant-design/icons";
 import {signOut} from '../../../../actions/AuthenticationAction';
 function Sidebar(props) {
@@ -20,7 +25,7 @@ function Sidebar(props) {
   return (
     <div className="sidebar">
       <div className="sidebar-top-admin">
-        <img src="/img/J.png"></img>
+        {/* <img src="/img/J.png"></img> */}
       </div>
       <div className="sidebar-list">
         <Link to="/admin" className={'sidebar-list-item'}>
@@ -45,15 +50,16 @@ function Sidebar(props) {
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
           <span>
-            <OrderedListOutlined></OrderedListOutlined>
+            {/* <OrderedListOutlined></OrderedListOutlined> */}
+            <BarsOutlined />
           </span>
           <p>
             Quản lý công việc
           </p>
         </Link>
-        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-role" className={'sidebar-list-item'}>
           <span>
-          <SolutionOutlined />
+          <SafetyOutlined />
           </span>
           <p>
             Quản lý quyền
@@ -61,7 +67,7 @@ function Sidebar(props) {
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
           <span>
-            <OrderedListOutlined></OrderedListOutlined>
+          <MacCommandOutlined />
           </span>
           <p>
             Quản lý kỹ năng
@@ -69,7 +75,8 @@ function Sidebar(props) {
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
           <span>
-            <OrderedListOutlined></OrderedListOutlined>
+            {/* <OrderedListOutlined></OrderedListOutlined> */}
+            <HddOutlined />
           </span>
           <p>
             Quản lý bằng cấp
@@ -85,7 +92,8 @@ function Sidebar(props) {
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
           <span>
-            <OrderedListOutlined></OrderedListOutlined>
+            {/* <OrderedListOutlined></OrderedListOutlined> */}
+            <SlackOutlined />
           </span>
           <p>
             Quản lý loại hình công việc
@@ -93,7 +101,7 @@ function Sidebar(props) {
         </Link>
         <Link to="/admin/manage-job" className={'sidebar-list-item'}>
           <span>
-            <OrderedListOutlined></OrderedListOutlined>
+          <GatewayOutlined />
           </span>
           <p>
             Quản lý lĩnh vực hoạt động
