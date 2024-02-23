@@ -6,38 +6,106 @@ import { FormatDate } from '../../../../utils/FormatDate';
 
 function HRManageWork(props) {
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const jobs = useSelector(state => state.jobCompany.jobCompany);
+    const [jobName, setJobName] = useState('');
+    const jobs = useSelector(state => state.jobByCompany.jobByCompany);
     const jobSearch = useSelector(state => state.jobSearch.job)
     const token = JSON.parse(localStorage.getItem('userInfo')).access_token;
     const [isLoading, setIsLoading] = useState(false);
+    const displayedJob = useSelector((state) => state.jobByCompany.jobByCompany);
+    const [displayedJobs, setDisplayedJobs] = useState(null);
     const [updatedJobs, setUpdatedJobs] = useState([]); // State mới để lưu trữ danh sách user sau khi xóa thành công
     const [updateSearchJobs, setUpdateSearchJobs] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const shouldShowAllJobs = searchInput === '';
-    const displayedJobs = shouldShowAllJobs ? updatedJobs : updateSearchJobs;
+    // const displayedJobs = shouldShowAllJobs ? updatedJobs : updateSearchJobs;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalElements, setTotalElements] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
     useEffect(() => {
-        dispatch(getAllJobByCompany(token));
+        dispatch(getAllJobByCompany(page, token));
     }, [dispatch]);
-    useEffect(() => {
-        setUpdatedJobs(jobs); // Cập nhật state mới sau mỗi lần danh sách user thay đổi
-    }, [jobs]);
-    useEffect(() => {
-        if (jobSearch) {
-          setUpdateSearchJobs(jobSearch);
+    const [page, setPage] = useState({
+        "jobName": null,
+        "categoryId": '',
+        "provinceCode": null,
+        "page": 1,
+        "size": 10
+    });
+    const goToPreviousPage = () => {
+        if (currentPage > 1) {
+            const newPage = currentPage - 1;
+            setCurrentPage(newPage);
+            dispatch(getAllJobByCompany({ ...page, page: newPage, size: pageSize }, token))
         }
-      }, [jobSearch]);
-    useEffect(() => {
-        if (name === '') {
-            handleSearchJob('', token);
+    };
+    const goToNextPage = () => {
+        if (currentPage < totalPage) {
+            const newPage = currentPage + 1;
+            setCurrentPage(newPage);
+            dispatch(getAllJobByCompany({ ...page, page: newPage, size: pageSize }, token))
         }
-    }, [name, token]);
+    };
+    const pageSizes = [10, 20, 30, 50];
+    const handleChangePageSize = (size) => {
+        setPageSize(size);
+        dispatch(getAllJobByCompany({ ...page, page: 1, size: size }, token));
+        setCurrentPage(1);
+    };
+    useEffect(() => {
+        dispatch(getAllJobByCompany(page, token))
+            .then((result) => {
+                setUpdatedJobs(result); // Cập nhật state mới ngay cả khi không có kết quả từ getAllCandidate
+            })
+            .catch(err => {
+                console.log(err);
+                setUpdatedJobs([]); // Trường hợp có lỗi, cập nhật danh sách người dùng trống
+            });
+    }, [dispatch, token]);
+    useEffect(() => {
+        if (displayedJob) {
+            setDisplayedJobs(displayedJob.data); // Cập nhật danh sách quyền khi tải trang
+            setTotalElements(displayedJob.total); // Cập nhật tổng số phần tử
+            setTotalPage(Math.ceil(displayedJob.total / pageSize));
+        }
+    }, [displayedJob, pageSize]);
+    // useEffect(() => {
+    //     setUpdatedJobs(jobs); // Cập nhật state mới sau mỗi lần danh sách user thay đổi
+    // }, [jobs]);
+    // useEffect(() => {
+    //     if (jobSearch) {
+    //       setUpdateSearchJobs(jobSearch);
+    //     }
+    //   }, [jobSearch]);
+    // useEffect(() => {
+    //     if (name === '') {
+    //         handleSearchJob('', token);
+    //     }
+    // }, [name, token]);
 
+    // const handleDeleteJob = (jobId, token) => {
+    //     setIsLoading(true);
+    //     dispatch(deleteJob(jobId, token))
+    //         .then(() => {
+    //             dispatch(getAllJobByCompany);
+    //             setIsLoading(false);
+    //             setUpdatedJobs(jobs);
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             setIsLoading(false); // Ẩn loading nếu xóa không thành công
+    //         });
+    // }
+    const handleSearchJob = () => {
+        setSearchInput(jobName);
+        setPage(prevPage => ({ ...prevPage, jobName: jobName}));
+        dispatch(getAllJobByCompany({ ...page, jobName: jobName}), token);
+    };
     const handleDeleteJob = (jobId, token) => {
         setIsLoading(true);
         dispatch(deleteJob(jobId, token))
             .then(() => {
-                dispatch(getAllJobByCompany);
+                dispatch(getAllJobByCompany(page,token));
                 setIsLoading(false);
                 setUpdatedJobs(jobs);
             })
@@ -46,27 +114,6 @@ function HRManageWork(props) {
                 setIsLoading(false); // Ẩn loading nếu xóa không thành công
             });
     }
-    const handleSearchJob = (name, token) => {
-        setSearchInput(name);
-        let searchResult = [];
-        dispatch(getJobByName(name, token))
-            .then(() => {
-                searchResult = jobSearch;
-                setUpdateSearchJobs(searchResult);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    };
-    // const FormatDate = (time) => {
-    //     if (time && Array.isArray(time) ) {
-    //         const date = new Date(Date.UTC(...time));
-    //         const dateString = date.toISOString().split('T')[0];
-    //         return dateString;
-    //     } else {
-    //         return null;
-    //     }
-    // };
     const getStatusMessage = (status) => {
         switch (status) {
             case 0:
@@ -91,13 +138,13 @@ function HRManageWork(props) {
                         <div className="form-div">
                         <form onSubmit={e => {
                                 e.preventDefault();
-                                handleSearchJob(name, token);
+                                handleSearchJob();
                             }}>
-                                <input type="text" placeholder="Nhập vào tên công việc" onChange={e => setName(e.target.value)}  style={{width: "500px", height:"40px", marginRight:'20px', borderRadius:'5px'}}/>
+                                <input type="text" placeholder="Nhập vào tên công việc" onChange={e => setJobName(e.target.value)}  style={{width: "500px", height:"40px", marginRight:'20px', borderRadius:'5px'}}/>
                                 <button  style={{width: "100px", height:"35px", borderRadius:'5px'}} type="submit">Tìm kiếm</button>
                             </form>
                         </div>
-                        {displayedJobs && displayedJobs.length === 0 ? (
+                        {displayedJob && displayedJob.data && displayedJob.data.length === 0 ? (
                         <p style={{color:'black', fontSize:'20px'}}>Không có kết quả </p>
                     ) : (
                         <table>
@@ -113,17 +160,17 @@ function HRManageWork(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {displayedJobs && displayedJobs.map((item, index) => ( // Render danh sách từ updatedUsers thay vì users
+                                {displayedJob && displayedJob.data && displayedJob.data.map((item, index) => ( // Render danh sách từ updatedUsers thay vì users
                                     <tr>
                                         <td>{index + 1}</td>
                                         <td>{item.jobName}</td>
                                         <td>{item.jobQuantity}</td>
                                         <td>{item.jobCandidate}</td>
-                                        <td>{FormatDate(item.createdAt)}</td>
+                                        <td>{FormatDate(item.createDate)}</td>
                                         <td>{getStatusMessage(item.jobStatus)}</td>
                                         <td>
                                             <button>Sửa</button>
-                                            <button onClick={() => handleDeleteJob(item.id, token)}>Xóa</button>
+                                            <button onClick={() => handleDeleteJob(item.jobId, token)}>Xóa</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -133,6 +180,16 @@ function HRManageWork(props) {
                     </div>
                 )
             }
+            <div style={{ color: 'black', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <button style={{ width: '20px' }} onClick={goToPreviousPage}>{"<"}</button>
+                <span>Trang {currentPage} / {totalPage}</span>
+                <button style={{ width: '20px' }} onClick={goToNextPage}>{">"}</button>
+                <select style={{ width: '80px', margin: '0 17px 0 20px' }} value={pageSize} onChange={(e) => handleChangePageSize(parseInt(e.target.value))}>
+                    {pageSizes.map(size => (
+                        <option key={size} value={size}>{size}/trang</option>
+                    ))}
+                </select>
+            </div>
         </div>
     );
 }

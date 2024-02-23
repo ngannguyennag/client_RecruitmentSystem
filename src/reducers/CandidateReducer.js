@@ -12,7 +12,7 @@ export const uploadImageReducer = (state = {}, action) => {
 export const uploadCVReducer = (state = {}, action) => {
   switch (action.type) {
     case "UPLOAD_CV_SUCCESS":
-      return { ...state, image: action.payload };
+      return { ...state, cv: action.payload };
     case "UPLOAD_CV_FAIL":
       return { ...state, error: action.payload };
     default:
@@ -31,6 +31,16 @@ export const getAllCandidateReducer = (state = {}, action) => {
   }
 };
 
+export const getAllCandidateDashboardReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GET_ALL_CANDIDATE_DASHBOARD_SUCCESS":
+      return { ...state, candidateDashboard: action.payload };
+    case "GET_ALL_CANDIDATE_DASHBOARD_FAIL":
+      return { ...state, error: action.payload };
+    default:
+      return state;
+  }
+};
 export const getCandidateByNameReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_CANDIDATE_BY_NAME_SUCCESS":
@@ -75,4 +85,14 @@ export const deleteCandidateReducer = (state = {}, action) => {
   }
 };
 
-
+export const getAllCompanyByCandidateReducer = (state = {}, action) => {
+  switch (action.type) {
+      case 'GET_ALL_COMPANY_BY_CANDIDATE_SUCCESS':{
+          return {...state, companyAllByCandidate: action.payload}
+      }
+      case "GET_ALL_COMPANY_BY_CANDIDATE_FAIL":
+      return { ...state, error: action.payload };
+      default:
+      return state;
+  }
+};

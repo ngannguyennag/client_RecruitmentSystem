@@ -13,7 +13,7 @@ function HeaderCompany(props) {
     <div className="header">
       <section id="menu">
         <div className="logo">
-              <img src="img/J.png"></img>
+              <img src="/img/J.png"></img>
             <Link to="/"> ANJWork </Link>
         </div>
         <ul className="menu-list" >

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Header.css";
 import { signOut } from "../../actions/CandidateAction";
 import { useHistory } from "react-router";
-import { searchProduct } from "../../actions/ProductAction";
 import { Link } from "react-router-dom";
 import { UserOutlined,FileOutlined,SettingOutlined,BellOutlined,LogoutOutlined  } from "@ant-design/icons";
 
@@ -68,12 +67,6 @@ function HeaderUser(props) {
           </li>
           <li>
             <Link to="/companies"> Công ty </Link>
-          </li>
-          <li>
-            <Link to="/career"> Nghề nghiệp </Link>
-          </li>
-          <li>
-            <Link to="/myjobs"> Việc của tôi </Link>
           </li>
         </ul>
         <div className="create-account">

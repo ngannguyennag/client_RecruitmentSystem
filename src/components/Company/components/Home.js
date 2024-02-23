@@ -32,7 +32,7 @@ const Home = () => {
                         <span style={{ marginLeft: '20px', cursor: 'pointer' }} onClick={handleWebsiteClick}>{company?.website}</span>
                     </li>
                     <li>
-                        <p> {company?.companyIndustry.industryNameVI}</p>
+                        <p style={{color:'rgb(60, 102, 128)'}}> Lĩnh vực {company?.companyIndustry.name}</p>
                     </li>
                 </div>
                 <button href='/' className='button'>Follow</button>

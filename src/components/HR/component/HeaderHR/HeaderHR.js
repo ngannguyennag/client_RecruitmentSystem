@@ -45,45 +45,11 @@ function HeaderHR(props) {
           <li>
             <Link to="/companies"> Công ty </Link>
           </li>
-          <li>
-            <Link to="/career"> Nghề nghiệp </Link>
-          </li>
-          <li>
-            <Link to="/myjobs"> Việc của tôi </Link>
-          </li>
         </ul>
         <div className="create-account">
-          <i className="account-icon" onClick={handleIconClick}>
+          {/* <i className="account-icon" onClick={handleIconClick}>
             <img src={company?.companyLogo} alt='company-logo'></img>
-          </i>
-          {/* {showAccount2 && (
-            <ul className="account-menu">
-                <li className="file">
-                    <i className="account-icon-menu"><FileOutlined/></i>
-                    <Link className='fileText' to="/userfile">
-                        <i >Hồ sơ của tôi</i>
-                    </Link>
-                </li>
-                <li className="file">
-                    <i className="account-icon-menu"><SettingOutlined/></i>
-                    <Link className='fileText' to="/usermanage">
-                        <i>Quản lý tài khoản</i>
-                    </Link>
-                </li>
-                <li className="file">
-                    <i className="account-icon-menu"><BellOutlined/></i>
-                    <Link className='fileText' to="/usernotification">
-                        <i>Thông báo việc làm</i>
-                    </Link>
-                </li>
-                <li className ="file" onClick={handleSignout}>
-                    <i className="account-icon-menu"><LogoutOutlined/></i>
-                    <Link className='fileText' to="/">
-                        <i>Đăng xuất</i>
-                    </Link>
-                </li>
-            </ul>
-          )} */}
+          </i> */}
         </div>
       </section>
     </div>

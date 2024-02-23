@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 //Category
 export function CarouselItem(props) {
   const { dataFromParent } = props
-  if (!dataFromParent || !dataFromParent.categoryIcon) {
+  if (!dataFromParent || !dataFromParent.icon) {
     return null;
   }
-  console.log(dataFromParent.categoryIcon);
   return (
     <div className="carouselItem_item">
-      <img src={dataFromParent.categoryIcon} alt="My Image" />
-      <div className="carouselItem_title">{dataFromParent.categoryName}</div>
-      <div className="carouselItem_total">{dataFromParent.categoryTotal }  việc làm</div>
+      <img src={dataFromParent.icon} alt="My Image" />
+      <div className="carouselItem_title">{dataFromParent.name}</div>
+      <div className="carouselItem_total">{dataFromParent.total }  việc làm</div>
     </div>
   )
 }

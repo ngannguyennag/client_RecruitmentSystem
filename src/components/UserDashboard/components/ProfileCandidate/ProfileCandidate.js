@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Provider, useSelector, useDispatch } from "react-redux";
+import {UploadOutlined} from "@ant-design/icons";
 import { Menu, Form, Input, Radio, Upload, Button, Avatar } from "antd";
 import { IdcardOutlined } from "@ant-design/icons";
 import { getCandidateInfo, getCandidateUpdate, uploadCV, uploadImage} from "../../../../actions/CandidateAction";
@@ -19,8 +20,7 @@ export default function ProfileCandidate() {
   const [avatarUrl, setAvatarUrl] = useState(null); // State for avatar URL
   const [cvUrl, setCVUrl] = useState(null); // State for cv url
   const candidate = useSelector((state) => state.getCandidateInfo.candidate);
-  const initToken = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
-  const [token, setToken] = useState(initToken);
+  const token = JSON.parse(localStorage.getItem("userInfo"))?.access_token;
   const handleMenuClick = (e) => {
     setCurrent(e.key);
   };
@@ -31,14 +31,16 @@ export default function ProfileCandidate() {
 
   useEffect(() => {
     if (candidate) {
+      const FormattedDate = FormatDate(candidate?.birthday);
       basicInfoForm.setFieldsValue({
+        id: candidate?.id,
         fullName: candidate?.fullName,
         desiredJob: candidate?.desiredJob,
         phoneNumber: candidate?.phoneNumber,
         email: candidate?.email,
         educationLevel: candidate?.educationLevel,
-        birthday: candidate?.birthday,
-        category: candidate?.category?.categoryId,
+        birthday: FormattedDate,
+        categoryId: candidate?.category?.id,
         gender: candidate?.gender,
       });
       setAvatarUrl(candidate?.imgUrl);
@@ -52,14 +54,14 @@ export default function ProfileCandidate() {
   const BasicInfoForm = () => {
     const categoryData = useSelector((state) => state.getCategory.category);
     const [selectedCategory, setSelectedCategory] = useState("");
-    let category = "";
+    let categoryId = "";
     if (!(candidate === undefined)) {
-      category = candidate.category.categoryId;
+      categoryId = candidate.category.id;
     }
 
     useEffect(() => {
-      setSelectedCategory(category);
-    }, [category]);
+      setSelectedCategory(categoryId);
+    }, [categoryId]);
     const CategorySelector = ({ onSelectCategory }) => {
       const handleSelectChange = (e) => {
         const selectedValue = e.target.value;
@@ -68,12 +70,12 @@ export default function ProfileCandidate() {
       };
 
       return (
-        <select value={selectedCategory} onChange={handleSelectChange}>
+        <select value={selectedCategory} onChange={handleSelectChange} style={{width: '100%', height: '35px'}}>
           <option value="">Chọn ngành nghề</option>
           {categoryData && categoryData.length > 0
             ? categoryData.map((category) => (
-                <option value={category.categoryId} key={category.categoryId}>
-                  {category.categoryName}
+                <option value={category.id} key={category.id}>
+                  {category.name}
                 </option>
               ))
             : null}
@@ -111,9 +113,8 @@ export default function ProfileCandidate() {
       const values = basicInfoForm.getFieldsValue();
       console.log(values);
       values.imgUrl = avatarUrl;
-      dispatch(getCandidateUpdate(token, values)).then((token) => {
-        setToken(token);
-      });
+      values.cvUrl = cvUrl;
+      dispatch(getCandidateUpdate(token, values));
     };
     return (
       <Form
@@ -121,7 +122,7 @@ export default function ProfileCandidate() {
         onFinish={handleSubmit}
         style={{ margin: " 40px", backgroundColor: "white", borderRadius: "10px",}}
         className="formUser">
-        <div className="formUser" style={{ padding: "35px" }}>
+        <div className="formUser" style={{ padding: "20px 55px" }}>
           <div  className="titleUser"  style={{ fontSize: "24px", fontWeight: "700" }}>
             Thông tin cơ bản
           </div>
@@ -148,8 +149,8 @@ export default function ProfileCandidate() {
           <Form.Item
             label="Tên đầy đủ * "
             name="fullName"
-            style={{ fontWeight: "500", width: '100%' }}>
-            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff", width: '300px' }} />
+            style={{ fontWeight: "500", width: '100%'}}>
+            <Input style={{ borderRadius: "5px", backgroundColor: "#e6f7ff", width: '100%' }} />
           </Form.Item>
           <Form.Item
             label="Công việc * "
@@ -159,11 +160,11 @@ export default function ProfileCandidate() {
           </Form.Item>
           <Form.Item
             label="Ngành nghề * "
-            name="category"
-            style={{ fontWeight: "500" ,  width: '100%'}}>
+            name="categoryId"
+            style={{ fontWeight: "500"}}>
             <CategorySelector
               onSelectCategory={(value) =>
-                basicInfoForm.setFieldsValue({ category: value })}/>
+                basicInfoForm.setFieldsValue({ categoryId: value })}/>
           </Form.Item>
           <Form.Item
             label="Trình độ học vấn * "
@@ -200,12 +201,24 @@ export default function ProfileCandidate() {
             </Radio.Group>
           </Form.Item>
           <Form.Item
-            className="form-item"
-            style={{ width: "10%", marginLeft: "25px" }}>
+          label="CV"
+          name="cvUrl"
+          style={{ fontWeight: "500" }}
+          getValueFromEvent={normFile}
+        >
+          <Upload
+            onChange={(info) => handleCVUpload(info.file)}
+            showUploadList={false}
+          >
+            <Button icon={<UploadOutlined />}>Tải lên CV</Button>
+          </Upload>
+        </Form.Item>
+          <Form.Item style={{ marginBottom: "20px" }}>
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "100%", borderRadius: "5px" }}>
+              style={{ width: "12%", borderRadius: "5px" }}
+            >
               Lưu
             </Button>
           </Form.Item>
@@ -225,7 +238,7 @@ export default function ProfileCandidate() {
         form={studyForm}
         style={{  margin: " 40px",  backgroundColor: "white",  borderRadius: "10px"}}
         className="formUser">
-        <div className="fileCompany" style={{ padding: "35px" }}>
+        <div className="fileCompany" style={{ padding: "20px 55px" }}>
           <h3  className="table-heading"  style={{ fontSize: "22px", fontWeight: "700" }}>
             Lộ trình học tập
           </h3>
@@ -240,17 +253,16 @@ export default function ProfileCandidate() {
               </p>
             </div>
           ))}
+          <Form.Item style={{ marginBottom: "20px" }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "12%", borderRadius: "5px" }}
+            >
+              Lưu
+            </Button>
+          </Form.Item>
         </div>
-        <Form.Item
-          className="form-item"
-          style={{ width: "10%", marginLeft: "25px" }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ width: "100%", borderRadius: "5px" }}>
-            Lưu
-          </Button>
-        </Form.Item>
       </Form>
     );
   };
@@ -258,7 +270,6 @@ export default function ProfileCandidate() {
   const ExperienceForm = () => {
     const handleSubmit = () => {
       const values = experienceForm.getFieldsValue();
-      console.log(values);
     };
 
     return (
@@ -266,7 +277,7 @@ export default function ProfileCandidate() {
         form={experienceForm}
         style={{margin: " 40px",  backgroundColor: "white",  borderRadius: "10px",}}
         className="formUser">
-        <div className="fileCompany" style={{ padding: "35px" }}>
+        <div className="fileCompany" style={{ padding: "20px 55px" }}>
           <h3
             className="table-heading"
             style={{ fontSize: "22px", fontWeight: "700" }}>
@@ -283,21 +294,21 @@ export default function ProfileCandidate() {
               </p>
             </div>
           ))}
+          <Form.Item style={{ marginBottom: "20px" }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: "12%", borderRadius: "5px" }}
+            >
+              Lưu
+            </Button>
+          </Form.Item>
         </div>
-        <Form.Item
-          className="form-item"
-          style={{ width: "10%", marginLeft: "25px" }}>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ width: "100%", borderRadius: "5px", alignItems: "center" }}>
-            Lưu
-          </Button>
-        </Form.Item>
       </Form>
     );
   };
-
+ 
+  
   const AddressForm = () => {
     const handleSubmit = () => {
       const values = addressForm.getFieldsValue();
@@ -312,7 +323,7 @@ export default function ProfileCandidate() {
     var tinhThanhPhoCompany = "";
     var huyenQuanCompany = "";
     var xaPhuongCompany = "";
-    if (!(candidate === undefined)) {
+    if (candidate) {
       tinhThanhPhoCompany = candidate.address.provinceCode;
       huyenQuanCompany = candidate.address.districtCode;
       xaPhuongCompany = candidate.address.wardCode;
@@ -347,12 +358,12 @@ export default function ProfileCandidate() {
         onSelectTinhThanhPho(selectedValue);
       };
       return (
-        <select value={selectedTinhThanhPho} onChange={handleSelectChange}>
+        <select value={selectedTinhThanhPho} onChange={handleSelectChange} style={{width:'100%', height:'35px'}}>
           <option value="">Chọn tỉnh/thành phố</option>
           {tinhThanhPhoData && tinhThanhPhoData.length > 0
             ? tinhThanhPhoData.map((tinhThanhPho) => (
-                <option  value={tinhThanhPho.provinceCode}  key={tinhThanhPho.provinceCode}>
-                  {tinhThanhPho.fullName}
+                <option  value={tinhThanhPho.code}  key={tinhThanhPho.code}>
+                  {tinhThanhPho.name}
                 </option>
               ))
             : null}
@@ -366,12 +377,12 @@ export default function ProfileCandidate() {
         onSelectHuyenQuan(selectedValue);
       };
       return (
-        <select value={selectedHuyenQuan} onChange={handleSelectChange}>
+        <select value={selectedHuyenQuan} onChange={handleSelectChange} style={{width:'100%', height:'35px'}}>
           <option value="">Chọn huyện/quận</option>
           {huyenQuanData && huyenQuanData.length > 0
             ? huyenQuanData.map((huyenQuan) => (
-                <option  value={huyenQuan.districtCode}  key={huyenQuan.districtCode}>
-                  {huyenQuan.fullName}
+                <option  value={huyenQuan.code}  key={huyenQuan.code}>
+                  {huyenQuan.name}
                 </option>
               ))
             : null}
@@ -385,19 +396,18 @@ export default function ProfileCandidate() {
         onSelectXaPhuong(selectedValue);
       };
       return (
-        <select value={selectedXaPhuong} onChange={handleSelectChange}>
+        <select value={selectedXaPhuong} onChange={handleSelectChange} style={{width:'100%', height:'35px'}}>
           <option value="">Chọn xã/phường</option>
           {xaPhuongData && xaPhuongData.length > 0
             ? xaPhuongData.map((xaPhuong) => (
-                <option value={xaPhuong.wardCode} key={xaPhuong.wardCode}>
-                  {xaPhuong.fullName}
+                <option value={xaPhuong.code} key={xaPhuong.code}>
+                  {xaPhuong.name}
                 </option>
               ))
             : null}
         </select>
       );
     };
-
     return (
       <Form
         form={addressForm}
@@ -409,55 +419,58 @@ export default function ProfileCandidate() {
         }}
         onFinish={handleSubmit}
         style={{
-          margin: " 40px",
+          margin: "40px",
           backgroundColor: "white",
           borderRadius: "10px",
         }}
       >
-        <div className="FormAddressCandidate" style={{ padding: "35px" }}>
-          <div  className="titleAddress"  style={{ fontSize: "22px", fontWeight: "700" }}>
-            Địa chỉ ứng viên
+        <div className="FormAddressCandidate" style={{ padding: "55px" }}>
+          <div className="titleAddress" style={{ fontSize: "22px", fontWeight: "700", marginBottom: "20px" }}>
+            Địa chỉ ứng viên
           </div>
           <Form.Item
             name="provinceCode"
-            label="Tỉnh/Thành phố *"
-            onChange={(e) =>  addressForm.setFieldsValue({ provinceCode: e.target.value })}
-            style={{ fontWeight: "500" }}
+            label="Tỉnh/Thành phố *"
+            onChange={(e) => addressForm.setFieldsValue({ provinceCode: e.target.value })}
+            style={{ fontWeight: "500", marginBottom: "20px" }}
           >
             <TinhThanhPhoSelector
-              onSelectTinhThanhPho={(value) =>  addressForm.setFieldsValue({ provinceCode: value })}
+              onSelectTinhThanhPho={(value) => addressForm.setFieldsValue({ provinceCode: value })} style={{width:'500px'}}
             />
           </Form.Item>
           <Form.Item
             name="districtCode"
-            label="Quận/Huyện *"
-            onChange={(e) =>  addressForm.setFieldsValue({ districtCode: e.target.value })}
-            style={{ fontWeight: "500" }}
+            label="Quận/Huyện *"
+            onChange={(e) => addressForm.setFieldsValue({ districtCode: e.target.value })}
+            style={{ fontWeight: "500", marginBottom: "20px" }}
           >
             <HuyenQuanSelector
-              onSelectHuyenQuan={(value) =>
-                addressForm.setFieldsValue({ districtCode: value })}
+              onSelectHuyenQuan={(value) => addressForm.setFieldsValue({ districtCode: value })}
             />
           </Form.Item>
           <Form.Item
             name="wardCode"
-            label="Xã/Phường *"
-            onChange={(e) =>  addressForm.setFieldsValue({ wardCode: e.target.value })  }
-            style={{ fontWeight: "500" }}
+            label="Xã/Phường *"
+            onChange={(e) => addressForm.setFieldsValue({ wardCode: e.target.value })}
+            style={{ fontWeight: "500", marginBottom: "20px" }}
           >
-            <XaPhuongSelector onSelectXaPhuong={(value) => addressForm.setFieldsValue({ wardCodeCode: value }) }/>
+            <XaPhuongSelector
+              onSelectXaPhuong={(value) => addressForm.setFieldsValue({ wardCode: value })}
+            />
           </Form.Item>
           <Form.Item
-            label="Số nhà và tên đường"
+            label="Số nhà và tên đường"
             name="address"
-            style={{ fontWeight: "500" }}>
+            style={{ fontWeight: "500", marginBottom: "20px" }}
+          >
             <Input style={{ borderRadius: "5px" }} />
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ marginBottom: "20px" }}>
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "12%", borderRadius: "5px" }}>
+              style={{ width: "12%", borderRadius: "5px" }}
+            >
               Lưu
             </Button>
           </Form.Item>

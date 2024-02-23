@@ -1,5 +1,5 @@
 .detail-job {
-  margin: 30px 70px;
+  margin: 30px 70px 0 70px;
   background-color: white;
 }
 
@@ -84,6 +84,8 @@
 
 .popup-content {
   background-color: white;
+  width: 400px;
+  height: 150px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -97,15 +99,26 @@
   cursor: pointer;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
 }
-
+.popup-header{
+  /* position: absolute; */
+  font-size: 24px;
+  color: red;
+  cursor: pointer;
+}
+.close-btn{
+  position: relative;
+  top: -65px;
+  left: 390px;
+}
 .popup-button:hover {
   background-color: #2980b9;
 }
 
 .popup-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .popup-button:nth-child(2) {
@@ -172,13 +185,14 @@
   border-radius: 12px;
   border: 1px solid rgb(241, 241, 241);
   background-color: rgb(218, 238, 250);
-  padding: 10px;
+  padding: 5px 40px;
 }
 .title-job-detail{
   display: flex;
   flex-direction: column;
   text-align: justify;
   align-items: center;
+  padding-top: 15px;
 }
 .job-detail-item{
   display: flex;
@@ -186,5 +200,20 @@
 }
 .job-detail-item p {
   font-size: 13px;
-  padding: 0 30px;
+  padding: 0 20px;
+}
+.benefits-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.requirements-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.requirements-list li {
+  margin-bottom: 5px; /* Thêm khoảng cách giữa các dòng */
+}
+.bullet {
+  margin-right: 5px;
+  font-size: 25px;
 }

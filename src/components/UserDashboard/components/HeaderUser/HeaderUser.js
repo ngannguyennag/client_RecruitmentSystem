@@ -19,7 +19,7 @@ function HeaderUser(props) {
     <div className="header">
       <section id="menu">
         <div className="logo">
-          <img src="img/J.png"></img>
+          <img src="/img/J.png"></img>
           <Link to="/"> ANJWork </Link>
         </div>
         <ul className= 'menu-list'>
@@ -27,16 +27,10 @@ function HeaderUser(props) {
             <Link to="/"> Trang chủ </Link>
           </li>
           <li>
-            <Link to="/jobs"> Tìm việc </Link>
+            <Link to="/jobs"> Việc làm </Link>
           </li>
           <li>
-            <Link to="/companies"> Doanh nghiệp </Link>
-          </li>
-          <li>
-            <Link to="/career"> Ứng viên </Link>
-          </li>
-          <li>
-            <Link to="/myjobs"> Khác <DownOutlined  style={{fontSize:'14px'}}/></Link>
+            <Link to="/companies"> Công ty </Link>
           </li>
         </ul>
       </section>

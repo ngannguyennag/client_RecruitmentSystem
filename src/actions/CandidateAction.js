@@ -66,7 +66,7 @@ export const uploadCV = (token, file) => async (dispatch) => {
   if (file.entries().next().value[1] !== null) {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/candidate/profile-image",
+        "http://localhost:8080/api/v1/candidate/cv",
         file,
         {
           headers: {
@@ -99,10 +99,10 @@ export const changePassword = (token, managePassword) => async (dispatch) => {
   }
 };
 
-export const getAllCandidate = (token) => async (dispatch) => {
+export const getAllCandidate = (page, token) => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/admin/manage/candidates/all",
+    const { data } = await axios.post(
+      "http://localhost:8080/api/v1/admin/manage/candidates/get-all",page,
       {
         headers: {
           "Content-Type": "application/json",
@@ -116,6 +116,22 @@ export const getAllCandidate = (token) => async (dispatch) => {
   }
 };
 
+export const getAllCandidateDashboard = (token) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(
+      "http://localhost:8080/api/v1/admin/manage/candidates/all",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    dispatch({ type: "GET_ALL_CANDIDATE_DASHBOARD_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_ALL_CANDIDATE_DASHBOARD_FAIL", payload: error.message });
+  }
+};
 export const deleteCandidate = (candidateId, token) => async (dispatch) => {
   try {
     const { data } = await axios.delete(
@@ -151,3 +167,4 @@ export const getCandidateByName = (name, token) => async (dispatch) => {
     dispatch({ type: "GET_CANDIDATE_BY_NAME_FAIL", payload: error.message });
   }
 };
+

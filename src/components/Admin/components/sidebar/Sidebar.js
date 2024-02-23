@@ -25,7 +25,6 @@ function Sidebar(props) {
   return (
     <div className="sidebar">
       <div className="sidebar-top-admin">
-        {/* <img src="/img/J.png"></img> */}
       </div>
       <div className="sidebar-list">
         <Link to="/admin" className={'sidebar-list-item'}>
@@ -34,7 +33,7 @@ function Sidebar(props) {
           </span>
           <p>Tổng quan</p>
         </Link>
-        <Link to="/admin/customer" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-candidate" className={'sidebar-list-item'}>
           <span>
             <UsergroupAddOutlined></UsergroupAddOutlined>
           </span>
@@ -65,7 +64,7 @@ function Sidebar(props) {
             Quản lý quyền
           </p>
         </Link>
-        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-skill" className={'sidebar-list-item'}>
           <span>
           <MacCommandOutlined />
           </span>
@@ -73,16 +72,15 @@ function Sidebar(props) {
             Quản lý kỹ năng
           </p>
         </Link>
-        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-degree" className={'sidebar-list-item'}>
           <span>
-            {/* <OrderedListOutlined></OrderedListOutlined> */}
             <HddOutlined />
           </span>
           <p>
             Quản lý bằng cấp
           </p>
         </Link>
-        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-category" className={'sidebar-list-item'}>
           <span>
             <OrderedListOutlined></OrderedListOutlined>
           </span>
@@ -90,7 +88,7 @@ function Sidebar(props) {
             Quản lý ngành nghề
           </p>
         </Link>
-        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-jobtype" className={'sidebar-list-item'}>
           <span>
             {/* <OrderedListOutlined></OrderedListOutlined> */}
             <SlackOutlined />
@@ -99,7 +97,7 @@ function Sidebar(props) {
             Quản lý loại hình công việc
           </p>
         </Link>
-        <Link to="/admin/manage-job" className={'sidebar-list-item'}>
+        <Link to="/admin/manage-industry" className={'sidebar-list-item'}>
           <span>
           <GatewayOutlined />
           </span>

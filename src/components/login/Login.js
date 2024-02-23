@@ -29,7 +29,7 @@ function Login(props) {
       var decodedHeader = jwt_decode(string);
       var roleAdmin = decodedHeader.role[0].authority;
       if (roleAdmin === "CANDIDATE") {
-        history.push("/user");
+        history.push("/candidate/profile-candidate");
       } else if(roleAdmin === "ADMIN") {
         history.push("/admin");
       } else if(roleAdmin === "COMPANY") {

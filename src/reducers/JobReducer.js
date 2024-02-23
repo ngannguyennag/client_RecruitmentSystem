@@ -1,7 +1,7 @@
 export const getAllJobByAdminReducer = (state = {}, action) => {
     switch (action.type) {
         case 'GET_ALL_JOB_BY_ADMIN_SUCCESS':{
-            return {...state, job: action.payload}
+            return {...state, jobByAdmin: action.payload}
         }
         case 'DELETE_JOB_BY_ADMIN':{
             return {...state}
@@ -10,6 +10,17 @@ export const getAllJobByAdminReducer = (state = {}, action) => {
     }
 };
 
+export const getAllJobByCandidateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_ALL_JOB_BY_CANDIDATE_SUCCESS':{
+            return {...state, jobByCandidate: action.payload}
+        }
+        case 'DELETE_JOB_BY_ADMIN':{
+            return {...state}
+        }
+        default: return state
+    }
+};
 export const getJobTopReducer = (state = {}, action) => {
     switch (action.type) {
         case 'JOBTOP_SUCCESS':
@@ -24,7 +35,7 @@ export const getJobTopReducer = (state = {}, action) => {
   export const getAllJobByCompanyReducer = (state = {}, action) => {
     switch (action.type) {
         case 'GET_ALL_JOB_BY_COMPANY_SUCCESS':{
-            return {...state, jobCompany: action.payload}
+            return {...state, jobByCompany: action.payload}
         }
         case 'DELETE_JOB':{
             return {...state}

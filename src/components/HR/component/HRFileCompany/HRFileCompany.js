@@ -142,7 +142,6 @@ export default function HRFileCompany(props) {
 
   const BasicInfoForm = () => {
     const industryData = useSelector((state) => state.getIndustry.industry);
-    
     const [selectedIndustry, setSelectedIndustry] = useState("");
     let industryCompany = "";
     if (!(company === undefined)) {
@@ -381,8 +380,7 @@ export default function HRFileCompany(props) {
             <Button
               type="primary"
               htmlType="submit"
-              style={{ width: "100%", borderRadius: "5px", }}
-            >
+              style={{ width: "100%", borderRadius: "5px", }}>
               Lưu
             </Button>
           </Form.Item>
@@ -646,10 +644,10 @@ export default function HRFileCompany(props) {
           {tinhThanhPhoData && tinhThanhPhoData.length > 0
             ? tinhThanhPhoData.map((tinhThanhPho) => (
               <option
-                value={tinhThanhPho.provinceCode}
-                key={tinhThanhPho.provinceCode}
+                value={tinhThanhPho.code}
+                key={tinhThanhPho.code}
               >
-                {tinhThanhPho.fullName}
+                {tinhThanhPho.name}
               </option>
             ))
             : null}
@@ -668,10 +666,10 @@ export default function HRFileCompany(props) {
           {huyenQuanData && huyenQuanData.length > 0
             ? huyenQuanData.map((huyenQuan) => (
               <option
-                value={huyenQuan.districtCode}
-                key={huyenQuan.districtCode}
+                value={huyenQuan.code}
+                key={huyenQuan.code}
               >
-                {huyenQuan.fullName}
+                {huyenQuan.name}
               </option>
             ))
             : null}
@@ -690,8 +688,8 @@ export default function HRFileCompany(props) {
           <option value="">Chọn xã/phường</option>
           {xaPhuongData && xaPhuongData.length > 0
             ? xaPhuongData.map((xaPhuong) => (
-              <option value={xaPhuong.wardCode} key={xaPhuong.wardCode}>
-                {xaPhuong.fullName}
+              <option value={xaPhuong.code} key={xaPhuong.code}>
+                {xaPhuong.name}
               </option>
             ))
             : null}

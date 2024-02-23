@@ -7,13 +7,7 @@ import Routes from './components/Routes'
 
 function Admin(props) {
   const userSignin = useSelector((state) => state.userSignin);
-  // const { userInfo, error } = userSignIn;
   const history = useHistory();
-
-  // if (!userInfo || !userInfo.isAdmin) {
-  //   history.push('/');
-  // }
-
   return (
     <Router>
       <Route

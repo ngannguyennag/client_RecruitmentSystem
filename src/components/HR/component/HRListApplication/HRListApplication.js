@@ -134,6 +134,9 @@ function HRListApplication() {
         <option value="0">Đang xem xét hồ sơ</option>
         <option value="1">Đậu hồ sơ</option>
         <option value="2">Trượt hồ sơ</option>
+        <option value="3">Đang phỏng vấn</option>
+        <option value="4">Đậu phỏng vấn</option>
+        <option value="5">Trượt phỏng vấn</option>
       </select>
     );
   };
@@ -232,13 +235,13 @@ function HRListApplication() {
                       <img
                         src={application && application.candidateImgUrl}
                         alt="avatar"
-                        style={{ border: ' blue 3px', cursor: 'pointer', width: '100px', height: '100px', marginTop: '20px' }}
+                        style={{ border: ' blue 3px', cursor: 'pointer', width: '100px', height: '80px', marginTop: '20px' }}
                       />
                     </h4>
                     <div className="aboutDetailCandidateApplication">
                       <h4>Ứng viên:  {application?.candidateFullName}</h4>
                       <h4>Năm sinh: {application?.candidateBirthday ? new Date(application.candidateBirthday).getFullYear() : ''}</h4>
-                      <h4 >Thời gian ứng tuyển: {application?.applicationTimeAgo}</h4>
+                      <h4>Thời gian ứng tuyển: {application?.applicationTimeAgo}</h4>
                     </div> 
                     <div className='resultApplication'>
                       <div className='userApplicationStatus'>Kết quả: {getStatusLabel(application.applicationStatus)}</div>

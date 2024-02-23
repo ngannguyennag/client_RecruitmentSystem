@@ -74,7 +74,7 @@ function UserListApplication(props) {
                 <div>
                   <div className="sidebarUser-top">
                     <i className="accountUser">
-                      <img src={users && users[0].candidateImgUrl} alt="avatar" style={{ border: ' blue 3px', cursor: 'pointer', width: '200px', height: '200px', marginTop: '20px' }} />
+                      <img src={users && users[0].candidateImgUrl} alt="avatar" style={{ border: ' blue 3px', cursor: 'pointer', width: '160px', height: '130px', marginTop: '20px' }} />
                     </i>
                   </div>
                 </div>
@@ -93,17 +93,15 @@ function UserListApplication(props) {
               users.map((candidate) => (
                 <div key={candidate.jobId} className="job-entry">
                   <div className="detailUserApplication">
-                    <h4>
                       <img
                         src={candidate && candidate.companyLogo}
                         alt="avatar"
-                        style={{ border: ' blue 3px', cursor: 'pointer', width: '50px', height: '50px', marginTop: '20px' }}
+                        style={{ border: ' blue 3px', cursor: 'pointer', width: '50px', height: '50px', margin: '10px -10px 10px 10px' }}
                       />
-                    </h4>
                     <div className="aboutDetailUserApplication">
-                      <h6><Link to={`/detail_jobs/${candidate.jobId}`}>Công việc: {candidate.jobName}</Link></h6>
-                      <h4>Công ty: {candidate.companyName} </h4>
-                      <h4>Số lượng yêu cầu: {candidate.jobQuantity}</h4>
+                      <div ><Link to={`/detail_jobs/${candidate.jobId}`} style={{fontSize:'15px'}}>Công việc: {candidate.jobName}</Link></div>
+                      <h5>Công ty: {candidate.companyName} </h5>
+                      <h5>Số lượng yêu cầu: {candidate.jobQuantity}</h5>
                       <div className='userApplicationStatus'>Kết quả: {getStatusLabel(candidate.applicationStatus)}</div>
                     </div>
                   </div>

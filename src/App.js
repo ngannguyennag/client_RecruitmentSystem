@@ -3,19 +3,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import ProductPage from './pages/ProductPage';
 import DetailPage from './pages/DetailPage';
-import CartPage from './pages/CartPage';
-import OrderPage from './pages/OrderPage';
 import SearchPage from './pages/SearchPage';
 import AdminPage from './pages/AdminPage';
 import UserPage from './pages/UserPage';
 import HRPage from './pages/HRPage';
 import ResetScroll from './components/ResetScroll/ResetScroll';
-import MyOrderPage from './pages/MyOrderPage';
-import ChatPage from './pages/ChatPage';
-import PaymentPage from './pages/PaymentPage';
-import OrderSuccessPage from './pages/OrderSuccessPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ConfirmEmailPage from './components/Signup/ConfirmEmail';
@@ -58,44 +51,17 @@ function App() {
         <Route path="/register">
           <SignupPage></SignupPage>
         </Route>
-        <Route path="/product">
-          <ProductPage></ProductPage>
-        </Route>
         <Route path="/detail/:id">
           <DetailPage></DetailPage>
         </Route>
-        <Route path='/cart'>
-          <CartPage></CartPage>
-        </Route>
-        <Route path='/order'>
-          <OrderPage></OrderPage>
-        </Route>
-
-        <Route path='/orderSuccess'>
-          <OrderSuccessPage></OrderSuccessPage>
-        </Route>
-
-        <Route path='/payment'>
-          <PaymentPage></PaymentPage>
-        </Route>
-
-        <Route path='/MyOrder'>
-          <MyOrderPage></MyOrderPage>
-        </Route>
-
         <Route path='/search'>
           <SearchPage></SearchPage>
         </Route>
-
-        <Route path='/chat'>
-          <ChatPage></ChatPage>
-        </Route>
-
         <Route path='/admin'>
           <AdminPage></AdminPage>
         </Route>
         
-        <Route path='/user'>
+        <Route path='/candidate'>
           <UserPage></UserPage>
         </Route>
         <Route path='/hr'>
@@ -104,20 +70,20 @@ function App() {
         <Route path='/userfile'>
           <UserFilePage></UserFilePage>
         </Route>
-        <Route path='/userfileedit'>
+        {/* <Route path='/userfileedit'>
           <UserFileEditPage></UserFileEditPage>
-        </Route>
+        </Route> */}
         <Route path='/userfileupdate'>
           <UserFileUpdatePage></UserFileUpdatePage>
         </Route>
 
-        <Route path='/usermanage'>
+        <Route path='/candidate/manage-account'>
           <UserManageAccountPage></UserManageAccountPage>
         </Route>
         <Route path='/useruploadavatar'>
           <UserUploadAvatar></UserUploadAvatar>
         </Route>
-       <Route path='/usermanagepassword'>
+       <Route path='/candidate/manage-password'>
         <UserManagePasswordPage></UserManagePasswordPage>
        </Route>
         <Route path="/company">
@@ -147,7 +113,7 @@ function App() {
         <Route path="/detail_jobs/:jobId">
           <DetailJobPage></DetailJobPage>
         </Route>
-        <Route path="/user-list-application">
+        <Route path="/list-application">
           <UserListApplicationPage></UserListApplicationPage>
         </Route>
       </Router>

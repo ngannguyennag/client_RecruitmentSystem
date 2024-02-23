@@ -30,19 +30,19 @@ function Sidebar(props) {
         {/* <img src={users.imgUrl}></img> */}
       </div>
       <div className="sidebar-list">
-        <Link to="/user/profile-candidate" className={'sidebar-list-item'}>
+        <Link to="/candidate/profile-candidate" className={'sidebar-list-item'}>
           <span>
             <UserOutlined />
           </span>
           <p>Hồ sơ ứng viên</p>
         </Link>
-        <Link to="/user/user-list-application" className={'sidebar-list-item'}>
+        <Link to="/candidate/list-application" className={'sidebar-list-item'}>
           <span>
             <UnorderedListOutlined />
           </span>
           <p>Danh sách ứng tuyển</p>
         </Link>
-        <Link to="/admin/notification" className={'sidebar-list-item'}>
+        <Link to="/candidate/manage-account" className={'sidebar-list-item'}>
           <span>
             <SettingOutlined />          
           </span>
@@ -50,7 +50,7 @@ function Sidebar(props) {
             Cài đặt tài khoản
           </p>
         </Link>
-        <Link to="/user/notification" className={'sidebar-list-item'}>
+        <Link to="/candidate/notification" className={'sidebar-list-item'}>
           <span>
             <NotificationOutlined />
           </span>

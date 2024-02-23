@@ -52,9 +52,15 @@ table th{
 }
 table td{
     padding: .5rem 0;
-    font-size: 13.5px;
+    font-size: 12px;
     border-right: 1px solid black;
 
+}
+.form-div-manage-job{
+    display: flex;
+    flex-direction: row;
+    color: black;
+    margin-bottom: 10px;
 }
 .form-div,table td button{
     color: black;

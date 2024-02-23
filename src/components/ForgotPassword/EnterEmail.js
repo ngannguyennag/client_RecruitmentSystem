@@ -32,7 +32,7 @@ const ResetPassword = () => {
         className="form-forgot-password"
       >
         <div className="imgLogo">
-          <img src="img/J.png"></img>
+          <img src="/img/J.png"></img>
         </div>
         <h2>Quên mật khẩu</h2>
         <div className="title-email">

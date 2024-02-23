@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllRoleByAdmin, saveRoleByAdmin, deleteRoleByAdmin, addRoleByAdmin, pageRoleByAdmin } from '../../../../actions/AuthenticationAction';
+import { getAllRoleByAdmin, saveRoleByAdmin, deleteRoleByAdmin} from '../../../../actions/AuthenticationAction';
 import './AdminManageRole.css';
 import { EditOutlined, DeleteOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
@@ -42,7 +42,12 @@ function AdminManageRole(props) {
             dispatch(getAllRoleByAdmin({ ...page, page: newPage, size: pageSize }, token))
         }
     };
-
+    const pageSizes = [10, 20, 30, 50];
+    const handleChangePageSize = (size) => {
+        setPageSize(size);
+        dispatch(getAllRoleByAdmin({ ...page, page: 1, size: size }, token));
+        setCurrentPage(1);
+    };
     useEffect(() => {
         dispatch(getAllRoleByAdmin(page, token));
     }, [dispatch]);
@@ -51,9 +56,9 @@ function AdminManageRole(props) {
         if (displayedRole) {      
             setDisplayedRoles(displayedRole.data); // Cập nhật danh sách quyền khi tải trang
             setTotalElements(displayedRole.total); // Cập nhật tổng số phần tử
-            setTotalPage(Math.ceil(displayedRole.total / page.size));
+            setTotalPage(Math.ceil(displayedRole.total / pageSize));
         }
-    }, [displayedRole, page.size]);
+    }, [displayedRole, pageSize]);
     useEffect(() => {
         if (name === '') {
             handleSearchRole('', token);
@@ -72,7 +77,7 @@ function AdminManageRole(props) {
             .catch(error => console.error("Error saving role:", error));
     };
     const handleAddRole = () => {
-        dispatch(addRoleByAdmin(selectedRole, token))
+        dispatch(saveRoleByAdmin(selectedRole, token))
             .then(() => {
                 dispatch(getAllRoleByAdmin(page, token))
             })
@@ -114,6 +119,20 @@ function AdminManageRole(props) {
                 setIsLoading(false);
             });
     };
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+          if (event.keyCode === 13) {
+            console.log(event.target.value);
+            handleSearchRole(event.target.value);
+          }
+        };
+    
+        document.addEventListener('keypress', handleKeyPress);
+    
+        return () => {
+          document.removeEventListener('keypress', handleKeyPress);
+        };
+      }, []);
     const handleEditClick = (role) => {
         setIsEditing(true);
         setSelectedRole(role);
@@ -159,7 +178,6 @@ function AdminManageRole(props) {
                                             <div className='code-1'>Tên quyền <span style={{ color: 'red' }}> * </span></div>
                                             <input type="text" value={selectedRole?.name || ''} onChange={(e) => setSelectedRole({ ...selectedRole, name: e.target.value })} />
                                         </div>
-
                                         <div className="role-button">
                                             <button className="role-button-1" type="submit" style={{ backgroundColor: "rgb(19, 125, 178)", color: 'white' }}>Lưu</button>
                                             <button className="role-button-2" type="button" style={{ backgroundColor: "#c0392b", color: 'black' }} onClick={handleCancelAddNewRole}>Hủy</button>
@@ -225,10 +243,15 @@ function AdminManageRole(props) {
                                 )}
                             </>
                         )}
-                        <div style={{color: 'black'}}>
-                            <button onClick={goToPreviousPage}>Trang trước</button>
+                        <div style={{color: 'black', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                            <button style={{width: '20px'}} onClick={goToPreviousPage}>{"<"}</button>
                             <span>Trang {currentPage} / {totalPage}</span>
-                            <button onClick={goToNextPage}>Trang tiếp theo</button>
+                            <button style={{width: '20px'}} onClick={goToNextPage}>{">"}</button>
+                            <select style={{width: '80px', marginLeft: '20px'}} value={pageSize} onChange={(e) => handleChangePageSize(parseInt(e.target.value))}>
+                                {pageSizes.map(size => (
+                                    <option key={size} value={size}>{size}/trang</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                 )

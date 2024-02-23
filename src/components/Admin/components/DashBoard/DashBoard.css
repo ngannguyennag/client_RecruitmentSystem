@@ -1,107 +1,102 @@
-*{
-    box-sizing: content-box;
-}
-.dashboard-top {
-    padding: 1rem;
-  display: flex;
-  align-items: center;
+* {
+    box-sizing: border-box;
 }
 
-.dashboard-top-search form {
-  position: relative;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+#dashboard {
+    padding-bottom: 20px;
 }
-.dashboard-top-search input {
-  border: none;
-  outline: none;
-  width: 100%;
-  padding: 0.5rem 2rem .5rem 1rem;
-}
-.dashboard-top-search span {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-.dashboard-top-content-avatar img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-.dashboard-top-content{
-    display: flex;
-    flex-grow: 1;
-    justify-content: flex-end;
-}
-.dashboard-top-content li{
-    margin-left: 1rem;
-}
-.dashboard-top-content-avatar{
+
+.dashboard-top {
+    padding: 1rem;
     display: flex;
     align-items: center;
 }
-.dashboard-top-content-avatar span{
+
+.dashboard-top-search form {
+    position: relative;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.dashboard-top-search span {
+    position: absolute;
+    right: 15px; /* Điều chỉnh khoảng cách so với viền phải */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+.dashboard-top-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.dashboard-top-content li {
+    margin-left: 1rem;
+}
+
+.dashboard-top-content-avatar span {
     font-weight: 500;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     color: #6b6b6b;
 }
-.dashboard-top-content-bell{
+
+.dashboard-top-content-bell {
     font-size: 20px;
     font-weight: 600;
 }
 
 /* middle */
-.dashboard-middle{
-    margin-top: 1rem;
+.dashboard-middle {
+    margin: 20px;
     display: flex;
+    justify-content: center; /* Đảm bảo các phần tử trong middle được căn giữa */
 }
-.dashboard-middle-statistic{
-    width: 50%;
+
+.dashboard-middle-statistic {
+    width: 100%;
+    max-width: 1400px; /* Giới hạn chiều rộng tối đa */
     display: flex;
     flex-wrap: wrap;
-}
-.dashboard-middle-statistic-content{
-     width: 50%;
-     padding: 1rem;
+    gap: 50px; /* Khoảng cách giữa các phần tử con */
 }
 
-.dashboard-middle-statistic li{
+.dashboard-middle-statistic-content {
+    flex: 1 1 calc(50% - 50px);
     background: white;
-    padding: 45px 0;
+    padding: 24px 16px;
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 130px;
 }
-.dashboard-middle-statistic-icon{
+
+.dashboard-middle-statistic-icon {
     font-size: 35px;
     font-weight: 700;
     color: #6b6b6b;
-
 }
-.dashboard-middle-statistic-title{
-    margin-left: 4rem;
 
+.dashboard-middle-statistic-title {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.dashboard-middle-statistic-title .title {
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    margin-left: 24px;
+}
+
+.dashboard-middle-chart {
+    flex: 1; /* Để biểu đồ có thể mở rộng ra hết không gian có sẵn */
     display: flex;
     flex-direction: column;
-}
-.dashboard-middle-statistic-title .total{
-    font-size: 25px;
-    font-weight: 700;
-    color: #6b6b6b;
-}
-.dashboard-middle-statistic-title .title{
-    font-size: 13px;
-    font-weight: 500;
-    color: gray;
+    justify-content: center; /* Căn giữa biểu đồ */
+    align-items: center; /* Căn giữa theo chiều dọc */
 }
 
-
-.dashboard-middle-chart{
-    width: 50%;
-    padding: 1rem;
+.dashboard-middle-chart h3 {
+    text-align: center; /* Căn giữa tiêu đề */
 }

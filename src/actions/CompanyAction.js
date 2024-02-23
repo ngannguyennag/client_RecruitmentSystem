@@ -1,9 +1,6 @@
 import axios from "axios";
 
-export const getAllCompany = () => async (dispatch, getState) => {
-  // const {
-  //   userSignin: { userInfo },
-  // } = getState();
+export const getAllCompany = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
       "http://localhost:8080/api/v1/companies/all"
@@ -14,16 +11,10 @@ export const getAllCompany = () => async (dispatch, getState) => {
   }
 };
 
-export const getAllCompanyByAdmin = (token) => async (dispatch) => {
+export const getAllCompanyByAdmin = (page) => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/admin/manage/companies/all",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    const { data } = await axios.post(
+      "http://localhost:8080/api/v1/companies/get-all",page,
     );
     dispatch({ type: "GET_ALL_COMPANY_BY_ADMIN_SUCCESS", payload: data });
   } catch (error) {
@@ -148,7 +139,7 @@ export const getWards = (codeDistrict) => async (dispatch) => {
 export const getIndustry = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/api/v1/industries/all"
+      "http://localhost:8080/api/v1/industry/all"
     );
     const { data } = response;
     dispatch({ type: "GET_INDUSTRY", payload: data });

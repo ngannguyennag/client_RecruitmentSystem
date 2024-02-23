@@ -1,5 +1,4 @@
 import React from 'react'
-import AppChat from '../components/AppChat/AppChat'
 import  HRManageWork from '../components/HR/component/HRManageWork/HRManageWork'
 import { useSelector } from 'react-redux';
 function HRManageWorkPage(props){
@@ -7,9 +6,7 @@ function HRManageWorkPage(props){
     return(
         <div style={{position: 'relative'}}>
             <HRManageWork></HRManageWork>
-            {
-               userInfo && userInfo.isUser === false ? (<AppChat></AppChat>) : ""
-            }        </div>
+        </div>
     );
  }
 

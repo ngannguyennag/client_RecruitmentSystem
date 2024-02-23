@@ -13,7 +13,7 @@
 }
 .logoCompany img{
     width: auto;
-    height: 200px;
+    height: 180px;
 }
 .nameCompany{
     color: rgb(6, 88, 132);
@@ -83,8 +83,8 @@
 .hero .button {
     width: 8%;
     font-size: 13px;
-    background-color: rgb(18, 112, 140);
-    color: #333;
+    background-color: rgb(232, 55, 6);
+    color: white;
 }
 
 .hero .button:hover {

@@ -6,30 +6,10 @@ import {
   uploadCVReducer,
   uploadImageReducer,
   getAllCandidateReducer,
+  getAllCandidateDashboardReducer,
   getCandidateByNameReducer,
+  getAllCompanyByCandidateReducer,
 } from "./reducers/CandidateReducer";
-import {
-  getAllProductReducer,
-  getProductByIdReducer,
-  searchProductReducer,
-} from "./reducers/ProductReducer";
-import { CartReducer } from "./reducers/CartReducer";
-import {
-  addressReducer,
-  getOrderByUserReducer,
-  OrderInfoReducer,
-  orderPayReducer,
-} from "./reducers/OrderReducer";
-import { ChatReducer } from "./reducers/ChatReducer";
-import {
-  SelectListReducer,
-  UpdateSelectListReducer,
-} from "./reducers/SelectListReducer";
-import {
-  ListTypeProductReducer,
-  TypeProductReducer,
-} from "./reducers/ListTypeProductReducer";
-import { InfoGhnReducer } from "./reducers/GhnReducer";
 import {
   getCompanyTopReducer,
   getAllCompany,
@@ -45,6 +25,9 @@ import {
 import {
   getCategoryReducer,
   getHotCategoryReducer,
+  getAllCategoryReducer,
+  saveCategoryByAdminReducer,
+  deleteCategoryByAdminReducer
 } from "./reducers/CategoryReducer";
 import {
   getAllJobByAdminReducer,
@@ -56,6 +39,7 @@ import {
   getJobByIdReducer,
   getJobByStatusReducer,
   getCompanyManageJobByIdReducer,
+  getAllJobByCandidateReducer,
 } from "./reducers/JobReducer";
 import {
   updateCompanyBasicInfoReducer,
@@ -71,16 +55,44 @@ import {
   getRecruitmentCandidateReducer,
   getRecruitmentManageAddInterviewReducer,
   getRecruitmentManageChangeStatusReducer,
+  getRecruitmentReducer,
 } from "./reducers/RecruitmentReducer";
 import {
   CandidateSignUpReducer,
   LoginReducer,
-  addRoleByAdminReducer,
-  deleteRoleByAdminReducer,
   getAllRoleReducer,
-  pageRoleByAdminReducer,
+  addRoleByAdminReducer,
   saveRoleByAdminReducer,
+  deleteRoleByAdminReducer,
+  pageRoleByAdminReducer,
 } from "./reducers/AuthenticationReducer";
+import {
+  getAllSkillReducer,
+  addSkillByAdminReducer,
+  saveSkillByAdminReducer,
+  deleteSkillByAdminReducer,
+  pageSkillByAdminReducer,
+  getSkillReducer,
+} from "./reducers/SkillReducer";
+import {
+  getAllDegreeReducer,
+  addDegreeByAdminReducer,
+  saveDegreeByAdminReducer,
+  deleteDegreeByAdminReducer,
+  pageDegreeByAdminReducer,
+  getDegreeReducer,
+} from "./reducers/DegreeReducer";
+import {
+  getAllIndustryReducer,
+  saveIndustryByAdminReducer,
+  deleteIndustryByAdminReducer,
+} from "./reducers/IndustryReducer";
+import {
+  getAllJobTypeReducer,
+  saveJobTypeByAdminReducer,
+  deleteJobTypeByAdminReducer,
+  getJobTypeReducer,
+} from "./reducers/JobTypeReducer";
 import { getNotificationReducer } from "./reducers/NotificationReducer";
 import { getStatisticalByAdminReducer, getStatisticalByCompanyReducer } from "./reducers/SystemReducer";
 
@@ -106,14 +118,40 @@ const reducer = combineReducers({
   deleteRole: deleteRoleByAdminReducer,
   addRole: addRoleByAdminReducer,
   pageRole: pageRoleByAdminReducer,
+  /* Skill */
+  skill: getAllSkillReducer,
+  saveSkill: saveSkillByAdminReducer,
+  deleteSkill: deleteSkillByAdminReducer,
+  addSkill: addSkillByAdminReducer, 
+  pageSkill: pageSkillByAdminReducer,
+  getSkill: getSkillReducer,
+  /* Degree */
+  degree: getAllDegreeReducer,
+  saveDegree: saveDegreeByAdminReducer,
+  deleteDegree: deleteDegreeByAdminReducer,
+  addDegree: addDegreeByAdminReducer, 
+  pageDegree: pageDegreeByAdminReducer,
+  getDegree: getDegreeReducer,
+  /* Industry */
+  industry: getAllIndustryReducer,
+  saveIndustry: saveIndustryByAdminReducer,
+  deleteIndustry: deleteIndustryByAdminReducer,
+  getIndustry: getIndustryReducer,
+  /* JobType */
+  jobType: getAllJobTypeReducer,
+  saveJobType: saveJobTypeByAdminReducer,
+  deleteJobType: deleteJobTypeByAdminReducer,
+  getJobType: getJobTypeReducer,
   /* Candidate */
   candidates: getAllCandidateReducer,
+  candidateDashboard: getAllCandidateDashboardReducer,
   candidateSearch: getCandidateByNameReducer,
   getCandidateInfo: getCandidateInfoReducer,
   getCandidateUpdate: getCandidateUpdateReducer,
   uploadImage: uploadImageReducer,
   uploadCV: uploadCVReducer,
-
+  // getCandidate: getAllCandidateDashboardReducer,
+  companyAllByCandidate: getAllCompanyByCandidateReducer,
   /* Company */
   companyAll: getAllCompany,
   companySearch: getCompanyByNameReducer,
@@ -129,8 +167,9 @@ const reducer = combineReducers({
 
   /* Job */
   jobAll: getAllJob,
-  jobAdmin: getAllJobByAdminReducer,
-  jobCompany: getAllJobByCompanyReducer,
+  jobByAdmin: getAllJobByAdminReducer,
+  jobByCandidate: getAllJobByCandidateReducer,
+  jobByCompany: getAllJobByCompanyReducer,
   jobSearch: getJobByNameReducer,
   createWork: createWorkReducer,
   getJobTop: getJobTopReducer,
@@ -145,10 +184,13 @@ const reducer = combineReducers({
   getApplicationIntervieweeByJobAndStatus: getApplicationIntervieweeByJobAndStatusReducer,
   getRecruitmentManageChangeStatus: getRecruitmentManageChangeStatusReducer,
   getRecruitmentManageAddInterview: getRecruitmentManageAddInterviewReducer,
+  recruitmentAll: getRecruitmentReducer,
   /* Category */
   getCategory: getCategoryReducer,
   getHotCategory: getHotCategoryReducer,
-
+  category: getAllCategoryReducer,
+  saveCategory: saveCategoryByAdminReducer,
+  deleteCategory: deleteCategoryByAdminReducer,
   /* Address */
   getProvince: getProvinceReducer,
   getDistrict: getDistrictReducer,
@@ -164,23 +206,6 @@ const reducer = combineReducers({
   getStatisticalByAdmin: getStatisticalByAdminReducer,
   getStatisticalByCompany: getStatisticalByCompanyReducer,
 
-
-
-  allProduct: getAllProductReducer,
-  getProductById: getProductByIdReducer,
-  searchProduct: searchProductReducer,
-  cart: CartReducer,
-  // allOrder: getAllOrderReducer,
-  address: addressReducer,
-  orderByUser: getOrderByUserReducer,
-  orderInfo: OrderInfoReducer,
-  payOrder: orderPayReducer,
-  orderGhn: InfoGhnReducer,
-  chat: ChatReducer,
-  selectList: SelectListReducer,
-  updateSelect: UpdateSelectListReducer,
-  allTypeProduct: ListTypeProductReducer,
-  detailType: TypeProductReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

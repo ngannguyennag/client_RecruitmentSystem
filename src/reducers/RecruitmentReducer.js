@@ -64,4 +64,13 @@ export const applyJobReducer = (state = {}, action) => {
     }
   };
   
-  
+  export const getRecruitmentReducer = (state = {}, action) => {
+    switch (action.type) {
+      case "GET_RECRUITMENT_SUCCESS":
+        return { ...state, recruitment: action.payload };
+      case "GET_RECRUITMENT_FAIL":
+        return { ...state, error: action.payload };
+      default:
+        return state;
+    }
+  };

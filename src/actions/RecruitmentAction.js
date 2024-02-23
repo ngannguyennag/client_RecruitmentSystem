@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const getRecruitment = () => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8080/api/v1/recruitment/all"
+    );
+    const { data } = response;
+    dispatch({ type: "GET_RECRUITMENT_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_RECRUITMENT_FAIL", payload: error.message });
+  }
+};
+
 export const applyJob = (jobId, token) => async (dispatch) => {
   try {
     const { data } = await axios.post(

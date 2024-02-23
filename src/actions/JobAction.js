@@ -1,15 +1,9 @@
 import axios from "axios";
 
-export const getAllJobByAdmin = (token) => async (dispatch, getState) => {
+export const getAllJobByAdmin = (page, token) => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/admin/manage/jobs/all",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    const { data } = await axios.post(
+      "http://localhost:8080/api/v1/admin/manage/jobs/all", page ,
     );
     dispatch({ type: "GET_ALL_JOB_BY_ADMIN_SUCCESS", payload: data });
   } catch (error) {
@@ -17,6 +11,16 @@ export const getAllJobByAdmin = (token) => async (dispatch, getState) => {
   }
 };
 
+export const getAllJobByCandidate = (page, token) => async (dispatch, getState) => {
+  try {
+    const { data } = await axios.post(
+      "http://localhost:8080/api/v1/jobs/get-all", page ,
+    );
+    dispatch({ type: "GET_ALL_JOB_BY_CANDIDATE_SUCCESS", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_ALL_JOB_BY_CANDIDATE_FAIL", payload: error.message });
+  }
+};
 export const getJobTop = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
@@ -28,10 +32,10 @@ export const getJobTop = () => async (dispatch) => {
   }
 };
 
-export const getAllJobByCompany = (token) => async (dispatch) => {
+export const getAllJobByCompany = (page, token) => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "http://localhost:8080/api/v1/company/manage/jobs/all",
+    const { data } = await axios.post(
+      "http://localhost:8080/api/v1/company/manage/jobs/all", page,
       {
         headers: {
           "Content-Type": "application/json",
@@ -45,10 +49,10 @@ export const getAllJobByCompany = (token) => async (dispatch) => {
   }
 };
 
-export const getCompanyManageJobById = (companyId) => async (dispatch) => {
+export const getCompanyManageJobById = (page, companyId) => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:8080/api/v1/jobs/${companyId}/all`
+    const { data } = await axios.post(
+      `http://localhost:8080/api/v1/jobs/${companyId}/all`, page
     );
     dispatch({ type: "GET_COMPANY_MANAGE_JOB_BY_ID_SUCCESS", payload: data });
   } catch (error) {
@@ -56,7 +60,7 @@ export const getCompanyManageJobById = (companyId) => async (dispatch) => {
   }
 };
 
-export const getAllJob = () => async (dispatch, getState) => {
+export const getAllJob = () => async (dispatch) => {
   try {
     const { data } = await axios.get("http://localhost:8080/api/v1/jobs/all");
     dispatch({ type: "GET_ALL_JOB_SUCCESS", payload: data });
