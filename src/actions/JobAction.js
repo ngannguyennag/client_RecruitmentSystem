@@ -144,5 +144,7 @@ export const createWork = (job, token) => async (dispatch) => {
       }
     );
     dispatch({ type: "CREATE_WORK_SUCCESS", payload: data });
-  } catch (error) {}
+  } catch (error) {
+    dispatch({ type: "CREATE_WORK_FAIL", payload: error.message })
+  }
 };

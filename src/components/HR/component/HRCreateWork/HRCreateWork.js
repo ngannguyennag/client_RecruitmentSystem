@@ -36,30 +36,31 @@ export default function HRCreateWork() {
     const tinhThanhPhoData = useSelector((state) => state.getProvince.province);
     const huyenQuanData = useSelector((state) => state.getDistrict.district);
     const xaPhuongData = useSelector((state) => state.getWards.wards );
+    const [selectedTinhThanhPho, setSelectedTinhThanhPho] = useState("");
     const [selectedHuyenQuan, setSelectedHuyenQuan] = useState("");
     const [selectedXaPhuong, setSelectedXaPhuong] = useState("");
     var tinhThanhPhoCompany = "";
     var huyenQuanCompany = "";
     var xaPhuongCompany = "";
 
-    if (!(users===undefined)) {
-      tinhThanhPhoCompany = users.companyAddress.provinceCode;
-      huyenQuanCompany = users.companyAddress.districtCode;
-      xaPhuongCompany = users.companyAddress.wardCode;
-    }
-    const [selectedTinhThanhPho, setSelectedTinhThanhPho] = useState("1");
-    useEffect(() => {
-      // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
-      setSelectedHuyenQuan(huyenQuanCompany);
-    }, [huyenQuanCompany]);
-    useEffect(() => {
-      // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
-      setSelectedXaPhuong(xaPhuongCompany);
-    }, [xaPhuongCompany]);
-    useEffect(() => {
-      // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
-      setSelectedTinhThanhPho(tinhThanhPhoCompany);
-    }, [tinhThanhPhoCompany]);
+    // if (!(users===undefined)) {
+    //   tinhThanhPhoCompany = users.companyAddress.provinceCode;
+    //   huyenQuanCompany = users.companyAddress.districtCode;
+    //   xaPhuongCompany = users.companyAddress.wardCode;
+    // }
+    // useEffect(() => {
+    //   // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
+    //   setSelectedHuyenQuan(huyenQuanCompany);
+    // }, [huyenQuanCompany]);
+    // useEffect(() => {
+    //   // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
+    //   setSelectedXaPhuong(xaPhuongCompany);
+    // }, [xaPhuongCompany]);
+    // useEffect(() => {
+    //   // Cập nhật giá trị của selectedIndustry khi industryCompany thay đổi
+    //   setSelectedTinhThanhPho(tinhThanhPhoCompany);
+    // }, [tinhThanhPhoCompany]);
+    console.log(selectedTinhThanhPho);
     useEffect(() => {
       dispatch(getProvince());
     }, []);
@@ -74,55 +75,110 @@ export default function HRCreateWork() {
         dispatch(getWards(selectedHuyenQuan));
       }
     }, [selectedHuyenQuan]);
-    const TinhThanhPhoSelector = ({ onSelectTinhThanhPho }) => (
-      <select
-        value={selectedTinhThanhPho}
-        onChange={(e) => onSelectTinhThanhPho(e.target.value)}
-      >
-        <option value="">Chọn tỉnh/thành phố</option>
-        {tinhThanhPhoData && tinhThanhPhoData.length > 0 ? (
-          tinhThanhPhoData.map((tinhThanhPho) => (
-            <option value={tinhThanhPho.code} key={tinhThanhPho.code}>
-              {tinhThanhPho.fullName}
-            </option>
-          ))
-        ) : null}
-      </select>
-    );
-
-    const HuyenQuanSelector = ({ onSelectHuyenQuan }) => (
-      <select
-        value={selectedHuyenQuan}
-        onChange={(e) => onSelectHuyenQuan(e.target.value)}
-      >
-        <option value="">Chọn huyện/quận</option>
-        {huyenQuanData && huyenQuanData.length > 0 ? (
-          huyenQuanData
-            .map((huyenQuan) => (
-              <option value={huyenQuan.code} key={huyenQuan.code}>
-                {huyenQuan.fullName}
-              </option>
-            ))
-        ) : null}
-      </select>
-    );
-
-    const XaPhuongSelector = ({ onSelectXaPhuong }) => (
-      <select
-        value={selectedXaPhuong}
-        onChange={(e) => onSelectXaPhuong(e.target.value)}
-      >
-        <option value="">Chọn xã/phường</option>
-        {xaPhuongData && xaPhuongData.length > 0 ? (
-          xaPhuongData
-            .map((xaPhuong) => (
-              <option value={xaPhuong.code} key={xaPhuong.code}>
-                {xaPhuong.fullName}
-              </option>
-            ))
-        ) : null}
-      </select>
-    );
+    // const TinhThanhPhoSelector = ({ onSelectTinhThanhPho }) => (
+    //   <select
+    //     value={selectedTinhThanhPho}
+    //     onChange={(e) => onSelectTinhThanhPho(e.target.value)}
+    //   >
+    //     <option value="">Chọn tỉnh/thành phố</option>
+    //     {tinhThanhPhoData && tinhThanhPhoData.length > 0 ? (
+    //       tinhThanhPhoData.map((tinhThanhPho) => (
+    //         <option value={tinhThanhPho.code} key={tinhThanhPho.code}>
+    //           {tinhThanhPho.name}
+    //         </option>
+    //       ))
+    //     ) : null}
+    //   </select>
+    // );
+    const TinhThanhPhoSelector = ({ onSelectTinhThanhPho }) => {
+      const handleSelectChange = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedTinhThanhPho(selectedValue);
+        onSelectTinhThanhPho(selectedValue);
+      };
+      return (
+        <select value={selectedTinhThanhPho} onChange={handleSelectChange} style={{width:'100%', height:'35px'}}>
+          <option value="">Chọn tỉnh/thành phố</option>
+          {tinhThanhPhoData && tinhThanhPhoData.length > 0
+            ? tinhThanhPhoData.map((tinhThanhPho) => (
+                <option  value={tinhThanhPho.code}  key={tinhThanhPho.code}>
+                  {tinhThanhPho.name}
+                </option>
+              ))
+            : null}
+        </select>
+      );
+    };
+    const HuyenQuanSelector = ({ onSelectHuyenQuan }) => {
+      const handleSelectChange = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedHuyenQuan(selectedValue);
+        onSelectHuyenQuan(selectedValue);
+      };
+      return (
+        <select value={selectedHuyenQuan} onChange={handleSelectChange} style={{width:'100%', height:'35px'}}>
+          <option value="">Chọn huyện/quận</option>
+          {huyenQuanData && huyenQuanData.length > 0
+            ? huyenQuanData.map((huyenQuan) => (
+                <option  value={huyenQuan.code}  key={huyenQuan.code}>
+                  {huyenQuan.name}
+                </option>
+              ))
+            : null}
+        </select>
+      );
+    };
+    // const HuyenQuanSelector = ({ onSelectHuyenQuan }) => (
+    //   <select
+    //     value={selectedHuyenQuan}
+    //     onChange={(e) => onSelectHuyenQuan(e.target.value)}
+    //   >
+    //     <option value="">Chọn huyện/quận</option>
+    //     {huyenQuanData && huyenQuanData.length > 0 ? (
+    //       huyenQuanData
+    //         .map((huyenQuan) => (
+    //           <option value={huyenQuan.code} key={huyenQuan.code}>
+    //             {huyenQuan.name}
+    //           </option>
+    //         ))
+    //     ) : null}
+    //   </select>
+    // );
+    const XaPhuongSelector = ({ onSelectXaPhuong }) => {
+      const handleSelectChange = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedXaPhuong(selectedValue);
+        onSelectXaPhuong(selectedValue);
+      };
+      return (
+        <select value={selectedXaPhuong} onChange={handleSelectChange} style={{width:'100%', height:'35px'}}>
+          <option value="">Chọn xã/phường</option>
+          {xaPhuongData && xaPhuongData.length > 0
+            ? xaPhuongData.map((xaPhuong) => (
+                <option value={xaPhuong.code} key={xaPhuong.code}>
+                  {xaPhuong.name}
+                </option>
+              ))
+            : null}
+        </select>
+      );
+    };
+    // const XaPhuongSelector = ({ onSelectXaPhuong }) => (
+    //   <select
+    //     value={selectedXaPhuong}
+    //     onChange={(e) => onSelectXaPhuong(e.target.value)}
+    //   >
+    //     <option value="">Chọn xã/phường</option>
+    //     {xaPhuongData && xaPhuongData.length > 0 ? (
+    //       xaPhuongData
+    //         .map((xaPhuong) => (
+    //           <option value={xaPhuong.code} key={xaPhuong.code}>
+    //             {xaPhuong.name}
+    //           </option>
+    //         ))
+    //     ) : null}
+    //   </select>
+    // );
     // useEffect(() => {
     //   if(token)
     //   dispatch(createWork(token));

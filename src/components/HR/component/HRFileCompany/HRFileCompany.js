@@ -111,7 +111,7 @@ export default function HRFileCompany(props) {
         companyFoundedYear: company?.companyFoundedYear,
         companySize: company?.companySize,
         companyMst: company?.companyMst,
-        companyIndustry: company?.companyIndustry.industryId,
+        companyIndustry: company?.companyIndustry.id,
       });
       setCompanyLogo(company?.companyLogo);
       setCompanyLicense(company?.companyLicense?.split(";"));
@@ -145,7 +145,7 @@ export default function HRFileCompany(props) {
     const [selectedIndustry, setSelectedIndustry] = useState("");
     let industryCompany = "";
     if (!(company === undefined)) {
-      industryCompany = company.companyIndustry.industryId;
+      industryCompany = company.companyIndustry.id;
     }
     useEffect(()=>{
       dispatch(getIndustry())
@@ -164,8 +164,8 @@ export default function HRFileCompany(props) {
           <option value="">Chọn lĩnh vực hoạt động</option>
           {industryData && industryData.length > 0
             ? industryData.map((industry) => (
-              <option value={industry.industryId} key={industry.industryId}>
-                {industry.industryNameVI}
+              <option value={industry.id} key={industry.id}>
+                {industry.name}
               </option>
             ))
             : null}
